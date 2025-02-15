@@ -1,6 +1,6 @@
 import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
-@Table({ timestamps: true })
+@Table
 export class Unidade extends Model {
   @Column({
     primaryKey: true,

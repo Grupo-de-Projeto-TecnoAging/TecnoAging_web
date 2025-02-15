@@ -6,11 +6,12 @@ import { AppService } from './app.service';
 import { UnidadesModule } from './unidades/unidades.module';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
 
-@Module({
+@Module({ 
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
