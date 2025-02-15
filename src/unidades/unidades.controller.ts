@@ -24,11 +24,11 @@ export class UnidadesController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUnidadeDto: UpdateUnidadeDto) {
-    return this.unidadesService.update(+id, updateUnidadeDto);
+    return this.unidadesService.updateById(id, updateUnidadeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.unidadesService.remove(+id);
+    return this.unidadesService.removeById(id);
   }
 }

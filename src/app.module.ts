@@ -19,7 +19,7 @@ import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       autoLoadModels: true,
-      synchronize: true,
+      synchronize:  process.env.NODE_ENV !== 'production',
     }),
     UnidadesModule
   ],
