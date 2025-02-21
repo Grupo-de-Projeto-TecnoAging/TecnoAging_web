@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UnidadesModule } from './unidades/unidades.module';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
+import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 
 @Module({ 
   imports: [
@@ -22,7 +23,8 @@ import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
       autoLoadModels: true,
       synchronize:  process.env.NODE_ENV !== 'production',
     }),
-    UnidadesModule
+    UnidadesModule,
+    AutenticacaoModule
   ],
   controllers: [AppController],
   providers: [AppService],
