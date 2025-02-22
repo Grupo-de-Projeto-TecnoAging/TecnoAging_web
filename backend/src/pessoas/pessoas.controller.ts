@@ -19,16 +19,16 @@ export class PessoasController {
 
   @Get(':cpf')
   findOne(@Param('cpf') cpf: string) {
-    return this.pessoasService.findOne(+cpf);
+    return this.pessoasService.findOne(cpf);
   }
 
   @Patch(':cpf')
   update(@Param('cpf') cpf: string, @Body() updatePessoaDto: UpdatePessoaDto) {
-    return this.pessoasService.updateByCpf(+cpf, updatePessoaDto);
+    return this.pessoasService.updateByCpf(cpf, updatePessoaDto);
   }
 
   @Delete(':cpf')
-  remove(@Param('cpf') cpf: number) {
+  remove(@Param('cpf') cpf: string) {
     return this.pessoasService.removeByCpf(cpf);
   }
 }

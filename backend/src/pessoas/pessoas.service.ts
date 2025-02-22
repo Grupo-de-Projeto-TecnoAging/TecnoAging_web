@@ -19,11 +19,11 @@ export class PessoasService {
     return await this.pessoaModel.findAll();
   }
 
-  findOne(cpf: number) {
+  findOne(cpf: string) {
     return `This action returns a #${cpf} pessoa`;
   }
 
-  async updateByCpf(cpf: number, updatePessoaDto: UpdatePessoaDto): Promise<Pessoa> {
+  async updateByCpf(cpf: string, updatePessoaDto: UpdatePessoaDto): Promise<Pessoa> {
     const pessoa = await this.pessoaModel.findOne({ where: { cpf } });
     if (!pessoa) {
       throw new NotFoundException(`Pessoa com cpf ${cpf} não encontrada`);
@@ -32,7 +32,7 @@ export class PessoasService {
     return pessoa;
   }
 
-  async removeByCpf(cpf: number): Promise<Pessoa> {
+  async removeByCpf(cpf: string): Promise<Pessoa> {
     const pessoa = await this.pessoaModel.findOne({ where: { cpf } });
     if (!pessoa) {
       throw new NotFoundException(`Pessoa com cpf ${cpf} não encontrada`);

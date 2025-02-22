@@ -5,10 +5,10 @@ export class Pessoa extends Model {
     @Column({
         primaryKey: true,
         autoIncrement: false,
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: false,
     })
-    cpf: number;
+    cpf: string;
 
     @Column({
         type: DataType.STRING,
