@@ -1,5 +1,11 @@
 import { Column, DataType, Model, Table } from "sequelize-typescript"
 
+export enum Perfil {
+    Paciente = "paciente",
+    Pesquisador = "pesquisador",
+    Profissional = "profissional"
+}
+
 @Table
 export class Pessoa extends Model {
     @Column({
@@ -38,6 +44,5 @@ export class Pessoa extends Model {
         type: DataType.STRING,
         allowNull: false,
     })
-    perfil: string
+    perfil: Perfil
 }
- 

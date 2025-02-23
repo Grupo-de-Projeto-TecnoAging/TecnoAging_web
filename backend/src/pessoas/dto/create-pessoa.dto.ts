@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreatePessoaDto {
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    cpf: number;
+    cpf: string;
 
     @IsString()
     nome: string;
