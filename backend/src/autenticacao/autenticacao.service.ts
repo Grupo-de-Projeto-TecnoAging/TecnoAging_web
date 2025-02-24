@@ -19,8 +19,8 @@ export class AutenticacaoService {
    
 }
 
-  async login(email: string, senha:string): Promise<Pessoa>{
-    const usuario = await this.pessoasRepository.findOne({where: {email} });
+  async login(cpf: string, senha:string): Promise<Pessoa>{
+    const usuario = await this.pessoasRepository.findOne({where: {cpf} });
 
     if(!usuario) {
       throw new NotFoundException('Usuário não encontrado');

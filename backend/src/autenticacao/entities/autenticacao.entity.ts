@@ -1,4 +1,4 @@
 export class Autenticacao {
-    email: string;
+    cpf: string;
     senha: string;
 }

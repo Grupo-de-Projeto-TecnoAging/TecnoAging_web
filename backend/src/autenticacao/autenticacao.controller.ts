@@ -8,8 +8,8 @@ export class AutenticacaoController {
   constructor(private readonly autenticacaoService: AutenticacaoService) {}
 
   @Post('login')
-  async login(@Body() body: {email: string, senha: string}){
-    const usuario = await this.autenticacaoService.login(body.email, body.senha);
+  async login(@Body() body: {cpf: string, senha: string}){
+    const usuario = await this.autenticacaoService.login(body.cpf, body.senha);
     return {mensagem: 'Login realizado com sucesso', usuario};
   }
 
