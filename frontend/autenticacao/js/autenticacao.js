@@ -18,7 +18,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
         const data = await response.json();
         if (data.token) {
             localStorage.setItem("token", data.token); // Salva o token no localStorage
-            window.location.href = "./home/home.html"; // Redireciona para a home
+            window.location.href = "../home/home.html"; // Redireciona para a home
         } else {
             throw new Error("Token não encontrado na resposta");
         }
