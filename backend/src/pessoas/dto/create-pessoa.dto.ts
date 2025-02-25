@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreatePessoaDto {
     @IsString()
@@ -10,14 +10,14 @@ export class CreatePessoaDto {
 
     @IsString()
     senha: string;
- 
-    @IsNumber()
-    telefone: number;
+
+    @IsString()
+    @IsNotEmpty()
+    telefone: string;
 
     @IsString()
     sexo: string;
-    
+
     @IsString()
     perfil: string;
 }
- 

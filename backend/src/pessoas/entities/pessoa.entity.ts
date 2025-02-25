@@ -11,7 +11,7 @@ export class Pessoa extends Model {
     @Column({
         primaryKey: true,
         autoIncrement: false,
-        type: DataType.STRING,
+        type: DataType.STRING(14),
         allowNull: false,
     })
     cpf: string;
@@ -29,10 +29,10 @@ export class Pessoa extends Model {
     senha: string
 
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.STRING, // Alterado de INTEGER para STRING
         allowNull: false,
     })
-    telefone: number
+    telefone: string
 
     @Column({
         type: DataType.STRING,

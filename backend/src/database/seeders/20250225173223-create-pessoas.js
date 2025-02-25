@@ -6,22 +6,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('unidades', [
+    await queryInterface.bulkInsert('pessoas', [
       {
-        nome: 'Unidade 1',
-        endereco: 'Endereço 1',
+        cpf: '012.345.678-90',
+        nome: 'João Silva',
+        senha: 'senha123',
+        telefone: '11987654321',
+        sexo: 'masculino',
+        perfil: 'paciente',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        nome: 'Unidade 2',
-        endereco: 'Endereço 2',
+        cpf: '109.876.543-21',
+        nome: 'Maria Oliveira',
+        senha: 'senha456',
+        telefone: '21987654321',
+        sexo: 'feminino',
+        perfil: 'pesquisador',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     ]);
   },
+
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('unidades', null, {});
+    await queryInterface.bulkDelete('pessoas', null, {});
   }
 };
