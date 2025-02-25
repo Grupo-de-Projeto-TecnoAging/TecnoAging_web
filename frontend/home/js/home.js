@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token'); // Recupera o token do localStorage
+const token = localStorage.getItem('token'); 
 
 if (token) {
     fetch('http://localhost:3000/home', {
@@ -23,10 +23,35 @@ if (token) {
     });
 } else {
     console.log('Token não encontrado. Redirecionando para login...');
-    window.location.href = './autenticacao/autenticacao.html'; // Redireciona para a página de login caso não tenha token
+    window.location.href = './autenticacao/autenticacao.html'; 
 }
 
-function logout() {
-    localStorage.removeItem('token'); // Remove o token do localStorage
-    window.location.href = './autenticacao/autenticacao.html'; // Redireciona para a página de login
+const testList = document.getElementById('testList');
+
+async function carregarTestes() {
+    try {
+        const response = await fetch('http://localhost:3000/testes');
+
+        if(!response.ok) {
+            throw new Error('Erro ao buscar testes');
+        }
+
+        const testes = await response.json();
+
+        testList.innerHTML = '';
+
+        testes.forEach(teste => {
+            const li = document.createElement('li');
+            li.classList.add("test-item");
+            li.innerHTML = `
+                <h3>${teste.tipo}</h3>
+                <button onclick="mostrarDetalhes('${teste.id}')">Detalhes</button>
+            `;
+            testList.appendChild(li);
+        });
+} catch (error) {
+    console.error('Erro ao carregar testes:', error);
+    testList.innerHTML = '<li>Erro ao carregar testes</li>';e
+    }
 }
+
