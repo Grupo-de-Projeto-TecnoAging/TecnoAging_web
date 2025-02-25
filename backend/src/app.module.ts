@@ -8,6 +8,7 @@ import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
 import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { HomeModule } from './home/home.module';
+import { TestesModule } from './testes/testes.module';
 
 
 @Module({ 
@@ -30,6 +31,7 @@ import { HomeModule } from './home/home.module';
     AutenticacaoModule,
     PessoasModule,
     HomeModule,
+    TestesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
