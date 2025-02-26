@@ -5,7 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UnidadesModule } from './unidades/unidades.module';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
+import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { PessoasModule } from './pessoas/pessoas.module';
+import { HomeModule } from './home/home.module';
+import { TestesModule } from './testes/testes.module';
+
 
 @Module({ 
   imports: [
@@ -24,7 +28,10 @@ import { PessoasModule } from './pessoas/pessoas.module';
       synchronize:  process.env.NODE_ENV !== 'production',
     }),
     UnidadesModule,
-    PessoasModule
+    AutenticacaoModule,
+    PessoasModule,
+    HomeModule,
+    TestesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
