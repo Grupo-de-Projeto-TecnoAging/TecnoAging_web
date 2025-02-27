@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsString } from "class-validator";
 
 export class CreatePessoaDto {
     @IsString()
@@ -19,5 +19,7 @@ export class CreatePessoaDto {
     sexo: string;
 
     @IsString()
+    @IsNotEmpty()
+    @IsEnum(["paciente", "pesquisador", "profissional"])
     perfil: string;
 }

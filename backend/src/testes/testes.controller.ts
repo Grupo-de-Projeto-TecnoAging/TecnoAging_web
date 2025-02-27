@@ -22,6 +22,16 @@ export class TestesController {
     return this.testesService.findOne(+id);
   }
 
+  @Get('pessoa/:cpf/testes')
+  findAllByPessoa(@Param('cpf') cpf: string) {
+    return this.testesService.findAllByPessoa(cpf);
+  }
+
+  @Get('pessoa/:cpf/testes/:id')
+  findOneByPessoa(@Param('cpf') cpf: string, @Param('id') id: string) {
+    return this.testesService.findOneByPessoa(cpf, +id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTestesDto: UpdateTestesDto) {
     return this.testesService.update(+id, updateTestesDto);
