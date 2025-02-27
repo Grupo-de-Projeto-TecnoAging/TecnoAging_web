@@ -1,19 +1,16 @@
 'use strict';
-//npx sequelize-cli db:seed:all
-//npx sequelize-cli db:seed:undo:all
-//npx sequelize-cli db:seed:generate --name create-unidade
-//npx sequelize-cli db:seed:undo
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('pessoas', [
       {
-        cpf: '012.345.678-90',
+        cpf: '123.456.789-01',
         nome: 'João Silva',
         senha: 'senha123',
         telefone: '11987654321',
         sexo: 'masculino',
-        perfil: 'profissional',
+        perfil: 'paciente',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -23,7 +20,7 @@ module.exports = {
         senha: 'senha456',
         telefone: '21987654321',
         sexo: 'feminino',
-        perfil: 'pesquisador',
+        perfil: 'paciente',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
