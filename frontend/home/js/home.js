@@ -4,7 +4,7 @@ if (token) {
     fetch('http://localhost:3000/home', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}` // Envia o token como Bearer token
+            'Authorization': `Bearer ${token}` // Envia o token no cabeçalho
         }
     })
     .then(response => {
@@ -15,11 +15,11 @@ if (token) {
         }
     })
     .then(data => {
-        console.log(data); // Exibe a resposta do servidor
+        console.log('Dados do usuário:', data); // Exibe a resposta do servidor
     })
     .catch(error => {
         console.error('Erro:', error); // Exibe o erro se ocorrer
-        window.Location.href = './autenticacao/autenticacao.html'; // Redireciona para a página de login caso nao tenha token
+        window.location.href = './autenticacao/autenticacao.html'; // Redireciona para login
     });
 } else {
     console.log('Token não encontrado. Redirecionando para login...');
@@ -30,10 +30,24 @@ const testList = document.getElementById('testList');
 
 async function carregarTestes() {
     try {
-        const response = await fetch('http://localhost:3000/testes');
+        const token = localStorage.getItem('token'); // Recupera o token do localStorage
 
-        if(!response.ok) {
-            throw new Error('Erro ao buscar testes');
+        if (!token) {
+            console.error('Token não encontrado. Redirecionando para login...');
+            window.location.href = './autenticacao/autenticacao.html';
+            return;
+        }
+
+        const response = await fetch('http://localhost:3000/testes', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Envia o token na requisição
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar testes: ${response.status}`);
         }
 
         const testes = await response.json();
@@ -49,9 +63,40 @@ async function carregarTestes() {
             `;
             testList.appendChild(li);
         });
-} catch (error) {
-    console.error('Erro ao carregar testes:', error);
-    testList.innerHTML = '<li>Erro ao carregar testes</li>';e
+    } catch (error) {
+        console.error('Erro ao carregar testes:', error);
+        testList.innerHTML = '<li>Erro ao carregar testes</li>';
     }
 }
 
+async function mostrarDetalhes(id) {
+    try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Token não encontrado. Redirecionando para login...');
+            window.location.href = './autenticacao/autenticacao.html';
+            return;
+        }
+
+        const response = await fetch(`http://localhost:3000/testes/details/${id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar detalhes do teste');
+        }
+
+        const detalhes = await response.json();
+        alert(`Detalhes do teste: ${JSON.stringify(detalhes, null, 2)}`);
+    } catch (error) {
+        console.error('Erro ao carregar detalhes do teste:', error);
+    }
+}
+
+
+carregarTestes();

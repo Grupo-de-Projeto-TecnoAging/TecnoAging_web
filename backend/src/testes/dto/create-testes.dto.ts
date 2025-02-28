@@ -1,7 +1,12 @@
-import { IsNotEmpty } from "class-validator";
+import { IsEnum, IsNotEmpty, IsString } from "class-validator";
 
 export class CreateTestesDto {
-    
+
     @IsNotEmpty()
+    @IsEnum(["5TSTS", "TUG"])
     tipo: "5TSTS" | "TUG";
+
+    @IsNotEmpty()
+    @IsString()
+    cpfPessoa: string;
 }

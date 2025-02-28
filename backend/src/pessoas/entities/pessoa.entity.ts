@@ -1,10 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript"
-
-export enum Perfil {
-    Paciente = "paciente",
-    Pesquisador = "pesquisador",
-    Profissional = "profissional"
-}
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript"
+import { Teste } from "src/testes/entities/teste.entity";
 
 @Table
 export class Pessoa extends Model {
@@ -41,8 +36,11 @@ export class Pessoa extends Model {
     sexo: string
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.ENUM("paciente", "pesquisador", "profissional"), 
         allowNull: false,
     })
-    perfil: Perfil
+    perfil: "paciente" | "pesquisador" | "profissional"
+
+    @HasMany(() => Teste)
+    testes: Teste[];
 }
