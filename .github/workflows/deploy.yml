@@ -22,13 +22,13 @@ jobs:
 
       - name: 📂 Enviar código para a VM
         run: |
-          rsync -avz --exclude 'node_modules' -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/meu-projeto
+          rsync -avz --exclude 'node_modules' --exclude 'dist' -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/tecnoaging
 
       - name: 🚀 Rodar build e reiniciar servidor
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /home/${{ secrets.SSH_USER }}/meu-projeto
+            cd /home/${{ secrets.SSH_USER }}/tecnoaging
             npm install
             npm run build
-            pm2 restart all
+            pm2 restart all || pm2 start dist/main.js --name tecnoaging
           EOF
