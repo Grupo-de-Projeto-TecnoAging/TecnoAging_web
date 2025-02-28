@@ -58,7 +58,7 @@ async function carregarTestes() {
             const li = document.createElement('li');
             li.classList.add("test-item");
             li.innerHTML = `
-                <h3>${teste.cpfPessoa}  |  ${teste.tipo}</h3>
+                <h3>${teste.tipo}</h3>
                 <button onclick="mostrarDetalhes('${teste.id}')">Detalhes</button>
             `;
             testList.appendChild(li);
