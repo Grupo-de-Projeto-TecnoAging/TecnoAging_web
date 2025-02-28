@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript"
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript"
+import { Teste } from "src/testes/entities/teste.entity";
 
 @Table
 export class Pessoa extends Model {
@@ -39,4 +40,7 @@ export class Pessoa extends Model {
         allowNull: false,
     })
     perfil: "paciente" | "pesquisador" | "profissional"
+
+    @HasMany(() => Teste)
+    testes: Teste[];
 }

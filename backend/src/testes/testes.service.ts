@@ -21,13 +21,13 @@ export class TestesService {
 
   async findAllByPessoa(cpf: string): Promise<Teste[]> {
     return await this.testesModel.findAll({
-      where: { id_pessoa: cpf }
+      where: { cpfPessoa: cpf }
     });
   }
   async findOneByPessoa(cpf: string, id: number): Promise<Teste> {
     const teste = await this.testesModel.findOne({
       where: {
-        id_pessoa: cpf,
+        cpfPessoa: cpf,
         id: id,
       },
     });

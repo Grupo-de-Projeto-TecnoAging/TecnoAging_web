@@ -3,15 +3,22 @@ import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { Pessoa } from './entities/pessoa.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { AutenticacaoService } from 'src/autenticacao/autenticacao.service';
 
 @Injectable()
 export class PessoasService {
   constructor(
     @InjectModel(Pessoa)
     private readonly pessoaModel: typeof Pessoa,
+    private readonly autenticacaoService: AutenticacaoService,
   ) { }
 
   async create(createPessoaDto: Partial<CreatePessoaDto>): Promise<Pessoa> {
+    if(!createPessoaDto.senha) {
+      throw new Error('Senha é obrigatória');
+    }
+    
+    createPessoaDto.senha = await this.autenticacaoService.criptografarSenha(createPessoaDto.senha);
     return await this.pessoaModel.create(createPessoaDto);
   }
 

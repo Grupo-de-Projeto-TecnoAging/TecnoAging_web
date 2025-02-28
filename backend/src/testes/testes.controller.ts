@@ -22,12 +22,12 @@ export class TestesController {
     return this.testesService.findOne(+id);
   }
 
-  @Get('pessoa/:cpf/testes')
+  @Get('pessoa/:cpf')
   findAllByPessoa(@Param('cpf') cpf: string) {
     return this.testesService.findAllByPessoa(cpf);
   }
 
-  @Get('pessoa/:cpf/testes/:id')
+  @Get('pessoa/:cpf/:id')
   findOneByPessoa(@Param('cpf') cpf: string, @Param('id') id: string) {
     return this.testesService.findOneByPessoa(cpf, +id);
   }

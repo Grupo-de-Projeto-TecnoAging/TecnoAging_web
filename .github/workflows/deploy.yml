@@ -1,0 +1,34 @@
+name: Deploy no Azure VM
+
+on:
+  push:
+    branches:
+      - master  # Sempre que fizer push na branch master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 Checkout do código
+        uses: actions/checkout@v3
+
+      - name: 🔑 Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 📂 Enviar código para a VM
+        run: |
+          rsync -avz --exclude 'node_modules' -e "ssh -i ~/.ssh/id_rsa" ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/meu-projeto
+
+      - name: 🚀 Rodar build e reiniciar servidor
+        run: |
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /home/${{ secrets.SSH_USER }}/meu-projeto
+            npm install
+            npm run build
+            pm2 restart all
+          EOF
