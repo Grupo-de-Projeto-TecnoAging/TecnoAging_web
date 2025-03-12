@@ -8,8 +8,8 @@ export class PesquisadorController {
   constructor(private readonly pesquisadorService: PesquisadorService) {}
 
   @Post()
-  create(@Body() createPesquisadorDto: CreatePesquisadorDto) {
-    return this.pesquisadorService.create(createPesquisadorDto);
+  create(@Body() createPesquisadorDto: CreatePesquisadorDto, @Body('cpf') cpf: string) {
+    return this.pesquisadorService.create(createPesquisadorDto, cpf);
   }
 
   @Get()

@@ -7,10 +7,11 @@ import { AutenticacaoService } from 'src/autenticacao/autenticacao.service';
 import { Especialidade, Profissional } from 'src/profissional/entities/profissional.entity';
 import { CreateProfissionalDto } from 'src/profissional/dto/create-profissional.dto';
 import { ProfissionalService } from 'src/profissional/profissional.service';
+import { PesquisadorService } from 'src/pesquisador/pesquisador.service';
+import { CreatePesquisadorDto } from 'src/pesquisador/dto/create-pesquisador.dto';
 
 @Injectable()
 export class PessoasService {
-  profissionalRepository: any;
   constructor(
     @InjectModel(Pessoa)
     private readonly pessoaModel: typeof Pessoa,
@@ -18,11 +19,13 @@ export class PessoasService {
     private readonly profissionalModel: typeof Profissional,
     private readonly autenticacaoService: AutenticacaoService,
     private readonly profissionalService: ProfissionalService,
+    private readonly pesquisadorService : PesquisadorService
   ) { }
 
   async create(
     createPessoaDto: Partial<CreatePessoaDto>, 
-    createProfissionalDto?: Partial<CreateProfissionalDto> // Adicionando como opcional
+    createProfissionalDto?: Partial<CreateProfissionalDto>,
+    createPesquisadorDto?: Partial<CreatePesquisadorDto>
 ): Promise<Pessoa> {
 
     if (!createPessoaDto.senha) {
@@ -39,6 +42,12 @@ export class PessoasService {
         }
     }
 
+    if (createPessoaDto.perfil === 'pesquisador') {
+        if (!createPessoaDto.email || !createPessoaDto.instituicao || !createPessoaDto.area || !createPessoaDto.especialidade) {
+            throw new BadRequestException('Dados de pesquisador são obrigatórios para este perfil: email, instituicao, area e especialidade');
+        }
+    }
+
     createPessoaDto.senha = await this.autenticacaoService.criptografarSenha(createPessoaDto.senha);
 
     const pessoa = await this.pessoaModel.create(createPessoaDto);
@@ -46,6 +55,11 @@ export class PessoasService {
     if (pessoa.perfil === 'profissional') {
         await this.profissionalService.create(createPessoaDto as any, pessoa.cpf);
     }
+
+    if (pessoa.perfil === 'pesquisador') {
+      await this.pesquisadorService.create(createPessoaDto as any, pessoa.cpf);
+    }
+    
     return pessoa;
 }
 

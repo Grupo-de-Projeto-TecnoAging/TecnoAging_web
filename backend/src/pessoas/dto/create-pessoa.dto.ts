@@ -25,9 +25,18 @@ export class CreatePessoaDto {
 
     @IsOptional()
     @IsEmail()
-    email?: string; // Email opcional para 'profissional'
+    email?: string;
   
     @IsOptional()
     @IsString()
     especialidade?: string;
+
+    @IsOptional()
+    @IsString()
+    instituicao?: string;
+    
+    @IsOptional()
+    @IsString()
+    area?: string;
+
 }

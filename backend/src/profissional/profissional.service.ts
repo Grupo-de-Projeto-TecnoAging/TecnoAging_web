@@ -17,8 +17,7 @@ export class ProfissionalService {
     if (!createProfissionalDto.email || !createProfissionalDto.especialidade) {
       throw new BadRequestException("Email e especialidade são obrigatórios para o perfil profissional.");
     }
-
-    
+     
     const profissional = await this.profissionalModel.create({
       ...createProfissionalDto,
       cpf: cpf, // Associando CPF da pessoa ao profissional

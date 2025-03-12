@@ -1,6 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsString } from "class-validator";
 import { Especialidade } from "../entities/profissional.entity";
-import { Is } from "sequelize-typescript";
 
 export class CreateProfissionalDto {
 
@@ -17,5 +16,4 @@ export class CreateProfissionalDto {
     @IsNotEmpty()
     @IsEmail()
     email: string;
-    
     }

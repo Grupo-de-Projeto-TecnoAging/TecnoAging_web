@@ -1,11 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreatePesquisadorDto } from './dto/create-pesquisador.dto';
 import { UpdatePesquisadorDto } from './dto/update-pesquisador.dto';
+import { Pesquisador } from './entities/pesquisador.entity';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class PesquisadorService {
-  create(createPesquisadorDto: CreatePesquisadorDto) {
-    return 'This action adds a new pesquisador';
+
+  constructor(
+    @InjectModel(Pesquisador)
+    private readonly pesquisadorModel: typeof Pesquisador
+  ) { }
+
+  async create(createPesquisadorDto: CreatePesquisadorDto, cpf: string): Promise<Pesquisador> {  
+    if (!createPesquisadorDto.email || !createPesquisadorDto.instituicao || !createPesquisadorDto.area || !createPesquisadorDto.especialidade) {
+      throw new BadRequestException('Email, instituicao, area e especialidade são obrigatórios para o perfil de pesquisador.');
+    }
+    
+    const pesquisador = await this.pesquisadorModel.create({
+      ...createPesquisadorDto,
+      cpf:cpf 
+    });
+    
+    return pesquisador;
   }
 
   findAll() {
