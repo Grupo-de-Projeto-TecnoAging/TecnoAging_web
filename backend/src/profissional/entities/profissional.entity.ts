@@ -1,10 +1,21 @@
-import { Column, DataType, Table } from "sequelize-typescript";
+
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Pessoa } from "src/pessoas/entities/pessoa.entity";
 
 @Table
-export class Profissional {
+export class Profissional extends Model {
     
+    @ForeignKey(() => Pessoa)
     @Column({
-        type: DataType.ENUM("ed_fisica"),
+        primaryKey: true,
+        type: DataType.STRING(14),
+        allowNull: false,
+        autoIncrement: false
+    })
+    cpf: string;
+
+    @Column({
+        type: DataType.ENUM("edFisica"),
         allowNull: false,
     })
     especialidade: Especialidade;
@@ -15,8 +26,10 @@ export class Profissional {
     })
     email: string;
 
+    @BelongsTo(() => Pessoa)
+    pessoa: Pessoa;
 }
 
 export enum Especialidade {
-    ED_FISICA = "ed_fisica"
+    ED_FISICA = "edFisica"
 }

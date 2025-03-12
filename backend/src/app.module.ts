@@ -10,6 +10,9 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { HomeModule } from './home/home.module';
 import { TestesModule } from './testes/testes.module';
 import { ProfissionalModule } from './profissional/profissional.module';
+import { Unidade } from './unidades/entities/unidade.entity';
+import { Pessoa } from './pessoas/entities/pessoa.entity';
+import { Profissional } from './profissional/entities/profissional.entity';
 
 
 @Module({ 

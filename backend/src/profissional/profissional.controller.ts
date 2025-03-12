@@ -8,13 +8,18 @@ export class ProfissionalController {
   constructor(private readonly profissionalService: ProfissionalService) {}
 
   @Post()
-  create(@Body() createProfissionalDto: CreateProfissionalDto) {
-    return this.profissionalService.create(createProfissionalDto);
+  create(@Body() createProfissionalDto: CreateProfissionalDto, @Body('cpf') cpf: string) {
+    return this.profissionalService.create(createProfissionalDto, cpf);
   }
 
   @Get()
   findAll() {
     return this.profissionalService.findAll();
+  }
+
+  @Get('detailed')
+  findAllDetailed() {
+    return this.profissionalService.findAllDetailed();
   }
 
   @Get(':id')
