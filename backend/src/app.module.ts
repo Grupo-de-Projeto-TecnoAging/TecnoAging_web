@@ -9,6 +9,7 @@ import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { HomeModule } from './home/home.module';
 import { TestesModule } from './testes/testes.module';
+import { PacientesModule } from './pacientes/pacientes.module';
 
 
 @Module({ 
@@ -32,6 +33,7 @@ import { TestesModule } from './testes/testes.module';
     PessoasModule,
     HomeModule,
     TestesModule,
+    PacientesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
