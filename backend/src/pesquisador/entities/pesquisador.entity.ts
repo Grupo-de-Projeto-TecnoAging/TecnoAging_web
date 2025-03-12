@@ -19,6 +19,7 @@ export class Pesquisador extends Model{
     })
     instituicao: string;
 
+    
     @Column({
         type: DataType.STRING,
         allowNull: false,

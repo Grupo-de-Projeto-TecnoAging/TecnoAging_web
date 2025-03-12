@@ -4,11 +4,12 @@ import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { Pessoa } from './entities/pessoa.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { AutenticacaoService } from 'src/autenticacao/autenticacao.service';
-import { Especialidade, Profissional } from 'src/profissional/entities/profissional.entity';
+import { Profissional } from 'src/profissional/entities/profissional.entity';
 import { CreateProfissionalDto } from 'src/profissional/dto/create-profissional.dto';
 import { ProfissionalService } from 'src/profissional/profissional.service';
 import { PesquisadorService } from 'src/pesquisador/pesquisador.service';
 import { CreatePesquisadorDto } from 'src/pesquisador/dto/create-pesquisador.dto';
+import { Pesquisador } from 'src/pesquisador/entities/pesquisador.entity';
 
 @Injectable()
 export class PessoasService {
@@ -17,6 +18,8 @@ export class PessoasService {
     private readonly pessoaModel: typeof Pessoa,
     @InjectModel(Profissional)
     private readonly profissionalModel: typeof Profissional,
+    @InjectModel(Pesquisador)
+    private readonly pesquisadorModel: typeof Pesquisador,
     private readonly autenticacaoService: AutenticacaoService,
     private readonly profissionalService: ProfissionalService,
     private readonly pesquisadorService : PesquisadorService

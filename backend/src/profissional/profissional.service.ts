@@ -20,7 +20,7 @@ export class ProfissionalService {
      
     const profissional = await this.profissionalModel.create({
       ...createProfissionalDto,
-      cpf: cpf, // Associando CPF da pessoa ao profissional
+      cpf: cpf, 
     });
 
     return profissional;
