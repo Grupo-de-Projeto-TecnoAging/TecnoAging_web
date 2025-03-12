@@ -13,6 +13,7 @@ import { ProfissionalModule } from './profissional/profissional.module';
 import { Unidade } from './unidades/entities/unidade.entity';
 import { Pessoa } from './pessoas/entities/pessoa.entity';
 import { Profissional } from './profissional/entities/profissional.entity';
+import { PesquisadorModule } from './pesquisador/pesquisador.module';
 
 
 @Module({ 
@@ -37,6 +38,7 @@ import { Profissional } from './profissional/entities/profissional.entity';
     HomeModule,
     TestesModule,
     ProfissionalModule,
+    PesquisadorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
