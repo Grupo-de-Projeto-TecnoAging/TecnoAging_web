@@ -1,26 +1,23 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Pessoa } from "src/pessoas/entities/pessoa.entity";
 
 @Table
 export class Paciente extends Model {
+    
+    @ForeignKey(() => Pessoa)
     @Column({
         primaryKey: true,
-        autoIncrement: true,
-        type: DataType.INTEGER,
+        type: DataType.STRING(14),
         allowNull: false,
+        autoIncrement: false
     })
-    id: number;
+    cpf: string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
-    cpf_paciente: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    id_endereco: string;
+    endereco: string;
 
     @Column({
         type: DataType.STRING,
@@ -51,4 +48,7 @@ export class Paciente extends Model {
         allowNull: false,
     })
     altura: number;
+
+    @BelongsTo(() => Pessoa)
+    pessoa: Pessoa;
 }
