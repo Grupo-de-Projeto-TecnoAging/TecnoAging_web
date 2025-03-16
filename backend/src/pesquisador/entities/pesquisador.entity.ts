@@ -2,15 +2,15 @@ import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize
 import { Pessoa } from "src/pessoas/entities/pessoa.entity";
 
 @Table
-export class Pesquisador extends Model{
+export class Pesquisador extends Model {
 
     @ForeignKey(() => Pessoa)
-        @Column({
-            primaryKey: true,
-            type: DataType.STRING(14),
-            allowNull: false,
-            autoIncrement: false
-        })
+    @Column({
+        primaryKey: true,
+        type: DataType.STRING(14),
+        allowNull: false,
+        autoIncrement: false
+    })
     cpf: string;
 
     @Column({
@@ -19,7 +19,6 @@ export class Pesquisador extends Model{
     })
     instituicao: string;
 
-    
     @Column({
         type: DataType.STRING,
         allowNull: false,
@@ -40,5 +39,5 @@ export class Pesquisador extends Model{
 
     @BelongsTo(() => Pessoa)
     pessoa: Pessoa;
-    
+
 }
