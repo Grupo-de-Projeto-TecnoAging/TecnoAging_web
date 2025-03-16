@@ -8,5 +8,5 @@ export class CreateTestesDto {
 
     @IsNotEmpty()
     @IsString()
-    cpfPessoa: string;
+    cpfProfissional: string;
 }

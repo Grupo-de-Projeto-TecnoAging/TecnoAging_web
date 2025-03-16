@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreatePessoaDto {
     @IsString()
@@ -22,4 +22,21 @@ export class CreatePessoaDto {
     @IsNotEmpty()
     @IsEnum(["paciente", "pesquisador", "profissional"])
     perfil: string;
+
+    @IsOptional()
+    @IsEmail()
+    email?: string;
+  
+    @IsOptional()
+    @IsString()
+    especialidade?: string;
+
+    @IsOptional()
+    @IsString()
+    instituicao?: string;
+    
+    @IsOptional()
+    @IsString()
+    area?: string;
+
 }
