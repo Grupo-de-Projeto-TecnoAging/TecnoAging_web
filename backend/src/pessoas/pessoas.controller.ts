@@ -8,7 +8,7 @@ export class PessoasController {
   constructor(private readonly pessoasService: PessoasService) { }
 
   @Post()
-  create(@Body() createPessoaDto: CreatePessoaDto) {
+  create(@Body() createPessoaDto: CreatePessoaDto,) {
     return this.pessoasService.create(createPessoaDto);
   }
 

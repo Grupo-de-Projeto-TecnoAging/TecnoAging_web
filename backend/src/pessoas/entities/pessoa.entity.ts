@@ -1,5 +1,6 @@
-import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript"
-import { Teste } from "src/testes/entities/teste.entity";
+import { Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript"
+import { Pesquisador } from "src/pesquisador/entities/pesquisador.entity";
+import { Profissional } from "src/profissional/entities/profissional.entity";
 
 @Table
 export class Pessoa extends Model {
@@ -14,7 +15,7 @@ export class Pessoa extends Model {
     @Column({
         type: DataType.STRING,
         allowNull: false,
-    })
+    })  
     nome: string
 
     @Column({
@@ -41,6 +42,10 @@ export class Pessoa extends Model {
     })
     perfil: "paciente" | "pesquisador" | "profissional"
 
-    @HasMany(() => Teste)
-    testes: Teste[];
+
+    @HasOne(() => Profissional)
+    profissional: Profissional;
+
+    @HasOne(() => Pesquisador)
+    pesquisador: Pesquisador;
 }
