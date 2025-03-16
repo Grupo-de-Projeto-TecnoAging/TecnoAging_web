@@ -3,7 +3,7 @@ import { Pessoa } from "src/pessoas/entities/pessoa.entity";
 
 @Table
 export class Paciente extends Model {
-    
+
     @ForeignKey(() => Pessoa)
     @Column({
         primaryKey: true,
@@ -13,6 +13,7 @@ export class Paciente extends Model {
     })
     cpf: string;
 
+    //@ForeignKey(() => Endereco)
     @Column({
         type: DataType.STRING,
         allowNull: false,
