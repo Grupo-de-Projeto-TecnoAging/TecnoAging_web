@@ -42,8 +42,14 @@ export class ProfissionalService {
     });
 }
 
-  findOne(id: number) {
-    return `This action returns a #${id} profissional`;
+  findOne(cpf: string) {
+    const profissional = this.profissionalModel.findOne({
+      where: { cpf },
+    });
+    if (!profissional) {
+      throw new BadRequestException("Profissional não encontrado.");
+    }
+    return profissional;
   }
 
   update(id: number, updateProfissionalDto: UpdateProfissionalDto) {

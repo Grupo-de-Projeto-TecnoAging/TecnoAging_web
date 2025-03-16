@@ -22,9 +22,9 @@ export class ProfissionalController {
     return this.profissionalService.findAllDetailed();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.profissionalService.findOne(+id);
+  @Get(':cpf')
+  findOne(@Param('cpf') cpf: string) {
+    return this.profissionalService.findOne(cpf);
   }
 
   @Patch(':id')

@@ -14,6 +14,8 @@ import { Unidade } from './unidades/entities/unidade.entity';
 import { Pessoa } from './pessoas/entities/pessoa.entity';
 import { Profissional } from './profissional/entities/profissional.entity';
 import { PesquisadorModule } from './pesquisador/pesquisador.module';
+import { DadosSensoresModule } from './dados-sensores/dados-sensores.module';
+import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
 
 
 @Module({ 
@@ -39,6 +41,8 @@ import { PesquisadorModule } from './pesquisador/pesquisador.module';
     TestesModule,
     ProfissionalModule,
     PesquisadorModule,
+    DadosSensoresModule,
+    DadoSensorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
