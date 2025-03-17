@@ -1,4 +1,4 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreatePessoaDto {
     @IsString()
@@ -26,7 +26,7 @@ export class CreatePessoaDto {
     @IsOptional()
     @IsEmail()
     email?: string;
-  
+
     @IsOptional()
     @IsString()
     especialidade?: string;
@@ -34,9 +34,28 @@ export class CreatePessoaDto {
     @IsOptional()
     @IsString()
     instituicao?: string;
-    
+
     @IsOptional()
     @IsString()
     area?: string;
 
+    @IsOptional()
+    @IsDate()
+    data_nascimento?: Date;
+
+    @IsOptional()
+    @IsString()
+    escolaridade?: string;
+
+    @IsOptional()
+    @IsString()
+    nivel_socioeconomico?: string;
+
+    @IsOptional()
+    @IsNumber()
+    peso?: number;
+
+    @IsOptional()
+    @IsNumber()
+    altura?: number;
 }

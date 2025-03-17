@@ -1,4 +1,5 @@
 import { Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript"
+import { Paciente } from "src/pacientes/entities/paciente.entity";
 import { Pesquisador } from "src/pesquisador/entities/pesquisador.entity";
 import { Profissional } from "src/profissional/entities/profissional.entity";
 
@@ -48,4 +49,7 @@ export class Pessoa extends Model {
 
     @HasOne(() => Pesquisador)
     pesquisador: Pesquisador;
+
+    @HasOne(() => Paciente)
+    paciente: Paciente;
 }

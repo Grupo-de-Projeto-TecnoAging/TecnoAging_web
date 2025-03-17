@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Pessoa } from "src/pessoas/entities/pessoa.entity";
+import { Paciente } from "src/pacientes/entities/paciente.entity";
 import { Profissional } from "src/profissional/entities/profissional.entity";
 
 @Table
@@ -25,7 +25,16 @@ export class Teste extends Model {
  })
   cpfProfissional: string;
 
+  @ForeignKey(() => Paciente)
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  cpfPaciente: string;
+
   @BelongsTo(() => Profissional)
   profissional: Profissional;
 
+  @BelongsTo(() => Paciente)
+  paciente: Paciente;
 }

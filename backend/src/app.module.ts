@@ -14,16 +14,15 @@ import { Unidade } from './unidades/entities/unidade.entity';
 import { Pessoa } from './pessoas/entities/pessoa.entity';
 import { Profissional } from './profissional/entities/profissional.entity';
 import { PesquisadorModule } from './pesquisador/pesquisador.module';
-import { DadosSensoresModule } from './dados-sensores/dados-sensores.module';
 import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
 
 
-@Module({ 
+@Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    
+
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -32,7 +31,7 @@ import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       autoLoadModels: true,
-      synchronize:  process.env.NODE_ENV !== 'production',
+      synchronize: process.env.NODE_ENV !== 'production',
     }),
     UnidadesModule,
     AutenticacaoModule,
@@ -41,7 +40,6 @@ import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
     TestesModule,
     ProfissionalModule,
     PesquisadorModule,
-    DadosSensoresModule,
     DadoSensorModule,
   ],
   controllers: [AppController],
