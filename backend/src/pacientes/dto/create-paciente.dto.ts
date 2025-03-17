@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreatePacienteDto {
     @IsString()
@@ -9,7 +9,7 @@ export class CreatePacienteDto {
     @IsNotEmpty()
     endereco: string;
 
-    @IsDate()
+    @IsDateString()
     @IsNotEmpty()
     data_nascimento: Date;
 

@@ -4,6 +4,8 @@ import { UpdateTestesDto } from './dto/update-testes.dto';
 import { Teste } from './entities/teste.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
+import { Paciente } from 'src/pacientes/entities/paciente.entity';
+import { Profissional } from 'src/profissional/entities/profissional.entity';
 
 @Injectable()
 export class TestesService {
@@ -49,10 +51,10 @@ export class TestesService {
   async findOneWithDetails(id: number): Promise<Teste> {
     const teste = await this.testesModel.findOne({
       where: { id },
-      include: [{
-        model: Pessoa,
-        attributes: ['nome', 'cpf', 'telefone', 'sexo']
-      }],
+      include: [
+        { model: Paciente, attributes: ['nome', 'cpf', 'telefone', 'sexo', 'peso', 'altura'] },
+        { model: Profissional, attributes: ['nome', 'cpf', 'telefone', 'email', 'especialidade'] }
+      ],
     });
     if (!teste) {
       throw new NotFoundException('Teste não encontrado');

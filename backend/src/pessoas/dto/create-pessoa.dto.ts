@@ -49,7 +49,7 @@ export class CreatePessoaDto {
 
     @IsOptional()
     @IsString()
-    nivel_socioeconomico?: string;
+    nivel_socio_economico?: string;
 
     @IsOptional()
     @IsNumber()

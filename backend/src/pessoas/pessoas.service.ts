@@ -28,7 +28,7 @@ export class PessoasService {
     private readonly autenticacaoService: AutenticacaoService,
     private readonly profissionalService: ProfissionalService,
     private readonly pesquisadorService: PesquisadorService,
-    private readonly pacienteService: PacientesService
+    private readonly pacientesService: PacientesService
   ) { }
 
   async create(
@@ -59,8 +59,8 @@ export class PessoasService {
     }
 
     if (createPessoaDto.perfil === 'paciente') {
-      if (!createPessoaDto.data_nascimento || !createPessoaDto.escolaridade || !createPessoaDto.nivel_socioeconomico || !createPessoaDto.peso || !createPessoaDto.altura) {
-        throw new BadRequestException('Dados de paciente são obrigatórios para este perfil: data_nascimento, escolaridade, nivel_socioeconomico, peso e altura');
+      if (!createPessoaDto.data_nascimento || !createPessoaDto.escolaridade || !createPessoaDto.nivel_socio_economico || !createPessoaDto.peso || !createPessoaDto.altura) {
+        throw new BadRequestException('Dados de paciente são obrigatórios para este perfil: data_nascimento, escolaridade, nivel_socio_economico, peso e altura');
       }
     }
 
@@ -77,7 +77,7 @@ export class PessoasService {
     }
 
     if (pessoa.perfil === 'paciente') {
-      await this.pacienteService.create(createPessoaDto as any, pessoa.cpf);
+      await this.pacientesService.create(createPessoaDto as any, pessoa.cpf);
     }
 
     return pessoa;

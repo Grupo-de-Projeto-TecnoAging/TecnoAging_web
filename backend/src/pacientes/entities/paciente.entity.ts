@@ -21,7 +21,7 @@ export class Paciente extends Model {
     endereco: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.DATEONLY,
         allowNull: false,
     })
     data_nascimento: Date;
@@ -39,13 +39,13 @@ export class Paciente extends Model {
     nivel_socio_economico: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.FLOAT,
         allowNull: false,
     })
     peso: number;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.FLOAT,
         allowNull: false,
     })
     altura: number;
