@@ -12,6 +12,7 @@ import { CreatePesquisadorDto } from 'src/pesquisador/dto/create-pesquisador.dto
 import { Pesquisador } from 'src/pesquisador/entities/pesquisador.entity';
 import { Paciente } from 'src/pacientes/entities/paciente.entity';
 import { CreatePacienteDto } from 'src/pacientes/dto/create-paciente.dto';
+import { PacientesService } from 'src/pacientes/pacientes.service';
 
 @Injectable()
 export class PessoasService {
@@ -26,7 +27,8 @@ export class PessoasService {
     private readonly pacienteModel: typeof Paciente,
     private readonly autenticacaoService: AutenticacaoService,
     private readonly profissionalService: ProfissionalService,
-    private readonly pesquisadorService: PesquisadorService
+    private readonly pesquisadorService: PesquisadorService,
+    private readonly pacienteService: PacientesService
   ) { }
 
   async create(
@@ -72,6 +74,10 @@ export class PessoasService {
 
     if (pessoa.perfil === 'pesquisador') {
       await this.pesquisadorService.create(createPessoaDto as any, pessoa.cpf);
+    }
+
+    if (pessoa.perfil === 'paciente') {
+      await this.pacienteService.create(createPessoaDto as any, pessoa.cpf);
     }
 
     return pessoa;
