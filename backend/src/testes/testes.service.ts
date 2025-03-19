@@ -3,6 +3,9 @@ import { CreateTestesDto } from './dto/create-testes.dto';
 import { UpdateTestesDto } from './dto/update-testes.dto';
 import { Teste } from './entities/teste.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { Paciente } from 'src/pacientes/entities/paciente.entity';
+import { Profissional } from 'src/profissional/entities/profissional.entity';
+import { Unidade } from 'src/unidades/entities/unidade.entity';
 import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
 
 @Injectable()
@@ -46,18 +49,48 @@ export class TestesService {
     return teste;
   }
 
-  async findOneWithDetails(id: number): Promise<Teste> {
+  async findOneWithDetails(id: number): Promise<any> {
     const teste = await this.testesModel.findOne({
       where: { id },
-      include: [{
-        model: Pessoa,
-        attributes: ['nome', 'cpf', 'telefone', 'sexo']
-      }],
+      attributes: ['id', 'tipo', 'cpfPaciente', 'cpfProfissional', 'id_unidade', 'createdAt'],
+      include: [
+        { 
+          model: Paciente, 
+          as: 'paciente',
+          attributes: ["peso", "altura", "data_nascimento"],
+          include: [{ model: Pessoa, attributes: ['nome', 'telefone', 'sexo'] }]
+        },
+        { 
+          model: Profissional, 
+          as: 'profissional',
+          attributes:  ['email'] ,
+          include: [{ model: Pessoa, attributes: ['nome', 'telefone'] }],
+        },
+        { model: Unidade, as: 'unidade', attributes: ['nome', 'endereco'] },
+      ],
     });
+
     if (!teste) {
       throw new NotFoundException('Teste não encontrado');
     }
-    return teste;
+    const result = {
+      ...teste.toJSON(), // Converte o objeto Sequelize para JSON puro
+      paciente: {
+        nome: teste.paciente.pessoa.nome,
+        telefone: teste.paciente.pessoa.telefone,
+        sexo: teste.paciente.pessoa.sexo,
+        peso: teste.paciente.peso,
+        altura: teste.paciente.altura,
+        data_nascimento: teste.paciente.data_nascimento
+      },
+      profissional: {
+        nome: teste.profissional.pessoa.nome,
+        email: teste.profissional.email,
+        telefone: teste.profissional.pessoa.telefone
+      }
+    };
+    delete result.paciente.pessoa;
+    return result;
   }
 
 

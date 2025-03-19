@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateTestesDto {
 
@@ -8,5 +8,9 @@ export class CreateTestesDto {
 
     @IsNotEmpty()
     @IsString()
-    cpfPessoa: string;
+    cpfProfissional: string;
+
+    @IsNotEmpty()
+    @IsNumber()
+    id_unidade: number;
 }

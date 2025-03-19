@@ -9,14 +9,20 @@ import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { HomeModule } from './home/home.module';
 import { TestesModule } from './testes/testes.module';
+import { ProfissionalModule } from './profissional/profissional.module';
+import { Unidade } from './unidades/entities/unidade.entity';
+import { Pessoa } from './pessoas/entities/pessoa.entity';
+import { Profissional } from './profissional/entities/profissional.entity';
+import { PesquisadorModule } from './pesquisador/pesquisador.module';
+import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
 
 
-@Module({ 
+@Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    
+
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -25,13 +31,16 @@ import { TestesModule } from './testes/testes.module';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       autoLoadModels: true,
-      synchronize:  process.env.NODE_ENV !== 'production',
+      synchronize: process.env.NODE_ENV !== 'production',
     }),
     UnidadesModule,
     AutenticacaoModule,
     PessoasModule,
     HomeModule,
     TestesModule,
+    ProfissionalModule,
+    PesquisadorModule,
+    DadoSensorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
