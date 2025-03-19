@@ -1,4 +1,5 @@
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import { Teste } from 'src/testes/entities/teste.entity';
 
 @Table
 export class Unidade extends Model {
@@ -21,4 +22,7 @@ export class Unidade extends Model {
     allowNull: false,
   })
   endereco: string;
+
+  @HasMany(() => Teste)
+  testes: Teste[];
 }

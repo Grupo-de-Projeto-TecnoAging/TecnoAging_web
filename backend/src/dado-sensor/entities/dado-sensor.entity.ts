@@ -1,9 +1,9 @@
-import { BelongsTo, Column, DataType, ForeignKey, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { Col } from "sequelize/types/utils";
 import { Teste } from "src/testes/entities/teste.entity";
 
 @Table
-export class DadoSensor {
+export class DadoSensor extends Model{
     @Column({ primaryKey: true, 
             autoIncrement: true,
             allowNull: false,

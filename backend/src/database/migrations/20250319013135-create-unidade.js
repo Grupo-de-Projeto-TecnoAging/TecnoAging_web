@@ -1,16 +1,13 @@
 'use strict';
-//npx sequelize db:create
-//npx sequelize-cli db:migrate
-//npx sequelize-cli db:migrate:undo
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('unidades', {
+    await queryInterface.createTable('Unidades', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
         allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       nome: {
         type: Sequelize.STRING,
@@ -21,18 +18,16 @@ module.exports = {
         allowNull: false,
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+        type: Sequelize.DATE,
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
-
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('unidades');
+    await queryInterface.dropTable('Unidades');
   }
 };
