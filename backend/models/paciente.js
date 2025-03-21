@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     escolaridade: DataTypes.STRING,
     nivel_socio_economico: DataTypes.STRING,
     peso: DataTypes.FLOAT,
-    altura: DataTypes.FLOAT
+    altura: DataTypes.FLOAT,
+    idade: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Paciente',

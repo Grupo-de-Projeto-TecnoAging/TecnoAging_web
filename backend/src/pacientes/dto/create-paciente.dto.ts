@@ -28,5 +28,8 @@ export class CreatePacienteDto {
     @IsNumber()
     @IsNotEmpty()
     altura: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    idade: number;
 }
-  

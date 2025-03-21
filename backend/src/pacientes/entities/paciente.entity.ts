@@ -51,6 +51,12 @@ export class Paciente extends Model {
     })
     altura: number;
 
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    idade: number;
+
     @BelongsTo(() => Pessoa)
     pessoa: Pessoa;
 
