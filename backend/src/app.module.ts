@@ -15,6 +15,7 @@ import { Pessoa } from './pessoas/entities/pessoa.entity';
 import { Profissional } from './profissional/entities/profissional.entity';
 import { PesquisadorModule } from './pesquisador/pesquisador.module';
 import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
+import { EnderecosModule } from './enderecos/enderecos.module';
 
 
 @Module({
@@ -41,6 +42,7 @@ import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
     ProfissionalModule,
     PesquisadorModule,
     DadoSensorModule,
+    EnderecosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
