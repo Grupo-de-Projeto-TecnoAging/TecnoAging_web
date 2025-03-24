@@ -13,7 +13,7 @@ export class PacientesService {
   ) { }
 
   async create(createPacienteDto: CreatePacienteDto, cpf: string): Promise<Paciente> {
-    if (!createPacienteDto.endereco || !createPacienteDto.data_nascimento || !createPacienteDto.escolaridade || !createPacienteDto.nivel_socio_economico || !createPacienteDto.peso || !createPacienteDto.altura) {
+    if (!createPacienteDto.id_endereco || !createPacienteDto.data_nascimento || !createPacienteDto.escolaridade || !createPacienteDto.nivel_socio_economico || !createPacienteDto.peso || !createPacienteDto.altura) {
       throw new BadRequestException('Endereço, data de nascimento, escolaridade, nível socioeconômico, peso e altura são obrigatórios para o perfil de paciente.');
     }
 

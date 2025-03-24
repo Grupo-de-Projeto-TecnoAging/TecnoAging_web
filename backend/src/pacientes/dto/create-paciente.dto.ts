@@ -1,13 +1,13 @@
-import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreatePacienteDto {
     @IsString()
     @IsNotEmpty()
     cpf: string;
 
-    @IsString()
+    @IsNumber()
     @IsNotEmpty()
-    endereco: string;
+    id_endereco: number;
 
     @IsDateString()
     @IsNotEmpty()

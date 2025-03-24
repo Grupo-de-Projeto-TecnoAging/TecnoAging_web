@@ -8,10 +8,6 @@ export class CreateEnderecoDto {
 
     @IsString()
     @IsNotEmpty()
-    endereco: string
-
-    @IsString()
-    @IsNotEmpty()
     complemento: string
 
     @IsString()

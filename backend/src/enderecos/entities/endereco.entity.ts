@@ -1,8 +1,9 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
-import { CreateEnderecoDto } from "../dto/create-endereco.dto";
+import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
+import { Paciente } from "src/pacientes/entities/paciente.entity";
+import { Unidade } from "src/unidades/entities/unidade.entity";
 
 @Table
-export class Endereco extends Model{
+export class Endereco extends Model {
 
     @Column({
         primaryKey: true,
@@ -53,4 +54,10 @@ export class Endereco extends Model{
         allowNull: false,
     })
     estado: string
+
+    @HasOne(() => Paciente)
+    paciente: Paciente;
+    
+    @HasOne(() => Unidade)
+    unidade: Unidade;
 }

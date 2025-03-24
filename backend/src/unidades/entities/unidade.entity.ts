@@ -1,4 +1,5 @@
-import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Endereco } from 'src/enderecos/entities/endereco.entity';
 import { Teste } from 'src/testes/entities/teste.entity';
 
 @Table
@@ -17,12 +18,17 @@ export class Unidade extends Model {
   })
   nome: string;
 
+  @ForeignKey(() => Endereco)
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
     allowNull: false,
   })
-  endereco: string;
+  id_endereco: number;
+
+  @BelongsTo(() => Endereco)
+  endereco: Endereco;
 
   @HasMany(() => Teste)
   testes: Teste[];
 }
+ 

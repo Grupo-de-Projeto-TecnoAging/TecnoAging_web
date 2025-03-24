@@ -66,7 +66,7 @@ export class TestesService {
           attributes:  ['email'] ,
           include: [{ model: Pessoa, attributes: ['nome', 'telefone'] }],
         },
-        { model: Unidade, as: 'unidade', attributes: ['nome', 'endereco'] },
+        { model: Unidade, as: 'unidade', attributes: ['nome', 'id_endereco'] },
       ],
     });
 

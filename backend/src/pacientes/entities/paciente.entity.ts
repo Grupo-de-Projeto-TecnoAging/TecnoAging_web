@@ -1,4 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Endereco } from "src/enderecos/entities/endereco.entity";
 import { Pessoa } from "src/pessoas/entities/pessoa.entity";
 import { Teste } from "src/testes/entities/teste.entity";
 
@@ -14,12 +15,12 @@ export class Paciente extends Model {
     })
     cpf: string;
 
-    //@ForeignKey(() => Endereco)
+    @ForeignKey(() => Endereco)
     @Column({
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull: false,
     })
-    endereco: string;
+    id_endereco: number;
 
     @Column({
         type: DataType.DATEONLY,
@@ -59,6 +60,9 @@ export class Paciente extends Model {
 
     @BelongsTo(() => Pessoa)
     pessoa: Pessoa;
+
+    @BelongsTo(() => Endereco)
+    endereco: Endereco;
 
     @HasMany(() => Teste)
     testes: Teste[];
