@@ -11,6 +11,10 @@ export class CreateTestesDto {
     cpfProfissional: string;
 
     @IsNotEmpty()
+    @IsString()
+    cpfPaciente: string;
+    
+    @IsNotEmpty()
     @IsNumber()
     id_unidade: number;
 }
