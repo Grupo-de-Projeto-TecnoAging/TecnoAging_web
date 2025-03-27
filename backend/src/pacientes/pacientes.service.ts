@@ -32,10 +32,10 @@ export class PacientesService {
     return this.pacienteModel.findAll();
   }
 
-  async findOne(id: number): Promise<Paciente> {
-    const paciente = await this.pacienteModel.findByPk(id);
+  async findOne(cpf: string): Promise<Paciente> {
+    const paciente = await this.pacienteModel.findByPk(cpf);
     if (!paciente) {
-      throw new NotFoundException(`Paciente com id ${id} não encontrado`);
+      throw new NotFoundException(`Paciente com id ${cpf} não encontrado`);
     }
     return paciente;
   }

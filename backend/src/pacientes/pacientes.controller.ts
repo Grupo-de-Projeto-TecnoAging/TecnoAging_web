@@ -17,9 +17,9 @@ export class PacientesController {
     return this.pacientesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pacientesService.findOne(+id);
+  @Get(':cpf')
+  findOne(@Param('cpf') cpf: string) {
+    return this.pacientesService.findOne(cpf);
   }
 
   @Patch(':id')
