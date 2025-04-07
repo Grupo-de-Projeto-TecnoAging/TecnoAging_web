@@ -17,7 +17,8 @@ module.exports = {
       nivel_socio_economico: "Medio",
       peso: "70.0",
       altura: "1.80",
-      idade: "86"
+      idade: "86",
+      queda: false
     },
     {
       cpf: "22222222222",
@@ -32,7 +33,8 @@ module.exports = {
       nivel_socio_economico: "Medio",
       peso: "70.0",
       altura: "1.57",
-      idade: "76"
+      idade: "76",
+      queda: true
     }
    ]);
   },

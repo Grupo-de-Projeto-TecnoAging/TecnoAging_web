@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsDate, IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreatePacienteDto {
     @IsString()
@@ -32,4 +32,8 @@ export class CreatePacienteDto {
     @IsNumber()
     @IsNotEmpty()
     idade: number;
+
+    @IsBoolean()
+    @IsNotEmpty()
+    queda: boolean;
 }

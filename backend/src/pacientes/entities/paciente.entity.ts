@@ -57,6 +57,12 @@ export class Paciente extends Model {
     })
     idade: number;
 
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+    })
+    queda: boolean;
+
     @BelongsTo(() => Pessoa)
     pessoa: Pessoa;
 
