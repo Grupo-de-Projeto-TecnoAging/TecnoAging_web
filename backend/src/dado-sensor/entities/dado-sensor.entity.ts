@@ -1,5 +1,4 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Col } from "sequelize/types/utils";
 import { Teste } from "src/testes/entities/teste.entity";
 
 @Table
@@ -12,8 +11,9 @@ export class DadoSensor extends Model{
     id: number;
 
     @ForeignKey(() => Teste)
-    @Column({ allowNull: false,
-            type: DataType.INTEGER
+    @Column({ field: 'id_teste',
+        allowNull: false,
+        type: DataType.INTEGER
         })
     id_teste: number;
 

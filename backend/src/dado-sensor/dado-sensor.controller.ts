@@ -22,6 +22,12 @@ export class DadoSensorController {
     return this.dadoSensorService.findOne(+id);
   }
 
+
+  @Get('teste/:idTeste')
+  findAllByTeste(@Param('idTeste') idTeste: string) {
+    return this.dadoSensorService.findAllByTeste(+idTeste);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDadoSensorDto: UpdateDadoSensorDto) {
     return this.dadoSensorService.update(+id, updateDadoSensorDto);
