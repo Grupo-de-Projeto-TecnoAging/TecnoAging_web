@@ -13,16 +13,12 @@ export class PacientesService {
   ) { }
 
   async create(createPacienteDto: CreatePacienteDto, cpf: string): Promise<Paciente> {
-    if (!createPacienteDto.endereco || !createPacienteDto.data_nascimento || !createPacienteDto.escolaridade || !createPacienteDto.nivel_socio_economico || !createPacienteDto.peso || !createPacienteDto.altura) {
+    if (!createPacienteDto.endereco || !createPacienteDto.data_nascimento || !createPacienteDto.escolaridade || !createPacienteDto.nivel_socio_economico || !createPacienteDto.peso || !createPacienteDto.altura || !createPacienteDto.idade || !createPacienteDto.queda) {
       throw new BadRequestException('Endereço, data de nascimento, escolaridade, nível socioeconômico, peso e altura são obrigatórios para o perfil de paciente.');
     }
-
-    const idade = this.calculaIdade(createPacienteDto.data_nascimento);
-
     const paciente = await this.pacienteModel.create({
       ...createPacienteDto,
       cpf: cpf,
-      idade: idade
     });
 
     return paciente;
@@ -60,7 +56,7 @@ export class PacientesService {
     return paciente;
   }
 
-  private calculaIdade(data_nascimento: Date): number {
+  /*private calculaIdade(data_nascimento: Date): number {
     const hoje = new Date();
     const nascimento = new Date(data_nascimento);
     let idade = hoje.getFullYear() - nascimento.getFullYear();
@@ -70,5 +66,5 @@ export class PacientesService {
       idade--;
     }
     return idade;
-  }
+  }*/
 }
