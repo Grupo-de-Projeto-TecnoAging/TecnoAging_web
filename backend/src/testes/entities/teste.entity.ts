@@ -1,4 +1,5 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { DadoSensor } from "src/dado-sensor/entities/dado-sensor.entity";
 import { Paciente } from "src/pacientes/entities/paciente.entity";
 import { Profissional } from "src/profissional/entities/profissional.entity";
 import { Unidade } from "src/unidades/entities/unidade.entity";
@@ -48,4 +49,7 @@ export class Teste extends Model {
 
   @BelongsTo(() => Paciente)
   paciente: Paciente;
+
+  @HasMany(() => DadoSensor)
+  dadosSensor: DadoSensor[];
 }
