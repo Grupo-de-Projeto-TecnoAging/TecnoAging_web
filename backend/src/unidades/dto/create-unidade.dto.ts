@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateUnidadeDto {
     
@@ -7,7 +7,7 @@ export class CreateUnidadeDto {
     @IsNotEmpty()
     nome: string;
     
-    @IsString()
+    @IsNumber()
     @IsNotEmpty()
-    endereco: string;
+    id_endereco: number;
 }
