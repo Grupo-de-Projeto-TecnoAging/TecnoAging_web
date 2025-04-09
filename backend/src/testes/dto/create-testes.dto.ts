@@ -1,4 +1,5 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { CreateDadoSensorDto } from "src/dado-sensor/dto/create-dado-sensor.dto";
 
 export class CreateTestesDto {
 
@@ -17,4 +18,6 @@ export class CreateTestesDto {
     @IsNotEmpty()
     @IsNumber()
     id_unidade: number;
+
+    dadosSensor?: CreateDadoSensorDto[];
 }

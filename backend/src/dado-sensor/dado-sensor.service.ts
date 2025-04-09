@@ -15,7 +15,7 @@ constructor(
     ) { }
 
   async create(createDadoSensorDto: Partial<CreateDadoSensorDto>): Promise<DadoSensor> {
-    return this.dadoSensorModel.create(createDadoSensorDto);
+    return await this.dadoSensorModel.create(createDadoSensorDto);
   }
 
   async findAll(): Promise<DadoSensor[]> {
