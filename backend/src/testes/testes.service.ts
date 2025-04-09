@@ -7,6 +7,7 @@ import { Paciente } from 'src/pacientes/entities/paciente.entity';
 import { Profissional } from 'src/profissional/entities/profissional.entity';
 import { Unidade } from 'src/unidades/entities/unidade.entity';
 import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
+import { DadoSensor } from 'src/dado-sensor/entities/dado-sensor.entity';
 
 @Injectable()
 export class TestesService {
@@ -16,7 +17,19 @@ export class TestesService {
   ) { }
 
   async create(createTestesDto: Partial<CreateTestesDto>): Promise<Teste> {
-    return this.testesModel.create(createTestesDto);
+    const { dadosSensor, ...dadosTeste } = createTestesDto;
+  
+    const testeCriado = await this.testesModel.create(
+      {
+        ...dadosTeste,
+        dadosSensor: dadosSensor || [], 
+      },
+      {
+        include: [DadoSensor], 
+      }
+    );
+  
+    return testeCriado;
   }
 
   async findAll(): Promise<Teste[]> {

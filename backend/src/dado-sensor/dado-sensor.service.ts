@@ -15,7 +15,7 @@ constructor(
     ) { }
 
   async create(createDadoSensorDto: Partial<CreateDadoSensorDto>): Promise<DadoSensor> {
-    return this.dadoSensorModel.create(createDadoSensorDto);
+    return await this.dadoSensorModel.create(createDadoSensorDto);
   }
 
   async findAll(): Promise<DadoSensor[]> {
@@ -27,11 +27,6 @@ constructor(
     return await this.dadoSensorModel.findAll({
       where: { id_teste: idTeste },
       attributes: ['id_teste', 'tempo', 'accel_x', 'accel_y', 'accel_z', 'gyro_x', 'gyro_y', 'gyro_z'],
-      include: [
-        {model: Teste, as: 'teste', attributes: ['tipo', 'cpfPaciente', 'cpfProfissional', 'id_unidade'], include: [
-          { model: Unidade,  attributes: ['endereco'] }]
-        }
-      ],
     });
   }
 
