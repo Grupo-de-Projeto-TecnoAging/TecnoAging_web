@@ -5,9 +5,9 @@ export class CreatePacienteDto {
     @IsNotEmpty()
     cpf: string;
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    id_endereco: number;
+    id_endereco: string;
 
     @IsDateString()
     @IsNotEmpty()

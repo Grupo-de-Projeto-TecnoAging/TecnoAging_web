@@ -2,17 +2,21 @@ import { IsNotEmpty, IsNumber, IsString } from "class-validator"
 
 export class CreateEnderecoDto {
 
+    @IsString()
+    @IsNotEmpty()
+    endereco_cep: string
+
     @IsNumber()
     @IsNotEmpty()
     numero: number
 
     @IsString()
     @IsNotEmpty()
-    complemento: string
+    rua: string
 
     @IsString()
     @IsNotEmpty()
-    cep: string
+    complemento: string
 
     @IsString()
     @IsNotEmpty()

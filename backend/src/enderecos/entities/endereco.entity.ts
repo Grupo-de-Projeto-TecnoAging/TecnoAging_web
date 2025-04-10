@@ -14,6 +14,13 @@ export class Endereco extends Model {
     id: number
 
     @Column({
+        type: DataType.STRING,
+        allowNull: false,
+        unique: true, // Ensure endereco_cep is unique
+    })
+    endereco_cep: string
+    
+    @Column({
         type: DataType.INTEGER,
         allowNull: false,
     })
@@ -23,19 +30,13 @@ export class Endereco extends Model {
         type: DataType.STRING,
         allowNull: false,
     })
-    endereco: string
+    rua: string
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
     complemento: string
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    cep: string
 
     @Column({
         type: DataType.STRING,

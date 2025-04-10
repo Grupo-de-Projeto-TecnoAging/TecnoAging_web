@@ -14,9 +14,13 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      endereco: {
+      id_endereco: {
         type: Sequelize.STRING,
         allowNull: false,
+        references: {
+          model: 'Enderecos',  // nome da tabela que referencia
+          key: 'endereco_cep', // chave primária da tabela referenciada
+        },
       },
       data_nascimento: {
         type: Sequelize.DATEONLY,

@@ -10,7 +10,7 @@ export class Unidade extends Model {
     type: DataType.INTEGER,
     allowNull: false,
   })
-  id:number;
+  id: number;
 
   @Column({
     type: DataType.STRING,
@@ -20,15 +20,14 @@ export class Unidade extends Model {
 
   @ForeignKey(() => Endereco)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.STRING,
     allowNull: false,
   })
-  id_endereco: number;
+  id_endereco: string;
 
-  @BelongsTo(() => Endereco)
+  @BelongsTo(() => Endereco, { foreignKey: 'id_endereco', targetKey: 'endereco_cep' })
   endereco: Endereco;
 
   @HasMany(() => Teste)
   testes: Teste[];
 }
- 
