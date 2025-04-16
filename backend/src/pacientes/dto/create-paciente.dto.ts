@@ -36,4 +36,5 @@ export class CreatePacienteDto {
     @IsBoolean()
     @IsNotEmpty()
     queda: boolean;
+
 }

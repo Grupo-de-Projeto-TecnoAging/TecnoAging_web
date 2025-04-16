@@ -3,6 +3,8 @@ import { CreatePacienteDto } from './dto/create-paciente.dto';
 import { UpdatePacienteDto } from './dto/update-paciente.dto';
 import { Paciente } from './entities/paciente.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
+import { ReturnPacienteDto } from './dto/return-paciente.dto';
 
 @Injectable()
 export class PacientesService {
@@ -24,16 +26,46 @@ export class PacientesService {
     return paciente;
   }
 
-  async findAll(): Promise<Paciente[]> {
-    return this.pacienteModel.findAll();
+  async findAll(): Promise<ReturnPacienteDto[]> {
+    const pacientes = await this.pacienteModel.findAll({
+      include: [{ model: Pessoa, attributes: ['nome'] }],
+    });
+  
+    return pacientes.map(paciente => ({
+      nome: paciente.pessoa?.nome,
+      cpf: paciente.cpf,
+      id_endereco: paciente.id_endereco,
+      data_nascimento: paciente.data_nascimento,
+      escolaridade: paciente.escolaridade,
+      nivel_socio_economico: paciente.nivel_socio_economico,
+      peso: paciente.peso,
+      altura: paciente.altura,
+      idade: paciente.idade,
+      queda: paciente.queda,
+      createdAt: paciente.createdAt,
+      updatedAt: paciente.updatedAt,
+    }));
   }
 
-  async findOne(cpf: string): Promise<Paciente> {
-    const paciente = await this.pacienteModel.findByPk(cpf);
+  async findOne(cpf: string): Promise<ReturnPacienteDto> {
+    const paciente = await this.pacienteModel.findByPk(cpf, { include: [{ model: Pessoa, attributes: ['nome'] }],});
     if (!paciente) {
       throw new NotFoundException(`Paciente com id ${cpf} não encontrado`);
     }
-    return paciente;
+    return {
+      nome: paciente.pessoa?.nome,
+      cpf: paciente.cpf,
+      id_endereco: paciente.id_endereco,
+      data_nascimento: paciente.data_nascimento,
+      escolaridade: paciente.escolaridade,
+      nivel_socio_economico: paciente.nivel_socio_economico,
+      peso: paciente.peso,
+      altura: paciente.altura,
+      idade: paciente.idade,
+      queda: paciente.queda,
+      createdAt: paciente.createdAt,
+      updatedAt: paciente.updatedAt,
+    };
   }
 
   async updateById(id: string, updatePacienteDto: UpdatePacienteDto): Promise<Paciente> {
