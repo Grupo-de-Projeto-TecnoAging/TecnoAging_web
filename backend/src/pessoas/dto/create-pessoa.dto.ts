@@ -1,4 +1,5 @@
 import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { Is } from "sequelize-typescript";
 
 export class CreatePessoaDto {
     @IsString()
@@ -58,4 +59,10 @@ export class CreatePessoaDto {
     @IsOptional()
     @IsNumber()
     altura?: number;
+
+    @IsOptional()
+    @IsString()
+    id_endereco?: string;
+
+
 }

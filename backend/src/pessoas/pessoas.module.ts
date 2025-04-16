@@ -10,9 +10,11 @@ import { Pesquisador } from 'src/pesquisador/entities/pesquisador.entity';
 import { PesquisadorModule } from 'src/pesquisador/pesquisador.module';
 import { Paciente } from 'src/pacientes/entities/paciente.entity';
 import { PacientesModule } from 'src/pacientes/pacientes.module';
+import { Endereco } from 'src/enderecos/entities/endereco.entity';
+import { EnderecosModule } from 'src/enderecos/enderecos.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Pessoa, Profissional, Pesquisador, Paciente]), AutenticacaoModule, ProfissionalModule, PesquisadorModule, PacientesModule],
+  imports: [SequelizeModule.forFeature([Pessoa, Profissional, Pesquisador, Paciente, Endereco]), AutenticacaoModule, ProfissionalModule, PesquisadorModule, PacientesModule, EnderecosModule],
   controllers: [PessoasController],
   providers: [PessoasService],
   exports: [SequelizeModule]
