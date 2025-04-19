@@ -13,9 +13,6 @@ import { Pesquisador } from 'src/pesquisador/entities/pesquisador.entity';
 import { Paciente } from 'src/pacientes/entities/paciente.entity';
 import { CreatePacienteDto } from 'src/pacientes/dto/create-paciente.dto';
 import { PacientesService } from 'src/pacientes/pacientes.service';
-import { EnderecosService } from 'src/enderecos/enderecos.service';
-import { Endereco } from 'src/enderecos/entities/endereco.entity';
-import { CreateEnderecoDto } from 'src/enderecos/dto/create-endereco.dto';
 
 @Injectable()
 export class PessoasService {
@@ -31,18 +28,14 @@ export class PessoasService {
     private readonly autenticacaoService: AutenticacaoService,
     private readonly profissionalService: ProfissionalService,
     private readonly pesquisadorService: PesquisadorService,
-    private readonly pacientesService: PacientesService,
-    private readonly enderecosService: EnderecosService,
-    @InjectModel(Endereco)
-    private readonly enderecoModel: typeof Endereco,
+    private readonly pacientesService: PacientesService
   ) { }
 
   async create(
     createPessoaDto: Partial<CreatePessoaDto>,
     createProfissionalDto?: Partial<CreateProfissionalDto>,
     createPesquisadorDto?: Partial<CreatePesquisadorDto>,
-    createPacienteDto?: Partial<CreatePacienteDto>,
-    createEnderecoDto?: Partial<CreateEnderecoDto>,
+    createPacienteDto?: Partial<CreatePacienteDto>
   ): Promise<Pessoa> {
 
     if (!createPessoaDto.senha) {
@@ -69,9 +62,6 @@ export class PessoasService {
       if (!createPessoaDto.data_nascimento || !createPessoaDto.escolaridade || !createPessoaDto.nivel_socio_economico || !createPessoaDto.peso || !createPessoaDto.altura) {
         throw new BadRequestException('Dados de paciente são obrigatórios para este perfil: data_nascimento, escolaridade, nivel_socio_economico, peso e altura');
       }
-      if (!createEnderecoDto || !createEnderecoDto.endereco_cep || !createEnderecoDto.numero || !createEnderecoDto.rua || !createEnderecoDto.complemento || !createEnderecoDto.bairro || !createEnderecoDto.cidade || !createEnderecoDto.estado) {
-        throw new BadRequestException('Todos os dados do endereço são obrigatórios');
-      }
     }
 
     createPessoaDto.senha = await this.autenticacaoService.criptografarSenha(createPessoaDto.senha);
@@ -87,13 +77,6 @@ export class PessoasService {
     }
 
     if (pessoa.perfil === 'paciente') {
-     
-      const enderecoCriado = await this.enderecosService.create(createEnderecoDto as any);
-      if (!enderecoCriado) {
-        throw new BadRequestException('Erro ao criar o endereço');
-      }
-      createPessoaDto.id_endereco = enderecoCriado.endereco_cep;
-
       await this.pacientesService.create(createPessoaDto as any, pessoa.cpf);
     }
 
