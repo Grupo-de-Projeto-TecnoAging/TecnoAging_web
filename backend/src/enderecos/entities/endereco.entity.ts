@@ -1,5 +1,5 @@
 import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
-import { Paciente } from "src/pacientes/entities/paciente.entity";
+import { Patient } from "src/patient/entities/patient.entity";
 import { Unidade } from "src/unidades/entities/unidade.entity";
 
 @Table
@@ -56,8 +56,8 @@ export class Endereco extends Model {
     })
     estado: string
 
-    @HasOne(() => Paciente)
-    paciente: Paciente;
+    @HasOne(() => Patient)
+    paciente: Patient;
     
     @HasOne(() => Unidade)
     unidade: Unidade;

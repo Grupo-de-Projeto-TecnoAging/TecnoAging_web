@@ -1,7 +1,7 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { DadoSensor } from "src/dado-sensor/entities/dado-sensor.entity";
-import { Paciente } from "src/pacientes/entities/paciente.entity";
-import { Profissional } from "src/profissional/entities/profissional.entity";
+import { Paciente } from "src/patient/entities/patient.entity";
+import { Profissional } from "src/healthProfessional/entities/healthProfessional.entity";
 import { Unidade } from "src/unidades/entities/unidade.entity";
 
 @Table

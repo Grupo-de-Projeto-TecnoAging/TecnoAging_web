@@ -6,16 +6,17 @@ import { AppService } from './app.service';
 import { UnidadesModule } from './unidades/unidades.module';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
 import { AutenticacaoModule } from './autenticacao/autenticacao.module';
-import { PessoasModule } from './pessoas/pessoas.module';
+import { PeopleModule } from './person/people.module';
 import { HomeModule } from './home/home.module';
 import { TestesModule } from './testes/testes.module';
-import { ProfissionalModule } from './profissional/profissional.module';
+import { HealthProfessionalModule } from './healthProfessional/healthProfessional.module';
 import { Unidade } from './unidades/entities/unidade.entity';
-import { Pessoa } from './pessoas/entities/pessoa.entity';
-import { Profissional } from './profissional/entities/profissional.entity';
-import { PesquisadorModule } from './pesquisador/pesquisador.module';
+import { Person } from './person/entities/person.entity';
+import { HealthProfessional } from './healthProfessional/entities/healthProfessional.entity';
 import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
 import { EnderecosModule } from './enderecos/enderecos.module';
+import { PatientsModule } from './patient/patients.module';
+import { ResearcherModule } from './researcher/researcher.module';
 
 
 @Module({
@@ -36,11 +37,12 @@ import { EnderecosModule } from './enderecos/enderecos.module';
     }),
     UnidadesModule,
     AutenticacaoModule,
-    PessoasModule,
+    PeopleModule,
     HomeModule,
     TestesModule,
-    ProfissionalModule,
-    PesquisadorModule,
+    HealthProfessionalModule,
+    PatientsModule,
+    ResearcherModule,
     DadoSensorModule,
     EnderecosModule,
   ],
