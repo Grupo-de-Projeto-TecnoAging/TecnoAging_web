@@ -3,7 +3,7 @@ import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { Person } from './entities/person.entity';
 import { InjectModel } from '@nestjs/sequelize';
-import { AutenticacaoService } from 'src/autenticacao/autenticacao.service';
+import { AuthService } from 'src/auth/auth.service';
 import { Researcher } from 'src/researcher/entities/researcher.entity';
 import { Patient } from 'src/patient/entities/patient.entity';
 import { CreatePatientDto } from 'src/patient/dto/create-patient.dto';
@@ -25,7 +25,7 @@ export class PeopleService {
     private readonly pesquisadorModel: typeof Researcher,
     @InjectModel(Patient)
     private readonly pacienteModel: typeof Patient,
-    private readonly autenticacaoService: AutenticacaoService,
+    private readonly authService: AuthService,
     private readonly profissionalService: HealthProfessionalService,
     private readonly pesquisadorService: ResearcherService,
     private readonly pacientesService: PatientsService
@@ -39,7 +39,7 @@ export class PeopleService {
   ): Promise<Person> {
 
     if (!createPersonDto.password) {
-      throw new BadRequestException('Senha é obrigatória');
+      throw new BadRequestException('Password é obrigatória');
     }
 
     if (!createPersonDto.cpf || !createPersonDto.profile) {
@@ -64,7 +64,7 @@ export class PeopleService {
       }
     }
 
-    createPersonDto.password = await this.autenticacaoService.criptografarSenha(createPersonDto.password);
+    createPersonDto.password = await this.authService.encryptPassword(createPersonDto.password);
 
     const person = await this.personModel.create(createPersonDto);
 

@@ -30,7 +30,7 @@ module.exports = {
     {
       cpf: "66666666666",
       name: 'João da Silva',     
-      senha: "pesquisador",
+      password: "pesquisador",
       phone: "112345678",
       gender: "M",
       profile: "pesquisador",

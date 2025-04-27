@@ -6,7 +6,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Paciente } from 'src/patient/entities/patient.entity';
 import { Profissional } from 'src/healthProfessional/entities/healthProfessional.entity';
 import { Unidade } from 'src/unidades/entities/unidade.entity';
-import { Pessoa } from 'src/pessoas/entities/pessoa.entity';
+import { Person } from 'src/persons/entities/person.entity';
 import { DadoSensor } from 'src/dado-sensor/entities/dado-sensor.entity';
 
 @Injectable()
@@ -36,20 +36,20 @@ export class TestesService {
     return await this.testesModel.findAll();
   }
 
-  async findAllByPessoa(cpf: string): Promise<Teste[]> {
+  async findAllByPerson(cpf: string): Promise<Teste[]> {
     return await this.testesModel.findAll({
-      where: { cpfPessoa: cpf }
+      where: { cpfPerson: cpf }
     });
   }
-  async findOneByPessoa(cpf: string, id: number): Promise<Teste> {
+  async findOneByPerson(cpf: string, id: number): Promise<Teste> {
     const teste = await this.testesModel.findOne({
       where: {
-        cpfPessoa: cpf,
+        cpfPerson: cpf,
         id: id,
       },
     });
     if (!teste) {
-      throw new NotFoundException('Teste não encontrado para esta pessoa');
+      throw new NotFoundException('Teste não encontrado para esta person');
     }
     return teste;
   }
@@ -71,13 +71,13 @@ export class TestesService {
           model: Paciente, 
           as: 'paciente',
           attributes: ["peso", "altura", "data_nascimento"],
-          include: [{ model: Pessoa, attributes: ['nome', 'telefone', 'sexo'] }]
+          include: [{ model: Person, attributes: ['nome', 'telefone', 'sexo'] }]
         },
         { 
           model: Profissional, 
           as: 'profissional',
           attributes:  ['email'] ,
-          include: [{ model: Pessoa, attributes: ['nome', 'telefone'] }],
+          include: [{ model: Person, attributes: ['nome', 'telefone'] }],
         },
         { model: Unidade, as: 'unidade', attributes: ['nome', 'id_endereco'] },
       ],
@@ -89,20 +89,20 @@ export class TestesService {
     const result = {
       ...teste.toJSON(), // Converte o objeto Sequelize para JSON puro
       paciente: {
-        nome: teste.paciente.pessoa.nome,
-        telefone: teste.paciente.pessoa.telefone,
-        sexo: teste.paciente.pessoa.sexo,
+        nome: teste.paciente.person.nome,
+        telefone: teste.paciente.person.telefone,
+        sexo: teste.paciente.person.sexo,
         peso: teste.paciente.peso,
         altura: teste.paciente.altura,
         data_nascimento: teste.paciente.data_nascimento
       },
       profissional: {
-        nome: teste.profissional.pessoa.nome,
+        nome: teste.profissional.person.nome,
         email: teste.profissional.email,
-        telefone: teste.profissional.pessoa.telefone
+        telefone: teste.profissional.person.telefone
       }
     };
-    delete result.paciente.pessoa;
+    delete result.paciente.person;
     return result;
   }
 

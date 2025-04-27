@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UnidadesModule } from './unidades/unidades.module';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
-import { AutenticacaoModule } from './autenticacao/autenticacao.module';
+import { AuthModule } from './auth/auth.module';
 import { PeopleModule } from './person/people.module';
 import { HomeModule } from './home/home.module';
 import { TestesModule } from './testes/testes.module';
@@ -36,7 +36,7 @@ import { ResearcherModule } from './researcher/researcher.module';
       synchronize: process.env.NODE_ENV !== 'production',
     }),
     UnidadesModule,
-    AutenticacaoModule,
+    AuthModule,
     PeopleModule,
     HomeModule,
     TestesModule,

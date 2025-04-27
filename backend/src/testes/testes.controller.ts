@@ -22,14 +22,14 @@ export class TestesController {
     return this.testesService.findOne(+id);
   }
 
-  @Get('pessoa/:cpf')
-  findAllByPessoa(@Param('cpf') cpf: string) {
-    return this.testesService.findAllByPessoa(cpf);
+  @Get('person/:cpf')
+  findAllByPerson(@Param('cpf') cpf: string) {
+    return this.testesService.findAllByPerson(cpf);
   }
 
-  @Get('pessoa/:cpf/:id')
-  findOneByPessoa(@Param('cpf') cpf: string, @Param('id') id: string) {
-    return this.testesService.findOneByPessoa(cpf, +id);
+  @Get('person/:cpf/:id')
+  findOneByPerson(@Param('cpf') cpf: string, @Param('id') id: string) {
+    return this.testesService.findOneByPerson(cpf, +id);
   }
 
   @Get('details/:id')

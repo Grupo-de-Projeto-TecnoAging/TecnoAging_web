@@ -8,8 +8,8 @@ module.exports = {
         type: Sequelize.STRING(14),
         allowNull: false,
         references: {
-          model: 'Pessoas',  // Nome da tabela Pessoa
-          key: 'cpf',        // Chave primária da tabela Pessoa
+          model: 'Persons',  // Nome da tabela Person
+          key: 'cpf',        // Chave primária da tabela Person
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
