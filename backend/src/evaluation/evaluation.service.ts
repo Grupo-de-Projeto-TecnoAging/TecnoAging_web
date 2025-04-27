@@ -75,7 +75,7 @@ export class EvaluationService {
         },
         { 
           model: HealthProfessional, 
-          as: 'healthprofessional',
+          as: 'healthProfessional',
           attributes:  ['email'] ,
           include: [{ model: Person, attributes: ['name', 'phone'] }],
         },
@@ -96,10 +96,10 @@ export class EvaluationService {
         height: evaluation.patient.height,
         dateOfBirth: evaluation.patient.dateOfBirth
       },
-      healthprofessional: {
-        name: evaluation.healthprofessional.person.name,
-        email: evaluation.healthprofessional.email,
-        phone: evaluation.healthprofessional.person.phone
+      healthProfessional: {
+        name: evaluation.healthProfessional.person.name,
+        email: evaluation.healthProfessional.email,
+        phone: evaluation.healthProfessional.person.phone
       }
     };
     delete result.patient.person;

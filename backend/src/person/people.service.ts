@@ -20,13 +20,13 @@ export class PeopleService {
     @InjectModel(Person)
     private readonly personModel: typeof Person,
     @InjectModel(HealthProfessional)
-    private readonly healthprofessionalModel: typeof HealthProfessional,
+    private readonly healthProfessionalModel: typeof HealthProfessional,
     @InjectModel(Researcher)
     private readonly pesquisadorModel: typeof Researcher,
     @InjectModel(Patient)
     private readonly patientModel: typeof Patient,
     private readonly authService: AuthService,
-    private readonly healthprofessionalService: HealthProfessionalService,
+    private readonly healthProfessionalService: HealthProfessionalService,
     private readonly pesquisadorService: ResearcherService,
     private readonly patientService: PatientService
   ) { }
@@ -46,9 +46,9 @@ export class PeopleService {
       throw new BadRequestException('CPF e Perfil são obrigatórios');
     }
 
-    if (createPersonDto.profile === 'healthprofessional') {
+    if (createPersonDto.profile === 'healthProfessional') {
       if (!createPersonDto.email || !createPersonDto.expertise) {
-        throw new BadRequestException('Dados de healthprofessional são obrigatórios para este perfil: email e especialidade');
+        throw new BadRequestException('Dados de healthProfessional são obrigatórios para este perfil: email e especialidade');
       }
     }
 
@@ -69,7 +69,7 @@ export class PeopleService {
     const person = await this.personModel.create(createPersonDto);
 
     if (person.profile === 'healthProfessional') {
-      await this.healthprofessionalService.create(createPersonDto as any, person.cpf);
+      await this.healthProfessionalService.create(createPersonDto as any, person.cpf);
     }
 
     if (person.profile === 'researcher') {

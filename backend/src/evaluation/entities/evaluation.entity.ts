@@ -42,7 +42,7 @@ export class Evaluation extends Model {
   id_healthUnit: number;
 
   @BelongsTo(() => HealthProfessional)
-  healthprofessional: HealthProfessional;
+  healthProfessional: HealthProfessional;
 
   @BelongsTo(() => healthUnit)
   healthUnit: healthUnit;
