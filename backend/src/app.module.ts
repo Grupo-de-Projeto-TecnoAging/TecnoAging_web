@@ -3,18 +3,18 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UnidadesModule } from './unidades/unidades.module';
+import { healthUnitModule } from './healthUnit/healthUnit.module';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
 import { AuthModule } from './auth/auth.module';
 import { PeopleModule } from './person/people.module';
 import { HomeModule } from './home/home.module';
 import { EvaluationModule } from './evaluation/evaluation.module';
 import { HealthProfessionalModule } from './healthProfessional/healthProfessional.module';
-import { Unidade } from './unidades/entities/unidade.entity';
+import { healthUnit } from './healthUnit/entities/healthUnit.entity';
 import { Person } from './person/entities/person.entity';
 import { HealthProfessional } from './healthProfessional/entities/healthProfessional.entity';
 import { SensorDataModule } from './sensorData/sensorData.module';
-import { EnderecosModule } from './enderecos/enderecos.module';
+import { EnderecosModule } from './address/enderecos.module';
 import { PatientsModule } from './patient/patients.module';
 import { ResearcherModule } from './researcher/researcher.module';
 
@@ -35,7 +35,7 @@ import { ResearcherModule } from './researcher/researcher.module';
       autoLoadModels: true,
       synchronize: process.env.NODE_ENV !== 'production',
     }),
-    UnidadesModule,
+    healthUnitModule,
     AuthModule,
     PeopleModule,
     HomeModule,

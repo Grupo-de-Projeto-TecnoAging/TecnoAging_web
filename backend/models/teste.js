@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     tipo: DataTypes.ENUM,
     cpfHealthProfessional: DataTypes.STRING,
     cpfPatient: DataTypes.STRING,
-    id_unidade: DataTypes.INTEGER
+    id_healthUnit: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Evaluation',

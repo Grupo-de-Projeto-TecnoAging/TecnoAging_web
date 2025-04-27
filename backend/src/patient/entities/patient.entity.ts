@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { Endereco } from "src/enderecos/entities/endereco.entity";
+import { Endereco } from "src/address/entities/address.entity";
 import { Person } from "src/person/entities/person.entity";
 import { Evaluation } from "src/evaluation/entities/evaluation.entity";
 

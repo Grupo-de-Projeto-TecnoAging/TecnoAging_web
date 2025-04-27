@@ -5,7 +5,7 @@ import { Evaluation } from './entities/evaluation.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { Patient } from 'src/patient/entities/patient.entity';
 import { HealthProfessional } from 'src/healthProfessional/entities/healthProfessional.entity';
-import { Unidade } from 'src/unidades/entities/unidade.entity';
+import { healthUnit } from 'src/healthUnit/entities/healthUnit.entity';
 import { Person } from 'src/person/entities/person.entity';
 import { SensorData } from 'src/sensorData/entities/sensorData.entity';
 
@@ -65,7 +65,7 @@ export class EvaluationService {
   async findOneWithDetails(id: number): Promise<any> {
     const evaluation = await this.evaluationModel.findOne({
       where: { id },
-      attributes: ['id', 'tipo', 'cpfPatient', 'cpfHealthProfessional', 'id_unidade', 'createdAt'],
+      attributes: ['id', 'tipo', 'cpfPatient', 'cpfHealthProfessional', 'id_healthUnit', 'createdAt'],
       include: [
         { 
           model: Patient, 
@@ -79,7 +79,7 @@ export class EvaluationService {
           attributes:  ['email'] ,
           include: [{ model: Person, attributes: ['name', 'phone'] }],
         },
-        { model: Unidade, as: 'unidade', attributes: ['name', 'id_endereco'] },
+        { model: healthUnit, as: 'healthUnit', attributes: ['name', 'id_endereco'] },
       ],
     });
 

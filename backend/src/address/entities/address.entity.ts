@@ -1,0 +1,64 @@
+import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
+import { Patient } from "src/patient/entities/patient.entity";
+import { healthUnit } from "src/healthUnit/entities/healthUnit.entity";
+
+@Table
+export class Endereco extends Model {
+
+    @Column({
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    id: number
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+        unique: true, // Ensure endereco_cep is unique
+    })
+    endereco_cep: string
+    
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false,
+    })
+    numero: number
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    rua: string
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    complemento: string
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    bairro: string
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    cidade: string
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    estado: string
+
+    @HasOne(() => Patient)
+    patient: Patient;
+    
+    @HasOne(() => healthUnit)
+    healthUnit: healthUnit;
+}

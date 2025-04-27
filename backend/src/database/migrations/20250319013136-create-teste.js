@@ -33,11 +33,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      id_unidade: {
+      id_healthUnit: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Unidades',
+          model: 'healthUnit',
           key: 'id',
         },
         onUpdate: 'CASCADE',

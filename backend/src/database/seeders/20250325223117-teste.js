@@ -8,13 +8,13 @@ module.exports = {
       tipo: "TUG",
       cpfHealthProfessional: "33333333333",
       cpfPatient: "11111111111",
-      id_unidade: "1"
+      id_healthUnit: "1"
     },
     {
       tipo: "TUG",
       cpfHealthProfessional: "44444444444",
       cpfPatient: "22222222222",
-      id_unidade: "2"
+      id_healthUnit: "2"
     }
     ]);
   },

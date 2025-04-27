@@ -2,7 +2,7 @@ import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "
 import { SensorData } from "src/sensorData/entities/sensorData.entity";
 import { Patient } from "src/patient/entities/patient.entity";
 import { HealthProfessional } from "src/healthProfessional/entities/healthProfessional.entity";
-import { Unidade } from "src/unidades/entities/unidade.entity";
+import { healthUnit } from "src/healthUnit/entities/healthUnit.entity";
 
 @Table
 export class Evaluation extends Model {
@@ -34,18 +34,18 @@ export class Evaluation extends Model {
   })
   cpfPatient: string;
 
-  @ForeignKey(() => Unidade)
+  @ForeignKey(() => healthUnit)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  id_unidade: number;
+  id_healthUnit: number;
 
   @BelongsTo(() => HealthProfessional)
   healthprofessional: HealthProfessional;
 
-  @BelongsTo(() => Unidade)
-  unidade: Unidade;
+  @BelongsTo(() => healthUnit)
+  healthUnit: healthUnit;
 
   @BelongsTo(() => Patient)
   patient: Patient;

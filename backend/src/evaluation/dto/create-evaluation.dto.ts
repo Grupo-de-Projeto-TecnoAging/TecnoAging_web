@@ -17,7 +17,7 @@ export class CreateEvaluationDto {
     
     @IsNotEmpty()
     @IsNumber()
-    id_unidade: number;
+    id_healthUnit: number;
 
     sensorData?: CreateSensorDataDto[];
 }
