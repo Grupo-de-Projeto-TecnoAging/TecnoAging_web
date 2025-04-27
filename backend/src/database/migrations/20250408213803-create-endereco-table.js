@@ -3,33 +3,33 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('Enderecos', {
-      endereco_cep: {
+    await queryInterface.createTable('Address', {
+      address_cep: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING(10),
       },
-      numero: {
+      number: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      rua: {
+      street: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      complemento: {
+      complement: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      bairro: {
+      neighborhood: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cidade: {
+      city: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      estado: {
+      state: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -37,6 +37,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Enderecos');
+    await queryInterface.dropTable('Address');
   }
 };

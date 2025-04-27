@@ -13,12 +13,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      id_endereco: {
+      id_address: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Enderecos',  // name da tabela que referencia
-          key: 'endereco_cep', // chave primária da tabela referenciada
+          model: 'Address',  // name da tabela que referencia
+          key: 'address_cep', // chave primária da tabela referenciada
         },
       },
       createdAt: {

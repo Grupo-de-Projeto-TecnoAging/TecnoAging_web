@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   healthUnit.init({
     name: DataTypes.STRING,
-    endereco: DataTypes.STRING
+    address: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'healthUnit',

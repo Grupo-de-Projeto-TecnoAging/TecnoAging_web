@@ -14,7 +14,7 @@ import { healthUnit } from './healthUnit/entities/healthUnit.entity';
 import { Person } from './person/entities/person.entity';
 import { HealthProfessional } from './healthProfessional/entities/healthProfessional.entity';
 import { SensorDataModule } from './sensorData/sensorData.module';
-import { EnderecosModule } from './address/enderecos.module';
+import { AddresssModule } from './address/address.module';
 import { PatientsModule } from './patient/patients.module';
 import { ResearcherModule } from './researcher/researcher.module';
 
@@ -44,7 +44,7 @@ import { ResearcherModule } from './researcher/researcher.module';
     PatientsModule,
     ResearcherModule,
     SensorDataModule,
-    EnderecosModule,
+    AddresssModule,
   ],
   controllers: [AppController],
   providers: [AppService],

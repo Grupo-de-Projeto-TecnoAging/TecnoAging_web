@@ -3,38 +3,38 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Enderecos', [
+    await queryInterface.bulkInsert('Address', [
       {
-        endereco_cep: '12345-678',
-        numero: 123,
-        rua: 'Rua das Flores',
-        complemento: 'Apto 101',
-        bairro: 'Jardim Primavera',
-        cidade: 'São Paulo',
-        estado: 'SP',
+        address_cep: '12345-678',
+        number: 123,
+        street: 'Street das Flores',
+        complement: 'Apto 101',
+        neighborhood: 'Jardim Primavera',
+        city: 'São Paulo',
+        state: 'SP',
       },
       {
-        endereco_cep: '23456-789',
-        numero: 456,
-        rua: 'Avenida Central',
-        complemento: null,
-        bairro: 'Centro',
-        cidade: 'Rio de Janeiro',
-        estado: 'RJ',
+        address_cep: '23456-789',
+        number: 456,
+        street: 'Avenida Central',
+        complement: null,
+        neighborhood: 'Centro',
+        city: 'Rio de Janeiro',
+        state: 'RJ',
       },
       {
-        endereco_cep: '34567-890',
-        numero: 789,
-        rua: 'Travessa dos Pássaros',
-        complemento: 'Casa',
-        bairro: 'Vila Nova',
-        cidade: 'Belo Horizonte',
-        estado: 'MG',
+        address_cep: '34567-890',
+        number: 789,
+        street: 'Travessa dos Pássaros',
+        complement: 'Casa',
+        neighborhood: 'Vila Nova',
+        city: 'Belo Horizonte',
+        state: 'MG',
       },
     ]);
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Enderecos', null, {});
+    await queryInterface.bulkDelete('Address', null, {});
   }
 };

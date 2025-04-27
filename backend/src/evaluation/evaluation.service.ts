@@ -79,7 +79,7 @@ export class EvaluationService {
           attributes:  ['email'] ,
           include: [{ model: Person, attributes: ['name', 'phone'] }],
         },
-        { model: healthUnit, as: 'healthUnit', attributes: ['name', 'id_endereco'] },
+        { model: healthUnit, as: 'healthUnit', attributes: ['name', 'id_address'] },
       ],
     });
 

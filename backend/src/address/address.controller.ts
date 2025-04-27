@@ -1,35 +1,35 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { EnderecosService } from './address.service';
-import { CreateEnderecoDto } from './dto/create-address.dto';
-import { UpdateEnderecoDto } from './dto/update-address.dto';
+import { AddresssService } from './address.service';
+import { CreateAddressDto } from './dto/create-address.dto';
+import { UpdateAddressDto } from './dto/update-address.dto';
 
-@Controller('enderecos')
-export class EnderecosController {
-  constructor(private readonly enderecosService: EnderecosService) {}
+@Controller('address')
+export class AddresssController {
+  constructor(private readonly addresssService: AddresssService) {}
 
   @Post()
-  create(@Body() createEnderecoDto: CreateEnderecoDto) {
-    return this.enderecosService.create(createEnderecoDto);
+  create(@Body() createAddressDto: CreateAddressDto) {
+    return this.addresssService.create(createAddressDto);
   }
 
   @Get()
   findAll() {
-    return this.enderecosService.findAll();
+    return this.addresssService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.enderecosService.findOne(+id);
+    return this.addresssService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEnderecoDto: UpdateEnderecoDto) {
-    return this.enderecosService.updateById(id, updateEnderecoDto);
+  update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
+    return this.addresssService.updateById(id, updateAddressDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.enderecosService.removeById(id);
+    return this.addresssService.removeById(id);
   }
 }
  

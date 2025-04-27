@@ -3,7 +3,7 @@ import { Patient } from "src/patient/entities/patient.entity";
 import { healthUnit } from "src/healthUnit/entities/healthUnit.entity";
 
 @Table
-export class Endereco extends Model {
+export class Address extends Model {
 
     @Column({
         primaryKey: true,
@@ -16,45 +16,45 @@ export class Endereco extends Model {
     @Column({
         type: DataType.STRING,
         allowNull: false,
-        unique: true, // Ensure endereco_cep is unique
+        unique: true, // Ensure address_cep is unique
     })
-    endereco_cep: string
+    address_cep: string
     
     @Column({
         type: DataType.INTEGER,
         allowNull: false,
     })
-    numero: number
+    number: number
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
-    rua: string
+    street: string
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
-    complemento: string
+    complement: string
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
-    bairro: string
+    neighborhood: string
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
-    cidade: string
+    city: string
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
-    estado: string
+    state: string
 
     @HasOne(() => Patient)
     patient: Patient;

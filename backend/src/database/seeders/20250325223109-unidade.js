@@ -6,15 +6,15 @@ module.exports = {
     await queryInterface.bulkInsert('healthUnit', [
       {
         name: 'Hospital da Unimed',
-        endereco: 'Rua das Flores, 123',
+        address: 'Street das Flores, 123',
       },
       {
         name: 'Hospital do Coração',
-        endereco: 'Avenida Brasil, 456',
+        address: 'Avenida Brasil, 456',
       },
       {
         name: 'Hospital São Francisco',
-        endereco: 'Praça dos Expedicionários, 789',
+        address: 'Praça dos Expedicionários, 789',
       }
     ]);
   },

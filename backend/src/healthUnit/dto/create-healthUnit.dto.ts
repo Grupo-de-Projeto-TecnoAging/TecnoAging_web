@@ -9,5 +9,5 @@ export class CreatehealthUnitDto {
     
     @IsString()
     @IsNotEmpty()
-    id_endereco: string;
+    id_address: string;
 }

@@ -15,7 +15,7 @@ export class PatientsService {
   ) { }
 
   async create(createPatientDto: CreatePatientDto, cpf: string): Promise<Patient> {
-    if (!createPatientDto.id_endereco || !createPatientDto.dateOfBirth || !createPatientDto.educationLevel || !createPatientDto.socioeconomicStatus || !createPatientDto.weight || !createPatientDto.height) {
+    if (!createPatientDto.id_address || !createPatientDto.dateOfBirth || !createPatientDto.educationLevel || !createPatientDto.socioeconomicStatus || !createPatientDto.weight || !createPatientDto.height) {
       throw new BadRequestException('Endereço, data de nascimento, educationLevel, nível socioeconômico, weight e height são obrigatórios para o perfil de patient.');
     }
     const patient = await this.patientModel.create({
@@ -34,7 +34,7 @@ export class PatientsService {
     return patients.map(patient => ({
       name: patient.person?.name,
       cpf: patient.cpf,
-      id_endereco: patient.id_endereco,
+      id_address: patient.id_address,
       dateOfBirth: patient.dateOfBirth,
       educationLevel: patient.educationLevel,
       socioeconomicStatus: patient.socioeconomicStatus,
@@ -55,7 +55,7 @@ export class PatientsService {
     return {
       name: patient.person?.name,
       cpf: patient.cpf,
-      id_endereco: patient.id_endereco,
+      id_address: patient.id_address,
       dateOfBirth: patient.dateOfBirth,
       educationLevel: patient.educationLevel,
       socioeconomicStatus: patient.socioeconomicStatus,

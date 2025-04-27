@@ -1,49 +1,49 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateEnderecoDto } from './dto/create-address.dto';
-import { UpdateEnderecoDto } from './dto/update-address.dto';
-import { Endereco } from './entities/address.entity';
+import { CreateAddressDto } from './dto/create-address.dto';
+import { UpdateAddressDto } from './dto/update-address.dto';
+import { Address } from './entities/address.entity';
 import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
-export class EnderecosService {
+export class AddresssService {
   constructor(
-    @InjectModel(Endereco)
-    private readonly enderecoModel: typeof Endereco,
+    @InjectModel(Address)
+    private readonly addressModel: typeof Address,
   ) { }
 
-  async create(createEnderecoDto: Partial<CreateEnderecoDto>): Promise<Endereco> {
-    return this.enderecoModel.create(createEnderecoDto);
+  async create(createAddressDto: Partial<CreateAddressDto>): Promise<Address> {
+    return this.addressModel.create(createAddressDto);
   }
 
-  async findAll(): Promise<Endereco[]> {
-    return this.enderecoModel.findAll();
+  async findAll(): Promise<Address[]> {
+    return this.addressModel.findAll();
   }
 
-  async findOne(id: number): Promise<Endereco> {
-    const endereco = await this.enderecoModel.findByPk(id);
-    if (!endereco) {
-      throw new NotFoundException(`Endereco com id ${id} não encontrada`);
+  async findOne(id: number): Promise<Address> {
+    const address = await this.addressModel.findByPk(id);
+    if (!address) {
+      throw new NotFoundException(`Address com id ${id} não encontrada`);
     }
-    return endereco;
+    return address;
   }
 
-  async updateById(id: string, updateEnderecoDto: UpdateEnderecoDto): Promise<Endereco> {
-    const endereco = await this.enderecoModel.findOne({ where: { id } });
-    if (!endereco) {
-      throw new NotFoundException(`endereco com id ${id} não encontrada`);
-    }
-
-    await endereco.update(updateEnderecoDto);
-    return endereco;
-  }
-
-  async removeById(id: string): Promise<Endereco> {
-    const endereco = await this.enderecoModel.findOne({ where: { id } });
-    if (!endereco) {
-      throw new NotFoundException(`Endereco com id ${id} não encontrada`);
+  async updateById(id: string, updateAddressDto: UpdateAddressDto): Promise<Address> {
+    const address = await this.addressModel.findOne({ where: { id } });
+    if (!address) {
+      throw new NotFoundException(`address com id ${id} não encontrada`);
     }
 
-    await endereco.destroy();
-    return endereco;
+    await address.update(updateAddressDto);
+    return address;
+  }
+
+  async removeById(id: string): Promise<Address> {
+    const address = await this.addressModel.findOne({ where: { id } });
+    if (!address) {
+      throw new NotFoundException(`Address com id ${id} não encontrada`);
+    }
+
+    await address.destroy();
+    return address;
   }
 }

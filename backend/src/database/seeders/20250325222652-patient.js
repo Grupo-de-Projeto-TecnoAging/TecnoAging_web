@@ -27,7 +27,7 @@ module.exports = {
       phone: "112345678",
       gender: "F",
       profile: "patient",
-      adress: "Endereco",
+      adress: "Address",
       datOfBirth: "1955-04-12",
       educationStatus: "Superior Completo",
       socioeconomicLevel: "Medio",

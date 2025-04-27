@@ -1,32 +1,32 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator"
 
-export class CreateEnderecoDto {
+export class CreateAddressDto {
 
     @IsString()
     @IsNotEmpty()
-    endereco_cep: string
+    address_cep: string
 
     @IsNumber()
     @IsNotEmpty()
-    numero: number
+    number: number
 
     @IsString()
     @IsNotEmpty()
-    rua: string
+    street: string
 
     @IsString()
     @IsNotEmpty()
-    complemento: string
+    complement: string
 
     @IsString()
     @IsNotEmpty()
-    bairro: string
+    neighborhood: string
 
     @IsString()
     @IsNotEmpty()
-    cidade: string
+    city: string
 
     @IsString()
     @IsNotEmpty()
-    estado: string
+    state: string
 }

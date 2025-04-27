@@ -7,7 +7,7 @@ export class CreatePatientDto {
 
     @IsString()
     @IsNotEmpty()
-    id_endereco: string;
+    id_address: string;
 
     @IsDateString()
     @IsNotEmpty()
