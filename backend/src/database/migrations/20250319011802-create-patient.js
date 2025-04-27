@@ -2,13 +2,13 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Patient', {
+    await queryInterface.createTable('Patients', {
       cpf: {
         primaryKey: true, // Definindo cpf como PK
         type: Sequelize.STRING(14),
         allowNull: false,
         references: {
-          model: 'Person',  // Name da tabela Person
+          model: 'People',  // Name da tabela Person
           key: 'cpf',        // Chave primária da tabela Person
         },
         onUpdate: 'CASCADE',
@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Address',  // name da tabela que referencia
+          model: 'Addresses',  // name da tabela que referencia
           key: 'address_cep', // chave primária da tabela referenciada
         },
       },
@@ -62,6 +62,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Patient');
+    await queryInterface.dropTable('Patients');
   }
 };

@@ -3,7 +3,7 @@ import { CreateSensorDataDto } from './dto/create-sensorData.dto';
 import { UpdateSensorDataDto } from './dto/update-sensorData.dto';
 import { SensorData } from './entities/sensorData.entity';
 import { InjectModel } from '@nestjs/sequelize';
-import { healthUnit } from 'src/healthUnit/entities/healthUnit.entity';
+import { HealthUnit } from 'src/healthUnit/entities/healthUnit.entity';
 
 @Injectable()
 export class SensorDataService {

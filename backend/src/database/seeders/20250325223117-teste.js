@@ -5,13 +5,13 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Evaluation', [
     {
-      tipo: "TUG",
+      type: "TUG",
       cpfHealthProfessional: "33333333333",
       cpfPatient: "11111111111",
       id_healthUnit: "1"
     },
     {
-      tipo: "TUG",
+      type: "TUG",
       cpfHealthProfessional: "44444444444",
       cpfPatient: "22222222222",
       id_healthUnit: "2"

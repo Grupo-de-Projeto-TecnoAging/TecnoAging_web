@@ -2,14 +2,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Evaluation', {
+    await queryInterface.createTable('Evaluations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tipo: {
+      type: {
         type: Sequelize.ENUM('5TSTS', 'TUG'),
         allowNull: false,
       },
@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'HealthProfessional',  // name da tabela que referencia
+          model: 'HealthProfessionals',  // name da tabela que referencia
           key: 'cpf',              // chave primária da tabela referenciada
         },
         onUpdate: 'CASCADE',
@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Patient',
+          model: 'Patients',
           key: 'cpf',
         },
         onUpdate: 'CASCADE',
@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'healthUnit',
+          model: 'HealthUnits',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -54,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Evaluation');
+    await queryInterface.dropTable('Evaluations');
   }
 };

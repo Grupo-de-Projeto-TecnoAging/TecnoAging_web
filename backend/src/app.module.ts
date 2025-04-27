@@ -6,11 +6,11 @@ import { AppService } from './app.service';
 import { healthUnitModule } from './healthUnit/healthUnit.module';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
 import { AuthModule } from './auth/auth.module';
-import { PeopleModule } from './person/people.module';
+import { PersonModule } from './person/person.module';
 import { HomeModule } from './home/home.module';
 import { EvaluationModule } from './evaluation/evaluation.module';
 import { HealthProfessionalModule } from './healthProfessional/healthProfessional.module';
-import { healthUnit } from './healthUnit/entities/healthUnit.entity';
+import { HealthUnit } from './healthUnit/entities/healthUnit.entity';
 import { Person } from './person/entities/person.entity';
 import { HealthProfessional } from './healthProfessional/entities/healthProfessional.entity';
 import { SensorDataModule } from './sensorData/sensorData.module';
@@ -37,7 +37,7 @@ import { ResearcherModule } from './researcher/researcher.module';
     }),
     healthUnitModule,
     AuthModule,
-    PeopleModule,
+    PersonModule,
     HomeModule,
     EvaluationModule,
     HealthProfessionalModule,

@@ -3,7 +3,7 @@ import { Address } from 'src/address/entities/address.entity';
 import { Evaluation } from 'src/evaluation/entities/evaluation.entity';
 
 @Table
-export class healthUnit extends Model {
+export class HealthUnit extends Model {
   @Column({
     primaryKey: true,
     autoIncrement: true,

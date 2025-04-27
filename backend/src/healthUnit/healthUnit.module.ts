@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { healthUnitService } from './healthUnit.service';
 import { healthUnitController } from './healthUnit.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { healthUnit } from './entities/healthUnit.entity';
+import { HealthUnit } from './entities/healthUnit.entity';
 
 @Module({
-  imports: [SequelizeModule.forFeature([healthUnit])],
+  imports: [SequelizeModule.forFeature([HealthUnit])],
   controllers: [healthUnitController],
   providers: [healthUnitService],
 })

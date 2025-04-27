@@ -1,6 +1,6 @@
 import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
 import { Patient } from "src/patient/entities/patient.entity";
-import { healthUnit } from "src/healthUnit/entities/healthUnit.entity";
+import { HealthUnit } from "src/healthUnit/entities/healthUnit.entity";
 
 @Table
 export class Address extends Model {
@@ -59,6 +59,6 @@ export class Address extends Model {
     @HasOne(() => Patient)
     patient: Patient;
     
-    @HasOne(() => healthUnit)
-    healthUnit: healthUnit;
+    @HasOne(() => HealthUnit)
+    healthUnit: HealthUnit;
 }

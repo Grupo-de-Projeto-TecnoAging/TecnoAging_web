@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('healthUnit', {
+    await queryInterface.createTable('HealthUnits', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Address',  // name da tabela que referencia
+          model: 'Addresses',  // name da tabela que referencia
           key: 'address_cep', // chave primária da tabela referenciada
         },
       },
@@ -32,6 +32,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('healthUnit');
+    await queryInterface.dropTable('HealthUnits');
   }
 };

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Evaluation.init({
-    tipo: DataTypes.ENUM,
+    type: DataTypes.ENUM,
     cpfHealthProfessional: DataTypes.STRING,
     cpfPatient: DataTypes.STRING,
     id_healthUnit: DataTypes.INTEGER

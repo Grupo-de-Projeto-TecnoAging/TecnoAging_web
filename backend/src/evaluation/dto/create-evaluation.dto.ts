@@ -5,7 +5,7 @@ export class CreateEvaluationDto {
 
     @IsNotEmpty()
     @IsEnum(["5TSTS", "TUG"])
-    tipo: "5TSTS" | "TUG";
+    type: "5TSTS" | "TUG";
 
     @IsNotEmpty()
     @IsString()
