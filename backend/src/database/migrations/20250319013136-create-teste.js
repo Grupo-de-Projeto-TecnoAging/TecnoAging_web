@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'HealthProfessionals',  // name da tabela que referencia
+          model: 'HealthProfessional',  // name da tabela que referencia
           key: 'cpf',              // chave primária da tabela referenciada
         },
         onUpdate: 'CASCADE',
@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Patients',
+          model: 'Patient',
           key: 'cpf',
         },
         onUpdate: 'CASCADE',

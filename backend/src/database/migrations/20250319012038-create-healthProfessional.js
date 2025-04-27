@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('HealthProfessionals', {
+    await queryInterface.createTable('HealthProfessional', {
       cpf: {
         primaryKey: true, // Definindo cpf como PK
         type: Sequelize.STRING(14),
@@ -34,6 +34,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('HealthProfessionals');
+    await queryInterface.dropTable('HealthProfessional');
   },
 };

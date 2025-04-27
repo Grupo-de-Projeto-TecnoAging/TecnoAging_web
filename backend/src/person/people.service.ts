@@ -10,7 +10,7 @@ import { CreatePatientDto } from 'src/patient/dto/create-patient.dto';
 import { HealthProfessional } from 'src/healthProfessional/entities/healthProfessional.entity';
 import { HealthProfessionalService } from 'src/healthProfessional/healthProfessional.service';
 import { ResearcherService } from 'src/researcher/researcher.service';
-import { PatientsService } from 'src/patient/patients.service';
+import { PatientService } from 'src/patient/patient.service';
 import { CreateHealthProfessionalDto } from 'src/healthProfessional/dto/create-healthProfessional.dto';
 import { CreateResearcherDto } from 'src/researcher/dto/create-researcher.dto';
 
@@ -28,7 +28,7 @@ export class PeopleService {
     private readonly authService: AuthService,
     private readonly healthprofessionalService: HealthProfessionalService,
     private readonly pesquisadorService: ResearcherService,
-    private readonly patientsService: PatientsService
+    private readonly patientService: PatientService
   ) { }
 
   async create(
@@ -77,7 +77,7 @@ export class PeopleService {
     }
 
     if (person.profile === 'patient') {
-      await this.patientsService.create(createPersonDto as any, person.cpf);
+      await this.patientService.create(createPersonDto as any, person.cpf);
     }
 
     return person;
