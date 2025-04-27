@@ -13,7 +13,7 @@ export class AuthController {
 
   @Post('encrypt-password')
   async encryptPassword(@Body() body: { password: string }) {
-    const passwordCriptografada = await this.authService.encryptPassword(body.password);
-    return { mensagem: 'Password criptografada com sucesso', passwordCriptografada };
+    const encryptedPassword = await this.authService.encryptPassword(body.password);
+    return { mensagem: 'Password criptografada com sucesso', encryptedPassword };
   }
 }

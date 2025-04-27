@@ -5,7 +5,7 @@ export class CreateUnidadeDto {
     
     @IsString()
     @IsNotEmpty()
-    nome: string;
+    name: string;
     
     @IsString()
     @IsNotEmpty()

@@ -57,7 +57,7 @@ export class Endereco extends Model {
     estado: string
 
     @HasOne(() => Patient)
-    paciente: Patient;
+    patient: Patient;
     
     @HasOne(() => Unidade)
     unidade: Unidade;

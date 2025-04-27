@@ -8,12 +8,12 @@ import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
 import { AuthModule } from './auth/auth.module';
 import { PeopleModule } from './person/people.module';
 import { HomeModule } from './home/home.module';
-import { TestesModule } from './testes/testes.module';
+import { EvaluationModule } from './evaluation/evaluation.module';
 import { HealthProfessionalModule } from './healthProfessional/healthProfessional.module';
 import { Unidade } from './unidades/entities/unidade.entity';
 import { Person } from './person/entities/person.entity';
 import { HealthProfessional } from './healthProfessional/entities/healthProfessional.entity';
-import { DadoSensorModule } from './dado-sensor/dado-sensor.module';
+import { SensorDataModule } from './sensorData/sensorData.module';
 import { EnderecosModule } from './enderecos/enderecos.module';
 import { PatientsModule } from './patient/patients.module';
 import { ResearcherModule } from './researcher/researcher.module';
@@ -39,11 +39,11 @@ import { ResearcherModule } from './researcher/researcher.module';
     AuthModule,
     PeopleModule,
     HomeModule,
-    TestesModule,
+    EvaluationModule,
     HealthProfessionalModule,
     PatientsModule,
     ResearcherModule,
-    DadoSensorModule,
+    SensorDataModule,
     EnderecosModule,
   ],
   controllers: [AppController],

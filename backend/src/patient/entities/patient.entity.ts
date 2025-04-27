@@ -1,7 +1,7 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { Endereco } from "src/enderecos/entities/endereco.entity";
 import { Person } from "src/person/entities/person.entity";
-import { Teste } from "src/testes/entities/teste.entity";
+import { Evaluation } from "src/evaluation/entities/evaluation.entity";
 
 @Table
 export class Patient extends Model {
@@ -70,6 +70,6 @@ export class Patient extends Model {
     @BelongsTo(() => Endereco, { foreignKey: 'id_endereco', targetKey: 'endereco_cep' })
     endereco: Endereco;
 
-    @HasMany(() => Teste)
-    testes: Teste[];
+    @HasMany(() => Evaluation)
+    evaluation: Evaluation[];
 }

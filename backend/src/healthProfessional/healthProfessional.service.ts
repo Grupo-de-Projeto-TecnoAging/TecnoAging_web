@@ -3,7 +3,7 @@ import { CreateHealthProfessionalDto } from './dto/create-healthProfessional.dto
 import { InjectModel } from '@nestjs/sequelize';
 import { HealthProfessional} from './entities/healthProfessional.entity';
 import { Person } from 'src/person/entities/person.entity';
-import { UpdateHealthProfessionalDto } from './dto/update-profissional.dto';
+import { UpdateHealthProfessionalDto } from './dto/update-healthprofessional.dto';
 
 @Injectable()
 export class HealthProfessionalService {

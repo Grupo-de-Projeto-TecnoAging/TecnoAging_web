@@ -9,21 +9,21 @@ module.exports = {
     {
       cpf: "33333333333",
       name: "Cleber Antonio",
-      password: "profissional",
+      password: "healthprofessional",
       phone: "112345678",
       gender: "M",
-      profile: "profissional",
-      email: "profissional1@email.com",
+      profile: "healthprofessional",
+      email: "healthprofessional1@email.com",
       expertise: "edFisica"
     },
     {
       cpf: "44444444444",
       name: "Joane Regina",
-      password: "profissional",
+      password: "healthprofessional",
       phone: "112345678",
       gender: "F",
-      profile: "profissional",
-      email: "profissional2@email.com",
+      profile: "healthprofessional",
+      email: "healthprofessional2@email.com",
       expertise: "edFisica"
       }
    ]);

@@ -1,11 +1,11 @@
 import { IsDate, IsNotEmpty, IsNumber } from "class-validator";
 
-export class CreateDadoSensorDto {
+export class CreateSensorDataDto {
    
     
         @IsNotEmpty()
         @IsDate()
-        tempo: Date;
+        time: Date;
     
         @IsNotEmpty()
         @IsNumber()

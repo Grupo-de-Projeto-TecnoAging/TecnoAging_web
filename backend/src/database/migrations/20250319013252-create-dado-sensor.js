@@ -2,24 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('DadoSensors', {
+    await queryInterface.createTable('SensorDatas', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      id_teste: {
+      id_evaluation: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Testes',  // nome da tabela que referencia
+          model: 'Evaluation',  // name da tabela que referencia
           key: 'id',        // chave primária da tabela referenciada
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      tempo: {
+      time: {
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -58,6 +58,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('DadoSensors');
+    await queryInterface.dropTable('SensorDatas');
   }
 };

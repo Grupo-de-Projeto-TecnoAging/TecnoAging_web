@@ -1,8 +1,8 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Teste } from "src/testes/entities/teste.entity";
+import { Evaluation } from "src/evaluation/entities/evaluation.entity";
 
 @Table
-export class DadoSensor extends Model{
+export class SensorData extends Model{
     @Column({ primaryKey: true, 
             autoIncrement: true,
             allowNull: false,
@@ -10,17 +10,17 @@ export class DadoSensor extends Model{
         })
     id: number;
 
-    @ForeignKey(() => Teste)
-    @Column({ field: 'id_teste',
+    @ForeignKey(() => Evaluation)
+    @Column({ field: 'id_evaluation',
         allowNull: false,
         type: DataType.INTEGER
         })
-    id_teste: number;
+    id_evaluation: number;
 
     @Column({ allowNull: false,
             type: DataType.DATE
         })
-    tempo: Date;
+    time: Date;
 
     @Column({ allowNull: false,
             type: DataType.FLOAT})
@@ -46,6 +46,6 @@ export class DadoSensor extends Model{
             type: DataType.FLOAT})
     gyro_z: number;
 
-    @BelongsTo(() => Teste)
-    teste: Teste;
+    @BelongsTo(() => Evaluation)
+    evaluation: Evaluation;
 }

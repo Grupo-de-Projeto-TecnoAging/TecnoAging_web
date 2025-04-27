@@ -1,11 +1,11 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { DadoSensor } from "src/dado-sensor/entities/dado-sensor.entity";
-import { Paciente } from "src/patient/entities/patient.entity";
-import { Profissional } from "src/healthProfessional/entities/healthProfessional.entity";
+import { SensorData } from "src/sensorData/entities/sensorData.entity";
+import { Patient } from "src/patient/entities/patient.entity";
+import { HealthProfessional } from "src/healthProfessional/entities/healthProfessional.entity";
 import { Unidade } from "src/unidades/entities/unidade.entity";
 
 @Table
-export class Teste extends Model {
+export class Evaluation extends Model {
   @Column({
     primaryKey: true,
     autoIncrement: true,
@@ -20,19 +20,19 @@ export class Teste extends Model {
   })
   tipo: "5TSTS" | "TUG";
 
-  @ForeignKey(() => Profissional)
+  @ForeignKey(() => HealthProfessional)
   @Column({
    type: DataType.STRING,
    allowNull: false,
  })
-  cpfProfissional: string;
+  cpfHealthProfessional: string;
 
-  @ForeignKey(() => Paciente)
+  @ForeignKey(() => Patient)
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  cpfPaciente: string;
+  cpfPatient: string;
 
   @ForeignKey(() => Unidade)
   @Column({
@@ -41,15 +41,15 @@ export class Teste extends Model {
   })
   id_unidade: number;
 
-  @BelongsTo(() => Profissional)
-  profissional: Profissional;
+  @BelongsTo(() => HealthProfessional)
+  healthprofessional: HealthProfessional;
 
   @BelongsTo(() => Unidade)
   unidade: Unidade;
 
-  @BelongsTo(() => Paciente)
-  paciente: Paciente;
+  @BelongsTo(() => Patient)
+  patient: Patient;
 
-  @HasMany(() => DadoSensor)
-  dadosSensor: DadoSensor[];
+  @HasMany(() => SensorData)
+  sensorData: SensorData[];
 }

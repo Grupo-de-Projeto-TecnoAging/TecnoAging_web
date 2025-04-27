@@ -5,15 +5,15 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Unidades', [
       {
-        nome: 'Hospital da Unimed',
+        name: 'Hospital da Unimed',
         endereco: 'Rua das Flores, 123',
       },
       {
-        nome: 'Hospital do Coração',
+        name: 'Hospital do Coração',
         endereco: 'Avenida Brasil, 456',
       },
       {
-        nome: 'Hospital São Francisco',
+        name: 'Hospital São Francisco',
         endereco: 'Praça dos Expedicionários, 789',
       }
     ]);

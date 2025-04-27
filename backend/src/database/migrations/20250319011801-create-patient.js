@@ -8,7 +8,7 @@ module.exports = {
         type: Sequelize.STRING(14),
         allowNull: false,
         references: {
-          model: 'Persons',  // Nome da tabela Person
+          model: 'Person',  // Name da tabela Person
           key: 'cpf',        // Chave primária da tabela Person
         },
         onUpdate: 'CASCADE',
@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Enderecos',  // nome da tabela que referencia
+          model: 'Enderecos',  // name da tabela que referencia
           key: 'endereco_cep', // chave primária da tabela referenciada
         },
       },
@@ -62,6 +62,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Pacientes');
+    await queryInterface.dropTable('Patients');
   }
 };

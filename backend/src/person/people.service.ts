@@ -20,22 +20,22 @@ export class PeopleService {
     @InjectModel(Person)
     private readonly personModel: typeof Person,
     @InjectModel(HealthProfessional)
-    private readonly profissionalModel: typeof HealthProfessional,
+    private readonly healthprofessionalModel: typeof HealthProfessional,
     @InjectModel(Researcher)
     private readonly pesquisadorModel: typeof Researcher,
     @InjectModel(Patient)
-    private readonly pacienteModel: typeof Patient,
+    private readonly patientModel: typeof Patient,
     private readonly authService: AuthService,
-    private readonly profissionalService: HealthProfessionalService,
+    private readonly healthprofessionalService: HealthProfessionalService,
     private readonly pesquisadorService: ResearcherService,
-    private readonly pacientesService: PatientsService
+    private readonly patientsService: PatientsService
   ) { }
 
   async create(
     createPersonDto: Partial<CreatePersonDto>,
-    createProfissionalDto?: Partial<CreateHealthProfessionalDto>,
+    createHealthProfessionalDto?: Partial<CreateHealthProfessionalDto>,
     createPesquisadorDto?: Partial<CreateResearcherDto>,
-    createPacienteDto?: Partial<CreatePatientDto>
+    createPatientDto?: Partial<CreatePatientDto>
   ): Promise<Person> {
 
     if (!createPersonDto.password) {
@@ -46,9 +46,9 @@ export class PeopleService {
       throw new BadRequestException('CPF e Perfil são obrigatórios');
     }
 
-    if (createPersonDto.profile === 'profissional') {
+    if (createPersonDto.profile === 'healthprofessional') {
       if (!createPersonDto.email || !createPersonDto.expertise) {
-        throw new BadRequestException('Dados de profissional são obrigatórios para este perfil: email e especialidade');
+        throw new BadRequestException('Dados de healthprofessional são obrigatórios para este perfil: email e especialidade');
       }
     }
 
@@ -58,9 +58,9 @@ export class PeopleService {
       }
     }
 
-    if (createPersonDto.profile === 'paciente') {
+    if (createPersonDto.profile === 'patient') {
       if (!createPersonDto.dateOfBirth || !createPersonDto.educationLevel || !createPersonDto.socioeconomicLevel || !createPersonDto.weight || !createPersonDto.height) {
-        throw new BadRequestException('Dados de paciente são obrigatórios para este perfil: data_nascimento, escolaridade, nivel_socio_economico, peso e altura');
+        throw new BadRequestException('Dados de patient são obrigatórios para este perfil: dateOfBirth, escolaridade, nivel_socio_economico, weight e height');
       }
     }
 
@@ -69,7 +69,7 @@ export class PeopleService {
     const person = await this.personModel.create(createPersonDto);
 
     if (person.profile === 'healthProfessional') {
-      await this.profissionalService.create(createPersonDto as any, person.cpf);
+      await this.healthprofessionalService.create(createPersonDto as any, person.cpf);
     }
 
     if (person.profile === 'researcher') {
@@ -77,7 +77,7 @@ export class PeopleService {
     }
 
     if (person.profile === 'patient') {
-      await this.pacientesService.create(createPersonDto as any, person.cpf);
+      await this.patientsService.create(createPersonDto as any, person.cpf);
     }
 
     return person;

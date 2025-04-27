@@ -8,7 +8,7 @@ module.exports = {
         type: Sequelize.STRING(14),
         allowNull: false,
         references: {
-          model: 'Persons',  // Nome da tabela Person
+          model: 'Person',  // Name da tabela Person
           key: 'cpf',        // Chave primária da tabela Person
         },
         onUpdate: 'CASCADE',

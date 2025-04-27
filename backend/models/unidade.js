@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Unidade.init({
-    nome: DataTypes.STRING,
+    name: DataTypes.STRING,
     endereco: DataTypes.STRING
   }, {
     sequelize,

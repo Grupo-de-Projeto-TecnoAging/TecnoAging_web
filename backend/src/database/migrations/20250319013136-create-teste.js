@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Testes', {
+    await queryInterface.createTable('Evaluation', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,21 +13,21 @@ module.exports = {
         type: Sequelize.ENUM('5TSTS', 'TUG'),
         allowNull: false,
       },
-      cpfProfissional: {
+      cpfHealthProfessional: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Profissionals',  // nome da tabela que referencia
+          model: 'HealthProfessionals',  // name da tabela que referencia
           key: 'cpf',              // chave primária da tabela referenciada
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      cpfPaciente: {
+      cpfPatient: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Pacientes',
+          model: 'Patients',
           key: 'cpf',
         },
         onUpdate: 'CASCADE',
@@ -54,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Testes');
+    await queryInterface.dropTable('Evaluation');
   }
 };

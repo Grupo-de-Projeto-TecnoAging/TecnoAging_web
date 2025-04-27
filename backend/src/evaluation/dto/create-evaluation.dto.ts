@@ -1,7 +1,7 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { CreateDadoSensorDto } from "src/dado-sensor/dto/create-dado-sensor.dto";
+import { CreateSensorDataDto } from "src/sensorData/dto/create-sensorData.dto";
 
-export class CreateTestesDto {
+export class CreateEvaluationDto {
 
     @IsNotEmpty()
     @IsEnum(["5TSTS", "TUG"])
@@ -9,15 +9,15 @@ export class CreateTestesDto {
 
     @IsNotEmpty()
     @IsString()
-    cpfProfissional: string;
+    cpfHealthProfessional: string;
 
     @IsNotEmpty()
     @IsString()
-    cpfPaciente: string;
+    cpfPatient: string;
     
     @IsNotEmpty()
     @IsNumber()
     id_unidade: number;
 
-    dadosSensor?: CreateDadoSensorDto[];
+    sensorData?: CreateSensorDataDto[];
 }

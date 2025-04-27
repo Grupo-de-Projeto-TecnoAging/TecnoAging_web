@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DadoSensorService } from './dado-sensor.service';
+import { EvaluationService } from './evaluation.service';
 
-describe('DadoSensorService', () => {
-  let service: DadoSensorService;
+describe('EvaluationService', () => {
+  let service: EvaluationService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [DadoSensorService],
+      providers: [EvaluationService],
     }).compile();
 
-    service = module.get<DadoSensorService>(DadoSensorService);
+    service = module.get<EvaluationService>(EvaluationService);
   });
 
   it('should be defined', () => {

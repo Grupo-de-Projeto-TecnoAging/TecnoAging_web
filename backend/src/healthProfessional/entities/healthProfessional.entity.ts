@@ -1,7 +1,7 @@
 
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { Person } from "src/person/entities/person.entity";
-import { Teste } from "src/testes/entities/teste.entity";
+import { Evaluation } from "src/evaluation/entities/evaluation.entity";
 
 @Table
 export class HealthProfessional extends Model {
@@ -30,8 +30,8 @@ export class HealthProfessional extends Model {
     @BelongsTo(() => Person)
     person: Person;
 
-    @HasMany(() => Teste)
-    testes: Teste[];
+    @HasMany(() => Evaluation)
+    evaluation: Evaluation[];
 }
 
 export enum Expertise {

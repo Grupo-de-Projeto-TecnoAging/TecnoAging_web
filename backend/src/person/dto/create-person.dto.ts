@@ -20,7 +20,7 @@ export class CreatePersonDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsEnum(["paciente", "pesquisador", "profissional"])
+    @IsEnum(["patient", "pesquisador", "healthprofessional"])
     profile: string;
 
     @IsOptional()

@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      nome: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'Enderecos',  // nome da tabela que referencia
+          model: 'Enderecos',  // name da tabela que referencia
           key: 'endereco_cep', // chave primária da tabela referenciada
         },
       },

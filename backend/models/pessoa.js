@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Person.init({
     cpf: DataTypes.STRING,
-    nome: DataTypes.STRING,
+    name: DataTypes.STRING,
     password: DataTypes.STRING,
-    telefone: DataTypes.STRING,
-    sexo: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    gender: DataTypes.STRING,
     perfil: DataTypes.STRING
   }, {
     sequelize,
