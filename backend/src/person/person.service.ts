@@ -39,28 +39,28 @@ export class PersonService {
   ): Promise<Person> {
 
     if (!createPersonDto.password) {
-      throw new BadRequestException('Password é obrigatória');
+      throw new BadRequestException('Password is required');
     }
 
     if (!createPersonDto.cpf || !createPersonDto.profile) {
-      throw new BadRequestException('CPF e Perfil são obrigatórios');
+      throw new BadRequestException('CPF and profile are required');
     }
 
     if (createPersonDto.profile === 'healthProfessional') {
       if (!createPersonDto.email || !createPersonDto.expertise) {
-        throw new BadRequestException('Dados de healthProfessional são obrigatórios para este perfil: email e especialidade');
+        throw new BadRequestException('Datas of health professional are required for this profile: email e especialidade');
       }
     }
 
     if (createPersonDto.profile === 'researcher') {
       if (!createPersonDto.email || !createPersonDto.institution || !createPersonDto.fieldOfStudy || !createPersonDto.expertise) {
-        throw new BadRequestException('Dados de pesquisador são obrigatórios para este perfil: email, instituicao, area e especialidade');
+        throw new BadRequestException('Datas of researcher are required for this profile: email, instituicao, area e especialidade');
       }
     }
 
     if (createPersonDto.profile === 'patient') {
       if (!createPersonDto.dateOfBirth || !createPersonDto.educationLevel || !createPersonDto.socioeconomicStatus || !createPersonDto.weight || !createPersonDto.height) {
-        throw new BadRequestException('Dados de patient são obrigatórios para este perfil: dateOfBirth, educationStatus, socioeconomicStatus, weight e height');
+        throw new BadRequestException('Datas of patient are required for this profile: dateOfBirth, educationStatus, socioeconomicStatus, weight e height');
       }
     }
 
