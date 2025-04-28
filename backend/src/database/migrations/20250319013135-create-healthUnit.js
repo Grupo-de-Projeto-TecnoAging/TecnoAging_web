@@ -14,11 +14,11 @@ module.exports = {
         allowNull: false,
       },
       id_address: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Addresses',  // name da tabela que referencia
-          key: 'address_cep', // chave primária da tabela referenciada
+          key: 'id', // chave primária da tabela referenciada
         },
       },
       createdAt: {

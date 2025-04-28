@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Evaluation', [
+    await queryInterface.bulkInsert('Evaluations', [
     {
       type: "TUG",
       cpfHealthProfessional: "33333333333",

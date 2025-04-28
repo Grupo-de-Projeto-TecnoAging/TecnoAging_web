@@ -18,17 +18,17 @@ export class healthUnitController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.healthUnitService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatehealthUnitDto: UpdatehealthUnitDto) {
+  update(@Param('id') id: number, @Body() updatehealthUnitDto: UpdatehealthUnitDto) {
     return this.healthUnitService.updateById(id, updatehealthUnitDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.healthUnitService.removeById(id);
   }
 }

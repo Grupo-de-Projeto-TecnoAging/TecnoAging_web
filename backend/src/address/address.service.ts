@@ -22,25 +22,25 @@ export class AddresssService {
   async findOne(id: number): Promise<Address> {
     const address = await this.addressModel.findByPk(id);
     if (!address) {
-      throw new NotFoundException(`Address com id ${id} não encontrada`);
+      throw new NotFoundException(`Address with id ${id} not found`);
     }
     return address;
   }
 
-  async updateById(id: string, updateAddressDto: UpdateAddressDto): Promise<Address> {
+  async updateById(id: number, updateAddressDto: UpdateAddressDto): Promise<Address> {
     const address = await this.addressModel.findOne({ where: { id } });
     if (!address) {
-      throw new NotFoundException(`address com id ${id} não encontrada`);
+      throw new NotFoundException(`Address with id ${id} not found`);
     }
 
     await address.update(updateAddressDto);
     return address;
   }
 
-  async removeById(id: string): Promise<Address> {
+  async removeById(id: number): Promise<Address> {
     const address = await this.addressModel.findOne({ where: { id } });
     if (!address) {
-      throw new NotFoundException(`Address com id ${id} não encontrada`);
+      throw new NotFoundException(`Address with id ${id} not found`);
     }
 
     await address.destroy();

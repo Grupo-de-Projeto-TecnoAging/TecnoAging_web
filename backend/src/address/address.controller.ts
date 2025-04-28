@@ -18,17 +18,17 @@ export class AddresssController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.addresssService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
+  update(@Param('id') id: number, @Body() updateAddressDto: UpdateAddressDto) {
     return this.addresssService.updateById(id, updateAddressDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.addresssService.removeById(id);
   }
 }

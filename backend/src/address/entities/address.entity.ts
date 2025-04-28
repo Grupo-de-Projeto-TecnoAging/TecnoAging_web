@@ -9,6 +9,7 @@ export class Address extends Model {
         primaryKey: true,
         autoIncrement: true,
         type: DataType.INTEGER,
+        unique: true,
         allowNull: false,
     })
     id: number
@@ -16,7 +17,6 @@ export class Address extends Model {
     @Column({
         type: DataType.STRING,
         allowNull: false,
-        unique: true, // Ensure address_cep is unique
     })
     address_cep: string
     

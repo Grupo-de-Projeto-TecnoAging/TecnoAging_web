@@ -17,10 +17,10 @@ export class Patient extends Model {
 
     @ForeignKey(() => Address)
     @Column({
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull: false,
     })
-    id_address: string;
+    id_address: number;
 
     @Column({
         type: DataType.DATEONLY,
@@ -67,7 +67,7 @@ export class Patient extends Model {
     @BelongsTo(() => Person)
     person: Person;
 
-    @BelongsTo(() => Address, { foreignKey: 'id_address', targetKey: 'address_cep' })
+    @BelongsTo(() => Address, { foreignKey: 'id_address', targetKey: 'id' })
     address: Address;
 
     @HasMany(() => Evaluation)

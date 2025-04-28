@@ -22,25 +22,25 @@ export class healthUnitService {
   async findOne(id: number): Promise<HealthUnit> {
     const healthUnit = await this.healthUnitModel.findByPk(id);
     if (!healthUnit) {
-      throw new NotFoundException(`healthUnit com id ${id} não encontrada`);
+      throw new NotFoundException(`HealthUnit with id ${id} not found`);
     }
     return healthUnit;
   }
 
-  async updateById(id: string, updatehealthUnitDto: UpdatehealthUnitDto): Promise<HealthUnit> {
+  async updateById(id: number, updatehealthUnitDto: UpdatehealthUnitDto): Promise<HealthUnit> {
     const healthUnit = await this.healthUnitModel.findOne({ where: { id } });
     if (!healthUnit) {
-      throw new NotFoundException(`healthUnit com id ${id} não encontrada`);
+      throw new NotFoundException(`HealthUnit with id ${id} not found`);
     }
 
     await healthUnit.update(updatehealthUnitDto);
     return healthUnit;
   }
 
-  async removeById(id: string): Promise<HealthUnit> {
+  async removeById(id: number): Promise<HealthUnit> {
     const healthUnit = await this.healthUnitModel.findOne({ where: { id } });
     if (!healthUnit) {
-      throw new NotFoundException(`healthUnit com id ${id} não encontrada`);
+      throw new NotFoundException(`HealthUnit with id ${id} not found`);
     }
 
     await healthUnit.destroy();

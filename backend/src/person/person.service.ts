@@ -34,7 +34,7 @@ export class PersonService {
   async create(
     createPersonDto: Partial<CreatePersonDto>,
     createHealthProfessionalDto?: Partial<CreateHealthProfessionalDto>,
-    createPesquisadorDto?: Partial<CreateResearcherDto>,
+    createResearcherDto?: Partial<CreateResearcherDto>,
     createPatientDto?: Partial<CreatePatientDto>
   ): Promise<Person> {
 
@@ -52,15 +52,15 @@ export class PersonService {
       }
     }
 
-    if (createPersonDto.profile === 'pesquisador') {
+    if (createPersonDto.profile === 'researcher') {
       if (!createPersonDto.email || !createPersonDto.institution || !createPersonDto.fieldOfStudy || !createPersonDto.expertise) {
         throw new BadRequestException('Dados de pesquisador são obrigatórios para este perfil: email, instituicao, area e especialidade');
       }
     }
 
     if (createPersonDto.profile === 'patient') {
-      if (!createPersonDto.dateOfBirth || !createPersonDto.educationLevel || !createPersonDto.socioeconomicLevel || !createPersonDto.weight || !createPersonDto.height) {
-        throw new BadRequestException('Dados de patient são obrigatórios para este perfil: dateOfBirth, escolaridade, nivel_socio_economico, weight e height');
+      if (!createPersonDto.dateOfBirth || !createPersonDto.educationLevel || !createPersonDto.socioeconomicStatus || !createPersonDto.weight || !createPersonDto.height) {
+        throw new BadRequestException('Dados de patient são obrigatórios para este perfil: dateOfBirth, educationStatus, socioeconomicStatus, weight e height');
       }
     }
 
@@ -92,7 +92,7 @@ export class PersonService {
   async findOne(cpf: string): Promise<Person> {
     const person = await this.personModel.findOne({ where: { cpf } });
     if (!person) {
-      throw new NotFoundException(`Person com cpf ${cpf} não encontrada`);
+      throw new NotFoundException(`Person with cpf ${cpf} not found`);
     }
     return person;
   }
@@ -100,7 +100,7 @@ export class PersonService {
   async updateByCpf(cpf: string, updatePersonDto: UpdatePersonDto): Promise<Person> {
     const person = await this.personModel.findOne({ where: { cpf } });
     if (!person) {
-      throw new NotFoundException(`Person com cpf ${cpf} não encontrada`);
+      throw new NotFoundException(`Person with cpf ${cpf} not found`);
     }
     await person.update(updatePersonDto);
     return person;
@@ -109,7 +109,7 @@ export class PersonService {
   async removeByCpf(cpf: string): Promise<Person> {
     const person = await this.personModel.findOne({ where: { cpf } });
     if (!person) {
-      throw new NotFoundException(`Person com cpf ${cpf} não encontrada`);
+      throw new NotFoundException(`Person with cpf ${cpf} not found`);
     }
 
     await person.destroy();

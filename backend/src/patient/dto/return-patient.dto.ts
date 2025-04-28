@@ -1,6 +1,6 @@
 export class ReturnPatientDto {
     cpf: string;
-    id_address: string;
+    id_address: number;
     dateOfBirth: Date;
     educationLevel: string;
     socioeconomicStatus: string;

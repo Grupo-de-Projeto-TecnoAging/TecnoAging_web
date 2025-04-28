@@ -5,14 +5,12 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Addresses', {
       
-    
-         id: ({
+      id: ({
           primaryKey: false,
           autoIncrement: true,
           type: Sequelize.INTEGER,
           allowNull: false,
       }),
-      
       address_cep: {
         allowNull: false,
         primaryKey: true,

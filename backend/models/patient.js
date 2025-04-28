@@ -15,13 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Patient.init({
     cpf: DataTypes.STRING,
-    address: DataTypes.STRING,
+    id_address: DataTypes.INTERGER,
     dateOfBirth: DataTypes.DATE,
-    escolaridade: DataTypes.STRING,
-    nivel_socio_economico: DataTypes.STRING,
+    educationLevel: DataTypes.STRING,
+    socioeconomicStatus: DataTypes.STRING,
     weight: DataTypes.FLOAT,
     height: DataTypes.FLOAT,
-    idade: DataTypes.INTEGER
+    age: DataTypes.INTEGER,
+    downFall: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Patient',

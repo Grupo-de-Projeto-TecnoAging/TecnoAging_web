@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsDate, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreatePersonDto {
     @IsString()
@@ -20,7 +20,7 @@ export class CreatePersonDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsEnum(["patient", "pesquisador", "healthProfessional"])
+    @IsEnum(["patient", "researcher", "healthProfessional"])
     profile: string;
 
     @IsOptional()
@@ -40,6 +40,10 @@ export class CreatePersonDto {
     fieldOfStudy?: string;
 
     @IsOptional()
+    @IsNumber()
+    id_address?: number;
+
+    @IsOptional()
     @IsDate()
     dateOfBirth?: Date;
 
@@ -49,7 +53,7 @@ export class CreatePersonDto {
 
     @IsOptional()
     @IsString()
-    socioeconomicLevel?: string;
+    socioeconomicStatus?: string;
 
     @IsOptional()
     @IsNumber()
@@ -58,4 +62,12 @@ export class CreatePersonDto {
     @IsOptional()
     @IsNumber()
     height?: number;
+
+    @IsOptional()
+    @IsNumber()
+    age?: number;
+
+    @IsOptional()
+    @IsBoolean()
+    downFall?: boolean;
 }

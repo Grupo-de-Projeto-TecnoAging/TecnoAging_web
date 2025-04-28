@@ -16,7 +16,7 @@ export class PatientService {
 
   async create(createPatientDto: CreatePatientDto, cpf: string): Promise<Patient> {
     if (!createPatientDto.id_address || !createPatientDto.dateOfBirth || !createPatientDto.educationLevel || !createPatientDto.socioeconomicStatus || !createPatientDto.weight || !createPatientDto.height) {
-      throw new BadRequestException('Endereço, data de nascimento, educationLevel, nível socioeconômico, weight e height são obrigatórios para o perfil de patient.');
+      throw new BadRequestException('Address, date of birth, education Level, socioeconomic status, weight and height are required for patient profile.');
     }
     const patient = await this.patientModel.create({
       ...createPatientDto,
@@ -50,7 +50,7 @@ export class PatientService {
   async findOne(cpf: string): Promise<ReturnPatientDto> {
     const patient = await this.patientModel.findByPk(cpf, { include: [{ model: Person, attributes: ['name'] }],});
     if (!patient) {
-      throw new NotFoundException(`Patient com id ${cpf} não encontrado`);
+      throw new NotFoundException(`Patient with id ${cpf} not found`);
     }
     return {
       name: patient.person?.name,
@@ -71,7 +71,7 @@ export class PatientService {
   async updateById(id: string, updatePatientDto: UpdatePatientDto): Promise<Patient> {
     const patient = await this.patientModel.findOne({ where: { id } });
     if (!patient) {
-      throw new NotFoundException(`Patient com id ${id} não encontrada`);
+      throw new NotFoundException(`Patient with id ${id} not found`);
     }
 
     await patient.update(updatePatientDto);
@@ -81,7 +81,7 @@ export class PatientService {
   async removeById(id: string): Promise<Patient> {
     const patient = await this.patientModel.findOne({ where: { id } });
     if (!patient) {
-      throw new NotFoundException(`Patient com id ${id} não encontrada`);
+      throw new NotFoundException(`Patient with id ${id} not found`);
     }
 
     await patient.destroy();

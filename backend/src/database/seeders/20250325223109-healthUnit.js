@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('healthUnit', [
+    await queryInterface.bulkInsert('healthUnits', [
       {
         name: 'Hospital da Unimed',
         address: 'Street das Flores, 123',

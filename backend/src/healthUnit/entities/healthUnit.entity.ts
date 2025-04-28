@@ -20,12 +20,12 @@ export class HealthUnit extends Model {
 
   @ForeignKey(() => Address)
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
     allowNull: false,
   })
-  id_address: string;
+  id_address: number;
 
-  @BelongsTo(() => Address, { foreignKey: 'id_address', targetKey: 'address_cep' })
+  @BelongsTo(() => Address, { foreignKey: 'id_address', targetKey: 'id' })
   address: Address;
 
   @HasMany(() => Evaluation)
