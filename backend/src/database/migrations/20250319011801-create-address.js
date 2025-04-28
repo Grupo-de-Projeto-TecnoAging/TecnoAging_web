@@ -6,14 +6,13 @@ module.exports = {
     await queryInterface.createTable('Addresses', {
       
       id: ({
-          primaryKey: false,
+          primaryKey: true,
           autoIncrement: true,
           type: Sequelize.INTEGER,
           allowNull: false,
       }),
       address_cep: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.STRING(10),
       },
       number: {
