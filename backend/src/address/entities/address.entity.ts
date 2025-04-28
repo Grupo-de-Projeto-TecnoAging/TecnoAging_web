@@ -4,7 +4,6 @@ import { HealthUnit } from "src/healthUnit/entities/healthUnit.entity";
 
 @Table
 export class Address extends Model {
-
     @Column({
         primaryKey: true,
         autoIncrement: true,
