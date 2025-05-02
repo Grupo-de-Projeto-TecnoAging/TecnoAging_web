@@ -24,11 +24,11 @@ export class ResearcherController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateresearcherDto: UpdateResearcherDto) {
-    return this.researcherService.updateById(+id, updateresearcherDto);
+    return this.researcherService.update(+id, updateresearcherDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.researcherService.removeById(+id);
+    return this.researcherService.remove(+id);
   }
 }
