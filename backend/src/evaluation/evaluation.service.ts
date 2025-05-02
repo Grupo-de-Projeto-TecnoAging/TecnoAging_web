@@ -65,7 +65,16 @@ export class EvaluationService {
   async findOneWithDetails(id: number): Promise<any> {
     const evaluation = await this.evaluationModel.findOne({
       where: { id },
-      attributes: ['id', 'type', 'cpfPatient', 'cpfHealthProfessional', 'id_healthUnit', 'createdAt'],
+      attributes: [
+        'id', 
+        'type', 
+        'cpfPatient', 
+        'cpfHealthProfessional',
+        'date',
+        'totalTime',
+        'id_healthUnit', 
+        'createdAt'
+      ],
       include: [
         { 
           model: Patient, 

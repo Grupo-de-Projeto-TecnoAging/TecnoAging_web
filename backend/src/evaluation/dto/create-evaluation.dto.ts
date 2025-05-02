@@ -36,5 +36,21 @@ export class CreateEvaluationDto {
     @IsNumber()
     id_healthUnit: number;
 
+    @ApiProperty({
+        description: 'Specifies the date of the evaluation',
+        example: '2023-10-01',
+    })
+    @IsNotEmpty()
+    @IsString()
+    date: string;
+
+    @ApiProperty({
+        description: 'Specifies the total time taken for the evaluation',
+        example: '00:30:00',
+    })
+    @IsNotEmpty()
+    @IsString()
+    totalTime: string;
+
     sensorData?: CreateSensorDataDto[];
 }

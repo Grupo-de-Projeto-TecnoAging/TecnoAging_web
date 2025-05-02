@@ -41,6 +41,18 @@ export class Evaluation extends Model {
   })
   id_healthUnit: number;
 
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+  })
+  date: Date;
+
+  @Column({
+    type: DataType.TIME,
+    allowNull: false,
+  })
+  totalTime: string;
+
   @BelongsTo(() => HealthProfessional)
   healthProfessional: HealthProfessional;
 
