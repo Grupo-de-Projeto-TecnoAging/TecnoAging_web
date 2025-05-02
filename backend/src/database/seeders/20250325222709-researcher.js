@@ -16,7 +16,7 @@ module.exports = {
     */
    await queryInterface.bulkInsert('Researchers', [
     {
-      cpf: "55555555555",
+      cpf: "222.222.222-22",
       name: 'Raquel de Oliveira',     
       password: "pesquisador",
       phone: "112345678",
@@ -28,7 +28,7 @@ module.exports = {
       fieldOfStudy: "Saude"
     },
     {
-      cpf: "66666666666",
+      cpf: "222.222.222-23",
       name: 'João da Silva',     
       password: "pesquisador",
       phone: "112345678",
