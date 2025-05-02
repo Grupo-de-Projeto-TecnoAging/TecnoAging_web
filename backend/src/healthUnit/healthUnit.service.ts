@@ -8,7 +8,7 @@ import { InjectModel } from '@nestjs/sequelize';
 export class healthUnitService {
   constructor(
     @InjectModel(HealthUnit)
-    private readonly healthUnitModel: typeof HealthUnit,
+    private readonly healthUnitModel: typeof HealthUnit
   ) { }
 
   async create(createhealthUnitDto: Partial<CreatehealthUnitDto>): Promise<HealthUnit> {

@@ -1,5 +1,4 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { Address } from "src/address/entities/address.entity";
 import { Person } from "src/person/entities/person.entity";
 import { Evaluation } from "src/evaluation/entities/evaluation.entity";
 
@@ -14,13 +13,6 @@ export class Patient extends Model {
         autoIncrement: false
     })
     cpf: string;
-
-    @ForeignKey(() => Address)
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    id_address: number;
 
     @Column({
         type: DataType.DATEONLY,
@@ -39,6 +31,42 @@ export class Patient extends Model {
         allowNull: false,
     })
     socioeconomicStatus: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    cep: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    street: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    number: number;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    neighborhood: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    city: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    state: string;
 
     @Column({
         type: DataType.FLOAT,
@@ -66,9 +94,6 @@ export class Patient extends Model {
 
     @BelongsTo(() => Person)
     person: Person;
-
-    @BelongsTo(() => Address, { foreignKey: 'id_address', targetKey: 'id' })
-    address: Address;
 
     @HasMany(() => Evaluation)
     evaluation: Evaluation[];

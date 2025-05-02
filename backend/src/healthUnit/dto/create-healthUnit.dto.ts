@@ -11,12 +11,36 @@ export class CreatehealthUnitDto {
     @IsString()
     @IsNotEmpty()
     name: string;
-    
+
     @ApiProperty({
-        description: 'Identifier of the address',
-        example: 1,
+        description: 'Street address of the health unit',
+        example: 'Street General Carneiro',
+    })
+    @IsString()
+    @IsNotEmpty()
+    street: string;
+
+    @ApiProperty({
+        description: 'Street number of the health unit',
+        example: 123,
     })
     @IsNumber()
     @IsNotEmpty()
-    id_address: number;
+    number: number;
+
+    @ApiProperty({
+        description: 'Neighborhood of the health unit',
+        example: 'Downtown',
+    })
+    @IsString()
+    @IsNotEmpty()
+    neighborhood: string;
+
+    @ApiProperty({
+        description: 'City of the health unit',
+        example: 'Curitiba',
+    })
+    @IsString()
+    @IsNotEmpty()
+    city: string;
 }

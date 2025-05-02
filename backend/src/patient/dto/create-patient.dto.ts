@@ -11,14 +11,6 @@ export class CreatePatientDto {
     cpf: string;
 
     @ApiProperty({
-        description: 'ID of the patient address',
-        example: 123,
-    })
-    @IsNumber()
-    @IsNotEmpty()
-    id_address: number;
-
-    @ApiProperty({
         description: 'Date of birth of the patient',
         example: '1990-01-01',
     })
@@ -41,6 +33,54 @@ export class CreatePatientDto {
     @IsString()
     @IsNotEmpty()
     socioeconomicStatus: string;
+
+    @ApiProperty({
+        description: "CEP of the patient's address",
+        example: '80060-130',
+    })
+    @IsString()
+    @IsNotEmpty()
+    cep: string;
+
+    @ApiProperty({
+        description: 'Street address of the patient',
+        example: 'Street Nilo Cairo',
+    })
+    @IsString()
+    @IsNotEmpty()
+    street: string;
+
+    @ApiProperty({
+        description: 'Street number of the patient',
+        example: 282,
+    })
+    @IsNumber()
+    @IsNotEmpty()
+    number: number;
+
+    @ApiProperty({
+        description: 'Neighborhood of the patient',
+        example: 'Downtown',
+    })
+    @IsString()
+    @IsNotEmpty()
+    neighborhood: string;
+
+    @ApiProperty({
+        description: 'City of the patient',
+        example: 'Curitiba',
+    })
+    @IsString()
+    @IsNotEmpty()
+    city: string;
+
+    @ApiProperty({
+        description: 'State of the patient',
+        example: 'PR',
+    })
+    @IsString()
+    @IsNotEmpty()
+    state: string;
 
     @ApiProperty({
         description: 'Weight of the patient in kilograms',
@@ -73,5 +113,4 @@ export class CreatePatientDto {
     @IsBoolean()
     @IsNotEmpty()
     downFall: boolean;
-
 }
