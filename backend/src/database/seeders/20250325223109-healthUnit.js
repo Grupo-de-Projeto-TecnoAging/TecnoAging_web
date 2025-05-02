@@ -2,24 +2,31 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('healthUnits', [
       {
-        name: 'Hospital da Unimed',
-        address: 'Street das Flores, 123',
-      },
-      {
-        name: 'Hospital do Coração',
-        address: 'Avenida Brasil, 456',
-      },
-      {
-        name: 'Hospital São Francisco',
-        address: 'Praça dos Expedicionários, 789',
+        name: "Unidade Centro",
+        street: "Rua das Flores",
+        number: 123,
+        city: "Curitiba",
+        neighborhood: "Centro"
+      }, {
+        name: "Unidade Batel",
+        street: "Rua Marechal Floriano",
+        number: 456,
+        city: "Curitiba",
+        neighborhood: "Batel"
+      }, {
+        name: "Unidade Bairro Alto",
+        street: "Rua da Luz",
+        number: 789,
+        city: "Curitiba",
+        neighborhood: "Bairro Alto"
       }
     ]);
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('healthUnit', null, {});
   }
 };

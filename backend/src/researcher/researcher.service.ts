@@ -6,15 +6,17 @@ import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class ResearcherService {
-
   constructor(
     @InjectModel(Researcher)
     private readonly researcherModel: typeof Researcher
   ) { }
 
   async create(createresearcherDto: UpdateResearcherDto, cpf: string): Promise<Researcher> {  
-    if (!createresearcherDto.email || !createresearcherDto.institution || !createresearcherDto.fieldOfStudy || !createresearcherDto.expertise) {
-      throw new BadRequestException('Email, instituicao, area e especialidade são obrigatórios para o perfil de researcher.');
+    if (!createresearcherDto.email || 
+      !createresearcherDto.institution || 
+      !createresearcherDto.fieldOfStudy || 
+      !createresearcherDto.expertise) {
+      throw new BadRequestException('Email, instituition, field of suty and expertise are required for researcher profile.');
     }
     
     const researcher = await this.researcherModel.create({
@@ -25,8 +27,8 @@ export class ResearcherService {
     return researcher;
   }
 
-  findAll() {
-    return `This action returns all researcher`;
+  async findAll(): Promise<Researcher[]> {
+    return this.researcherModel.findAll();
   }
 
   findOne(id: number) {

@@ -15,8 +15,19 @@ export class PatientService {
   ) { }
 
   async create(createPatientDto: CreatePatientDto, cpf: string): Promise<Patient> {
-    if (!createPatientDto.id_address || !createPatientDto.dateOfBirth || !createPatientDto.educationLevel || !createPatientDto.socioeconomicStatus || !createPatientDto.weight || !createPatientDto.height) {
-      throw new BadRequestException('Address, date of birth, education Level, socioeconomic status, weight and height are required for patient profile.');
+    if (!createPatientDto.cpf ||
+      !createPatientDto.cep ||
+      !createPatientDto.street ||
+      !createPatientDto.number ||
+      !createPatientDto.neighborhood ||
+      !createPatientDto.city ||
+      !createPatientDto.state ||
+      !createPatientDto.dateOfBirth ||
+      !createPatientDto.educationLevel ||
+      !createPatientDto.socioeconomicStatus ||
+      !createPatientDto.weight ||
+      !createPatientDto.height) {
+      throw new BadRequestException('Address informations, date of birth, education Level, socioeconomic status, weight and height are required for patient profile.');
     }
     const patient = await this.patientModel.create({
       ...createPatientDto,
@@ -30,14 +41,19 @@ export class PatientService {
     const patient = await this.patientModel.findAll({
       include: [{ model: Person, attributes: ['name'] }],
     });
-  
+
     return patient.map(patient => ({
       name: patient.person?.name,
       cpf: patient.cpf,
-      id_address: patient.id_address,
       dateOfBirth: patient.dateOfBirth,
       educationLevel: patient.educationLevel,
       socioeconomicStatus: patient.socioeconomicStatus,
+      cep: patient.cep,
+      street: patient.street,
+      number: patient.number,
+      neighborhood: patient.neighborhood,
+      city: patient.city,
+      state: patient.state,
       weight: patient.weight,
       height: patient.height,
       age: patient.age,
@@ -48,17 +64,22 @@ export class PatientService {
   }
 
   async findOne(cpf: string): Promise<ReturnPatientDto> {
-    const patient = await this.patientModel.findByPk(cpf, { include: [{ model: Person, attributes: ['name'] }],});
+    const patient = await this.patientModel.findByPk(cpf, { include: [{ model: Person, attributes: ['name'] }], });
     if (!patient) {
       throw new NotFoundException(`Patient with id ${cpf} not found`);
     }
     return {
       name: patient.person?.name,
       cpf: patient.cpf,
-      id_address: patient.id_address,
       dateOfBirth: patient.dateOfBirth,
       educationLevel: patient.educationLevel,
       socioeconomicStatus: patient.socioeconomicStatus,
+      cep: patient.cep,
+      street: patient.street,
+      number: patient.number,
+      neighborhood: patient.neighborhood,
+      city: patient.city,
+      state: patient.state,
       weight: patient.weight,
       height: patient.height,
       age: patient.age,

@@ -1,5 +1,4 @@
 import { Table, Column, Model, DataType, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { Address } from 'src/address/entities/address.entity';
 import { Evaluation } from 'src/evaluation/entities/evaluation.entity';
 
 @Table
@@ -18,15 +17,29 @@ export class HealthUnit extends Model {
   })
   name: string;
 
-  @ForeignKey(() => Address)
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  street: string;
+
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  id_address: number;
+  number: number;
 
-  @BelongsTo(() => Address, { foreignKey: 'id_address', targetKey: 'id' })
-  address: Address;
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  neighborhood: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  city: string;
 
   @HasMany(() => Evaluation)
   evaluation: Evaluation[];

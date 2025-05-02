@@ -5,7 +5,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
    await queryInterface.bulkInsert('Patients', [
     {
-      cpf: "11111111111",
+      cpf: "111.111.111-11",
       name: "Claudio da Silva",
       password: "patient",
       phone: "112345678",
@@ -21,7 +21,7 @@ module.exports = {
       downFall: false
     },
     {
-      cpf: "22222222222",
+      cpf: "111.111.111-12",
       name: "Maria da Silva",
       password: "patient",
       phone: "112345678",
