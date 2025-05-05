@@ -86,13 +86,6 @@ export class CreatePersonDto {
 
     @ApiPropertyOptional()
     @ApiProperty({
-        description: 'Defines the ID of the address',
-        example: '1',
-    })
-
-
-    @ApiPropertyOptional()
-    @ApiProperty({
         description: 'Date of birth of the person',
         example: '1957-01-01',
     })
