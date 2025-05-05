@@ -14,14 +14,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      id_address: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Addresses',  // name da tabela que referencia
-          key: 'id', // chave primária da tabela referenciada
-        },
-      },
       dateOfBirth: {
         type: Sequelize.DATEONLY,
         allowNull: false,
@@ -31,6 +23,30 @@ module.exports = {
         allowNull: false,
       },
       socioeconomicStatus: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      cep: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+     street: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      number: {
+        type: Sequelize.STRING,
+        allowNull: false,
+     },
+    neighborhood: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+    city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+    state: {
         type: Sequelize.STRING,
         allowNull: false,
       },
