@@ -89,9 +89,7 @@ export class CreatePersonDto {
         description: 'Defines the ID of the address',
         example: '1',
     })
-    @IsOptional()
-    @IsNumber()
-    id_address?: number;
+
 
     @ApiPropertyOptional()
     @ApiProperty({
