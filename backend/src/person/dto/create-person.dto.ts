@@ -153,4 +153,52 @@ export class CreatePersonDto {
     @IsOptional()
     @IsBoolean()
     downFall?: boolean;
+
+    @ApiProperty({
+        description: "CEP of the patient's address",
+        example: '80060-130',
+    })
+    @IsString()
+    @IsNotEmpty()
+    cep?: string;
+
+    @ApiProperty({
+        description: 'Street address of the patient',
+        example: 'Street Nilo Cairo',
+    })
+    @IsString()
+    @IsNotEmpty()
+    street?: string;
+
+    @ApiProperty({
+        description: 'Street number of the patient',
+        example: 282,
+    })
+    @IsNumber()
+    @IsNotEmpty()
+    number?: number;
+
+    @ApiProperty({
+        description: 'Neighborhood of the patient',
+        example: 'Downtown',
+    })
+    @IsString()
+    @IsNotEmpty()
+    neighborhood?: string;
+
+    @ApiProperty({
+        description: 'City of the patient',
+        example: 'Curitiba',
+    })
+    @IsString()
+    @IsNotEmpty()
+    city?: string;
+
+    @ApiProperty({
+        description: 'State of the patient',
+        example: 'PR',
+    })
+    @IsString()
+    @IsNotEmpty()
+    state?: string;
 }
