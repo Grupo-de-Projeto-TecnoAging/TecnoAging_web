@@ -24,6 +24,12 @@ export class HealthUnit extends Model {
   street: string;
 
   @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  state: string;
+  
+  @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })

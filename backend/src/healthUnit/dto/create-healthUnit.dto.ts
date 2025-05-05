@@ -43,4 +43,12 @@ export class CreatehealthUnitDto {
     @IsString()
     @IsNotEmpty()
     city: string;
+
+    @ApiProperty({
+        description: 'State of the Health Unit',
+        example: 'PR',
+    })
+    @IsString()
+    @IsNotEmpty()
+    state: string;
 }
