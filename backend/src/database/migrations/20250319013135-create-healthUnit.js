@@ -20,12 +20,12 @@ module.exports = {
       number: {
         type: Sequelize.STRING,
         allowNull: false,
-     },
-    neighborhood: {
+      },
+      neighborhood: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-    city: {
+      city: {
         type: Sequelize.STRING,
         allowNull: false,
       },

@@ -11,6 +11,14 @@ export class CreateSensorDataDto {
     time: Date;
 
     @ApiProperty({
+        description: 'ID of the evaluation associated with this sensor data',
+        example: 1,
+    })
+    @IsNotEmpty()
+    @IsNumber()
+    id_evaluation: number;
+
+    @ApiProperty({
         description: 'Acceleration in the X-axis',
         example: 0.12,
     })

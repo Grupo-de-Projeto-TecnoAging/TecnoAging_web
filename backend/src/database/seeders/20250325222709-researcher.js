@@ -5,15 +5,6 @@ const { query } = require('express');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('Person', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
    await queryInterface.bulkInsert('Researchers', [
     {
       cpf: "222.222.222-22",
