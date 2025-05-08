@@ -30,23 +30,23 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-     street: {
+      street: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       number: {
         type: Sequelize.STRING,
         allowNull: false,
-     },
-    neighborhood: {
+      },
+      neighborhood: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-    city: {
+      city: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-    state: {
+      state: {
         type: Sequelize.STRING,
         allowNull: false,
       },

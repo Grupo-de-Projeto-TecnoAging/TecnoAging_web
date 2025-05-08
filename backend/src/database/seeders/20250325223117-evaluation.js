@@ -6,27 +6,33 @@ module.exports = {
     await queryInterface.bulkInsert('Evaluations', [
       {
         type: "TUG",
-        cpfPatient: "111.111.111-11",
-        cpfHealthProfessional: "333.333.333-33",
+        cpfPatient: "111.111.111-01",
+        cpfHealthProfessional: "333.333.333-01",
         id_healthUnit: 1,
         date: "2023-10-01",
-        totalTime: "00:30:00"
+        totalTime: "00:30:00",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         type: "5TSTS",
-        cpfPatient: "111.111.111-11",
-        cpfHealthProfessional: "333.333.333-33",
+        cpfPatient: "111.111.111-01",
+        cpfHealthProfessional: "333.333.333-01",
         id_healthUnit: 1,
         date: "2023-10-01",
-        totalTime: "00:30:00"
+        totalTime: "00:30:00",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         type: "TUG",
-        cpfPatient: "111.111.111-12",
-        cpfHealthProfessional: "333.333.333-34",
+        cpfPatient: "111.111.111-02",
+        cpfHealthProfessional: "333.333.333-02",
         id_healthUnit: 1,
         date: "2023-10-01",
-        totalTime: "00:30:00"
+        totalTime: "00:30:00",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ]);
   },
