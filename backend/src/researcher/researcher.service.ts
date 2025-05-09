@@ -59,18 +59,18 @@ export class ResearcherService {
     };
   }
 
-  async updateById(id: number, updateresearcherDto: UpdateResearcherDto) {
-    const researcher = await this.researcherModel.findOne({ where: { id } });
+  async updateByCpf(cpf: string, updateResearcherDto: UpdateResearcherDto) {
+    const researcher = await this.researcherModel.findOne({ where: { cpf } });
     if (!researcher) {
       throw new BadRequestException('researcher not found.');
     }
 
-    await researcher.update(updateresearcherDto);
+    await researcher.update(updateResearcherDto);
     return researcher;
   }
 
-  async removeById(id: number) {
-    const researcher = await this.researcherModel.findOne({ where: { id } });
+  async removeByCpf(cpf: string) {
+    const researcher = await this.researcherModel.findOne({ where: { cpf } });
     if (!researcher) {
       throw new BadRequestException('researcher not found.');
     }

@@ -17,18 +17,18 @@ export class ResearcherController {
     return this.researcherService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.researcherService.findOne(+id);
+  @Get(':cpf')
+  findOne(@Param('cpf') cpf: string) {
+    return this.researcherService.findOne(cpf);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateresearcherDto: UpdateResearcherDto) {
-    return this.researcherService.update(+id, updateresearcherDto);
+  @Patch(':cpf')
+  update(@Param('cpf') cpf: string, @Body() updateResearcherDto: UpdateResearcherDto) {
+    return this.researcherService.updateByCpf(cpf, updateResearcherDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.researcherService.remove(+id);
+  @Delete(':cpf')
+  remove(@Param('cpf') cpf: string) {
+    return this.researcherService.removeByCpf(cpf);
   }
 }

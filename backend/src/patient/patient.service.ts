@@ -89,20 +89,20 @@ export class PatientService {
     };
   }
 
-  async updateById(id: string, updatePatientDto: UpdatePatientDto): Promise<Patient> {
-    const patient = await this.patientModel.findOne({ where: { id } });
+  async updateByCpf(cpf: string, updatePatientDto: UpdatePatientDto): Promise<Patient> {
+    const patient = await this.patientModel.findOne({ where: { cpf } });
     if (!patient) {
-      throw new NotFoundException(`Patient with id ${id} not found`);
+      throw new NotFoundException(`Patient with id ${cpf} not found`);
     }
 
     await patient.update(updatePatientDto);
     return patient;
   }
 
-  async removeById(id: string): Promise<Patient> {
-    const patient = await this.patientModel.findOne({ where: { id } });
+  async removeByCpf(cpf: string): Promise<Patient> {
+    const patient = await this.patientModel.findOne({ where: { cpf } });
     if (!patient) {
-      throw new NotFoundException(`Patient with id ${id} not found`);
+      throw new NotFoundException(`Patient with id ${cpf} not found`);
     }
 
     await patient.destroy();
