@@ -4,6 +4,7 @@ import { UpdateResearcherDto } from './dto/update-researcher.dto';
 import { Researcher } from './entities/researcher.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { ReturnResearcherDto } from './dto/return-researcher.dto';
+import { Transaction } from 'sequelize';
 import { Person } from 'src/person/entities/person.entity';
 
 @Injectable()
@@ -13,7 +14,7 @@ export class ResearcherService {
     private readonly researcherModel: typeof Researcher
   ) { }
 
-  async create(createresearcherDto: UpdateResearcherDto, cpf: string): Promise<Researcher> {  
+  async create(createresearcherDto: CreateResearcherDto, cpf: string, transaction?: Transaction): Promise<Researcher> {  
     if (!createresearcherDto.email || 
       !createresearcherDto.institution || 
       !createresearcherDto.fieldOfStudy || 
@@ -23,8 +24,10 @@ export class ResearcherService {
     
     const researcher = await this.researcherModel.create({
       ...createresearcherDto,
-      cpf:cpf 
-    });
+      cpf:cpf,
+     }, {
+          transaction,
+        });
     
     return researcher;
   }
