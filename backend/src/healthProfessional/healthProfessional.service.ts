@@ -5,6 +5,7 @@ import { HealthProfessional} from './entities/healthProfessional.entity';
 import { Person } from 'src/person/entities/person.entity';
 import { UpdateHealthProfessionalDto } from './dto/update-healthProfessional.dto';
 import { Transaction } from 'sequelize';
+import { ReturnHealthProfessionalDto } from './dto/return-healthProfessional.dto';
 
 @Injectable()
 export class HealthProfessionalService {
@@ -29,8 +30,17 @@ export class HealthProfessionalService {
   }
 
 
-  async findAll (): Promise<HealthProfessional[]> {
-    return await this.healthProfessionalModel.findAll();
+  async findAll (): Promise<ReturnHealthProfessionalDto[]> {
+    const healthProfessional = await this.healthProfessionalModel.findAll({
+      include: [{ model: Person, attributes: ['name'] }],
+    });
+
+    return healthProfessional.map(healthProfessional => ({
+      name: healthProfessional.person?.name,
+      cpf: healthProfessional.cpf,
+      email: healthProfessional.email,
+      expertise: healthProfessional.expertise,
+    }));
   }
 
   async findAllDetailed(): Promise<HealthProfessional[]> {
@@ -44,14 +54,18 @@ export class HealthProfessionalService {
     });
 }
 
-  findOne(cpf: string) {
-    const healthProfessional = this.healthProfessionalModel.findOne({
-      where: { cpf },
-    });
+  async findOne(cpf: string): Promise<ReturnHealthProfessionalDto> {
+    const healthProfessional = await this.healthProfessionalModel.findByPk(cpf, 
+      { include: [{ model: Person, attributes: ['name'] }] });
     if (!healthProfessional) {
       throw new BadRequestException("healthProfessional não encontrado.");
     }
-    return healthProfessional;
+    return{
+      name: healthProfessional.person?.name,
+      cpf: healthProfessional.cpf,
+      email: healthProfessional.email,
+      expertise: healthProfessional.expertise,
+    };
   }
 
   update(id: number, updatehealthProfessionalDto: UpdateHealthProfessionalDto) {

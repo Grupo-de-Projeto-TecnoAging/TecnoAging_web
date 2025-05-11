@@ -29,89 +29,119 @@ export class PersonService {
     private readonly patientModel: typeof Patient,
     private readonly authService: AuthService,
     private readonly healthProfessionalService: HealthProfessionalService,
-    private readonly researcherervice: ResearcherService,
+    private readonly researcherService: ResearcherService,
     private readonly patientService: PatientService,
     @InjectConnection() private readonly sequelize: Sequelize
   ) { }
 
-   async create(
-      createPersonDto: Partial<CreatePersonDto>,
-      createHealthProfessionalDto?: Partial<CreateHealthProfessionalDto>,
-      createResearcherDto?: Partial<CreateResearcherDto>,
-      createPatientDto?: Partial<CreatePatientDto>
-    ): Promise<Person> {
-      if (!createPersonDto.password) {
-        throw new BadRequestException('Password is required');
-      }
-
-      if (!createPersonDto.cpf || !createPersonDto.profile) {
-        throw new BadRequestException('CPF and profile are required');
-      }
-
-      const profile = createPersonDto.profile;
-
-      // Valida os dados específicos do perfil
-      switch (profile) {
-        case 'healthProfessional':
-          if (
-            !createHealthProfessionalDto?.email ||
-            !createHealthProfessionalDto?.expertise
-          ) {
-            throw new BadRequestException('Dados de healthProfessional são obrigatórios');
-          }
-          break;
-        case 'researcher':
-          if (
-            !createResearcherDto?.email ||
-            !createResearcherDto?.institution ||
-            !createResearcherDto?.fieldOfStudy ||
-            !createResearcherDto?.expertise
-          ) {
-            throw new BadRequestException('Dados de researcher são obrigatórios');
-          }
-          break;
-        case 'patient':
-          if (
-            !createPatientDto?.dateOfBirth ||
-            !createPatientDto?.educationLevel ||
-            !createPatientDto?.socioeconomicStatus ||
-            !createPatientDto?.weight ||
-            !createPatientDto?.height
-          ) {
-            throw new BadRequestException('Dados de patient são obrigatórios');
-          }
-          break;
-        default:
-          throw new BadRequestException('Perfil inválido');
-      }
-
-      createPersonDto.password = await this.authService.encryptPassword(createPersonDto.password);
-
-      const transaction = await this.sequelize.transaction(); // Transação criada
-      try {
-        const person = await this.personModel.create(createPersonDto, { transaction });
-
-        switch (profile) {
-          case 'healthProfessional':
-            await this.healthProfessionalService.create({ ...createHealthProfessionalDto, cpf: person.cpf } as CreateHealthProfessionalDto, person.cpf, transaction);
-            break;
-          case 'researcher':
-            await this.researcherervice.create({ ...createResearcherDto, cpf: person.cpf } as CreateResearcherDto, person.cpf, transaction);
-            break;
-          case 'patient':
-            await this.patientService.create({ ...createPatientDto, cpf: person.cpf } as CreatePatientDto, person.cpf, transaction);
-            break;
-        }
-
-        await transaction.commit(); // Commit se tudo certo
-        return person;
-
-      } catch (err) {
-        await transaction.rollback(); // Rollback em erro
-        console.error('Erro ao criar pessoa e perfil:', err);
-        throw new BadRequestException('Erro ao criar pessoa e perfil: ' + err.message);
-      }
+   async create(createPersonDto: any): Promise<Person> {
+  if (!createPersonDto.password) {
+    throw new BadRequestException('Password is required');
   }
+
+  if (!createPersonDto.cpf || !createPersonDto.profile) {
+    throw new BadRequestException('CPF and profile are required');
+  }
+
+  const profile = createPersonDto.profile;
+
+  // Validação por perfil
+  switch (profile) {
+    case 'healthProfessional':
+      if (!createPersonDto.email || !createPersonDto.expertise) {
+        throw new BadRequestException('Dados de healthProfessional são obrigatórios');
+      }
+      break;
+
+    case 'researcher':
+      if (
+        !createPersonDto.email ||
+        !createPersonDto.institution ||
+        !createPersonDto.fieldOfStudy ||
+        !createPersonDto.expertise
+      ) {
+        throw new BadRequestException('Dados de researcher são obrigatórios');
+      }
+      break;
+
+    case 'patient':
+      if (
+        !createPersonDto.dateOfBirth ||
+        !createPersonDto.educationLevel ||
+        !createPersonDto.socioeconomicStatus ||
+        !createPersonDto.weight ||
+        !createPersonDto.height
+      ) {
+        throw new BadRequestException('Dados de patient são obrigatórios');
+      }
+      break;
+
+    default:
+      throw new BadRequestException('Perfil inválido');
+  }
+
+  createPersonDto.password = await this.authService.encryptPassword(createPersonDto.password);
+
+  const transaction = await this.sequelize.transaction();
+
+  try {
+    const person = await this.personModel.create(createPersonDto, { transaction });
+
+    switch (profile) {
+      case 'healthProfessional': {
+        const dto = {
+          email: createPersonDto.email,
+          expertise: createPersonDto.expertise,
+          cpf: person.cpf,
+        };
+        await this.healthProfessionalService.create(dto, person.cpf, transaction);
+        break;
+      }
+
+      case 'researcher': {
+        const dto = {
+          email: createPersonDto.email,
+          institution: createPersonDto.institution,
+          fieldOfStudy: createPersonDto.fieldOfStudy,
+          expertise: createPersonDto.expertise,
+          cpf: person.cpf,
+        };
+        await this.researcherService.create(dto, person.cpf, transaction);
+        break;
+      }
+
+      case 'patient': {
+        const dto = {
+          dateOfBirth: createPersonDto.dateOfBirth,
+          educationLevel: createPersonDto.educationLevel,
+          socioeconomicStatus: createPersonDto.socioeconomicStatus,
+          weight: createPersonDto.weight,
+          height: createPersonDto.height,
+          cep: createPersonDto.cep,
+          street: createPersonDto.street,
+          number: createPersonDto.number,
+          neighborhood: createPersonDto.neighborhood,
+          city: createPersonDto.city,
+          state: createPersonDto.state, 
+          cpf: person.cpf,
+          age: createPersonDto.age,
+          downFall: createPersonDto.downFall,
+        };
+        await this.patientService.create(dto, person.cpf, transaction);
+        break;
+      }
+    }
+
+    await transaction.commit();
+    return person;
+  } catch (err) {
+    await transaction.rollback();
+    console.error('Erro ao criar pessoa e perfil:', err);
+    throw new BadRequestException('Erro ao criar pessoa e perfil: ' + err.message);
+  }
+}
+
+
 
 
   async findAll(): Promise<Person[]> {
