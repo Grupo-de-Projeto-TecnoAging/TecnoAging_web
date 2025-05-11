@@ -68,19 +68,24 @@ export class PersonService {
 
     const person = await this.personModel.create(createPersonDto);
 
-    if (person.profile === 'healthProfessional') {
-      await this.healthProfessionalService.create(createPersonDto as any, person.cpf);
+    if (!createPersonDto.profile) {
+      throw new BadRequestException('O campo "profile" é obrigatório para criar uma pessoa.');
     }
+    else {
+      if (person.profile === 'healthProfessional') {
+        await this.healthProfessionalService.create(createPersonDto as any, person.cpf);
+      }
 
-    if (person.profile === 'researcher') {
-      await this.researcherervice.create(createPersonDto as any, person.cpf);
+      if (person.profile === 'researcher') {
+        await this.researcherervice.create(createPersonDto as any, person.cpf);
+      }
+
+      if (person.profile === 'patient') {
+        await this.patientService.create(createPersonDto as any, person.cpf);
+      }
+
+     return person;
     }
-
-    if (person.profile === 'patient') {
-      await this.patientService.create(createPersonDto as any, person.cpf);
-    }
-
-    return person;
   }
 
 
@@ -102,6 +107,36 @@ export class PersonService {
     if (!person) {
       throw new NotFoundException(`Person with cpf ${cpf} not found`);
     }
+    if (updatePersonDto.password) {
+      updatePersonDto.password = await this.authService.encryptPassword(updatePersonDto.password);
+    }
+    
+    if (updatePersonDto.profile === 'healthProfessional') {
+      if (!updatePersonDto.email || !updatePersonDto.expertise) {
+        throw new BadRequestException('Datas of health professional are required for this profile: email e especialidade');
+      }
+    }
+    if (updatePersonDto.profile === 'researcher') {
+      if (!updatePersonDto.email || !updatePersonDto.institution || !updatePersonDto.fieldOfStudy || !updatePersonDto.expertise) {
+        throw new BadRequestException('Datas of researcher are required for this profile: email, instituicao, area e especialidade');
+      }
+    }
+    if (updatePersonDto.profile === 'patient') {
+      if (!updatePersonDto.dateOfBirth || !updatePersonDto.educationLevel || !updatePersonDto.socioeconomicStatus || !updatePersonDto.weight || !updatePersonDto.height) {
+        throw new BadRequestException('Datas of patient are required for this profile: dateOfBirth, educationStatus, socioeconomicStatus, weight e height');
+      }
+    }
+   
+    if (updatePersonDto.profile === 'healthProfessional') {
+      await this.healthProfessionalModel.update(updatePersonDto, { where: { cpf } });
+    }
+    if (updatePersonDto.profile === 'researcher') {
+      await this.pesquisadorModel.update(updatePersonDto, { where: { cpf } });
+    }
+    if (updatePersonDto.profile === 'patient') {
+      await this.patientModel.update(updatePersonDto, { where: { cpf } });
+    }
+
     await person.update(updatePersonDto);
     return person;
   }

@@ -44,7 +44,7 @@ export class CreatePersonDto {
         example: 'Patient',
     })
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'Profile is required' })
     @IsEnum(["patient", "researcher", "healthProfessional"])
     profile: string;
 
