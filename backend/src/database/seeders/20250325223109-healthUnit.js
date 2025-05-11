@@ -6,6 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert('HealthUnits', [
       {
         name: "Unidade Centro",
+        cep: "80060-000",
         street: "Rua das Flores",
         number: 123,
         city: "Curitiba",
@@ -15,6 +16,7 @@ module.exports = {
         updatedAt: new Date(),
       }, {
         name: "Unidade Batel",
+        cep: "80420-000",
         street: "Rua Marechal Floriano",
         number: 456,
         city: "Curitiba",
@@ -24,6 +26,7 @@ module.exports = {
         updatedAt: new Date(),
       }, {
         name: "Unidade Bairro Alto",
+        cep: "82000-000",
         street: "Rua da Luz",
         number: 789,
         city: "Curitiba",

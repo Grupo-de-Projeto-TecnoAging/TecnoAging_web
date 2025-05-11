@@ -13,6 +13,14 @@ export class CreatehealthUnitDto {
     name: string;
 
     @ApiProperty({
+        description: 'CEP of the health unit',
+        example: '89000-000',
+    })
+    @IsString()
+    @IsNotEmpty()
+    cep: string;
+
+    @ApiProperty({
         description: 'Street address of the health unit',
         example: 'Street General Carneiro',
     })

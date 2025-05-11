@@ -13,6 +13,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      cep: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       street: {
         type: Sequelize.STRING,
         allowNull: false,

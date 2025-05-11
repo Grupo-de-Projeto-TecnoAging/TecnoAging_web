@@ -15,6 +15,12 @@ export class HealthUnit extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
+  cep: string;
+  
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   name: string;
 
   @Column({
