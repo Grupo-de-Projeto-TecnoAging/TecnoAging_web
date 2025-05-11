@@ -41,7 +41,7 @@ export class CreatePersonDto {
 
     @ApiProperty({
         description: 'Profile of the person',
-        example: 'Patient',
+        example: 'patient',
     })
     @IsString()
     @IsNotEmpty()
