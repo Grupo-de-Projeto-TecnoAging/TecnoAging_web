@@ -2,7 +2,9 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { Person } from './entities/person.entity';
-import { InjectModel } from '@nestjs/sequelize';
+import { Sequelize } from 'sequelize-typescript';
+import { Transaction } from 'sequelize';
+import { InjectModel, InjectConnection } from '@nestjs/sequelize';
 import { AuthService } from 'src/auth/auth.service';
 import { Researcher } from 'src/researcher/entities/researcher.entity';
 import { Patient } from 'src/patient/entities/patient.entity';
@@ -28,59 +30,87 @@ export class PersonService {
     private readonly authService: AuthService,
     private readonly healthProfessionalService: HealthProfessionalService,
     private readonly researcherervice: ResearcherService,
-    private readonly patientService: PatientService
+    private readonly patientService: PatientService,
+    @InjectConnection() private readonly sequelize: Sequelize
   ) { }
 
-  async create(
-    createPersonDto: Partial<CreatePersonDto>,
-    createHealthProfessionalDto?: Partial<CreateHealthProfessionalDto>,
-    createResearcherDto?: Partial<CreateResearcherDto>,
-    createPatientDto?: Partial<CreatePatientDto>
-  ): Promise<Person> {
-
-    if (!createPersonDto.password) {
-      throw new BadRequestException('Password is required');
-    }
-
-    if (!createPersonDto.cpf || !createPersonDto.profile) {
-      throw new BadRequestException('CPF and profile are required');
-    }
-
-    if (createPersonDto.profile === 'healthProfessional') {
-      if (!createPersonDto.email || !createPersonDto.expertise) {
-        throw new BadRequestException('Datas of health professional are required for this profile: email e especialidade');
+   async create(
+      createPersonDto: Partial<CreatePersonDto>,
+      createHealthProfessionalDto?: Partial<CreateHealthProfessionalDto>,
+      createResearcherDto?: Partial<CreateResearcherDto>,
+      createPatientDto?: Partial<CreatePatientDto>
+    ): Promise<Person> {
+      if (!createPersonDto.password) {
+        throw new BadRequestException('Password is required');
       }
-    }
 
-    if (createPersonDto.profile === 'researcher') {
-      if (!createPersonDto.email || !createPersonDto.institution || !createPersonDto.fieldOfStudy || !createPersonDto.expertise) {
-        throw new BadRequestException('Datas of researcher are required for this profile: email, instituicao, area e especialidade');
+      if (!createPersonDto.cpf || !createPersonDto.profile) {
+        throw new BadRequestException('CPF and profile are required');
       }
-    }
 
-    if (createPersonDto.profile === 'patient') {
-      if (!createPersonDto.dateOfBirth || !createPersonDto.educationLevel || !createPersonDto.socioeconomicStatus || !createPersonDto.weight || !createPersonDto.height) {
-        throw new BadRequestException('Datas of patient are required for this profile: dateOfBirth, educationStatus, socioeconomicStatus, weight e height');
+      const profile = createPersonDto.profile;
+
+      // Valida os dados específicos do perfil
+      switch (profile) {
+        case 'healthProfessional':
+          if (
+            !createHealthProfessionalDto?.email ||
+            !createHealthProfessionalDto?.expertise
+          ) {
+            throw new BadRequestException('Dados de healthProfessional são obrigatórios');
+          }
+          break;
+        case 'researcher':
+          if (
+            !createResearcherDto?.email ||
+            !createResearcherDto?.institution ||
+            !createResearcherDto?.fieldOfStudy ||
+            !createResearcherDto?.expertise
+          ) {
+            throw new BadRequestException('Dados de researcher são obrigatórios');
+          }
+          break;
+        case 'patient':
+          if (
+            !createPatientDto?.dateOfBirth ||
+            !createPatientDto?.educationLevel ||
+            !createPatientDto?.socioeconomicStatus ||
+            !createPatientDto?.weight ||
+            !createPatientDto?.height
+          ) {
+            throw new BadRequestException('Dados de patient são obrigatórios');
+          }
+          break;
+        default:
+          throw new BadRequestException('Perfil inválido');
       }
-    }
 
-    createPersonDto.password = await this.authService.encryptPassword(createPersonDto.password);
+      createPersonDto.password = await this.authService.encryptPassword(createPersonDto.password);
 
-    const person = await this.personModel.create(createPersonDto);
+      const transaction = await this.sequelize.transaction(); // Transação criada
+      try {
+        const person = await this.personModel.create(createPersonDto, { transaction });
 
-    if (person.profile === 'healthProfessional') {
-      await this.healthProfessionalService.create(createPersonDto as any, person.cpf);
-    }
+        switch (profile) {
+          case 'healthProfessional':
+            await this.healthProfessionalService.create({ ...createHealthProfessionalDto, cpf: person.cpf } as CreateHealthProfessionalDto, person.cpf, transaction);
+            break;
+          case 'researcher':
+            await this.researcherervice.create({ ...createResearcherDto, cpf: person.cpf } as CreateResearcherDto, person.cpf, transaction);
+            break;
+          case 'patient':
+            await this.patientService.create({ ...createPatientDto, cpf: person.cpf } as CreatePatientDto, person.cpf, transaction);
+            break;
+        }
 
-    if (person.profile === 'researcher') {
-      await this.researcherervice.create(createPersonDto as any, person.cpf);
-    }
+        await transaction.commit(); // Commit se tudo certo
+        return person;
 
-    if (person.profile === 'patient') {
-      await this.patientService.create(createPersonDto as any, person.cpf);
-    }
-
-    return person;
+      } catch (err) {
+        await transaction.rollback(); // Rollback em erro
+        console.error('Erro ao criar pessoa e perfil:', err);
+        throw new BadRequestException('Erro ao criar pessoa e perfil: ' + err.message);
+      }
   }
 
 
@@ -102,6 +132,36 @@ export class PersonService {
     if (!person) {
       throw new NotFoundException(`Person with cpf ${cpf} not found`);
     }
+    if (updatePersonDto.password) {
+      updatePersonDto.password = await this.authService.encryptPassword(updatePersonDto.password);
+    }
+    
+    if (updatePersonDto.profile === 'healthProfessional') {
+      if (!updatePersonDto.email || !updatePersonDto.expertise) {
+        throw new BadRequestException('Datas of health professional are required for this profile: email e especialidade');
+      }
+    }
+    if (updatePersonDto.profile === 'researcher') {
+      if (!updatePersonDto.email || !updatePersonDto.institution || !updatePersonDto.fieldOfStudy || !updatePersonDto.expertise) {
+        throw new BadRequestException('Datas of researcher are required for this profile: email, instituicao, area e especialidade');
+      }
+    }
+    if (updatePersonDto.profile === 'patient') {
+      if (!updatePersonDto.dateOfBirth || !updatePersonDto.educationLevel || !updatePersonDto.socioeconomicStatus || !updatePersonDto.weight || !updatePersonDto.height) {
+        throw new BadRequestException('Datas of patient are required for this profile: dateOfBirth, educationStatus, socioeconomicStatus, weight e height');
+      }
+    }
+   
+    if (updatePersonDto.profile === 'healthProfessional') {
+      await this.healthProfessionalModel.update(updatePersonDto, { where: { cpf } });
+    }
+    if (updatePersonDto.profile === 'researcher') {
+      await this.pesquisadorModel.update(updatePersonDto, { where: { cpf } });
+    }
+    if (updatePersonDto.profile === 'patient') {
+      await this.patientModel.update(updatePersonDto, { where: { cpf } });
+    }
+
     await person.update(updatePersonDto);
     return person;
   }
