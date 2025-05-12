@@ -8,6 +8,7 @@ import { HealthProfessional } from 'src/healthProfessional/entities/healthProfes
 import { HealthUnit } from 'src/healthUnit/entities/healthUnit.entity';
 import { Person } from 'src/person/entities/person.entity';
 import { SensorData } from 'src/sensorData/entities/sensorData.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class EvaluationService {
@@ -18,17 +19,17 @@ export class EvaluationService {
 
   async create(createEvaluationDto: Partial<CreateEvaluationDto>): Promise<Evaluation> {
     const { sensorData, ...evaluationData } = createEvaluationDto;
-  
+
     const createdEvaluation = await this.evaluationModel.create(
       {
         ...evaluationData,
-        sensorData: sensorData || [], 
+        sensorData: sensorData || [],
       },
       {
-        include: [SensorData], 
+        include: [SensorData],
       }
     );
-  
+
     return createdEvaluation;
   }
 
@@ -38,13 +39,21 @@ export class EvaluationService {
 
   async findAllByPerson(cpf: string): Promise<Evaluation[]> {
     return await this.evaluationModel.findAll({
-      where: { cpfPerson: cpf }
+      where: {
+        [Op.or]: [
+          { cpfHealthProfessional: cpf },
+          { cpfPatient: cpf },
+        ],
+      },
     });
   }
   async findOneByPerson(cpf: string, id: number): Promise<Evaluation> {
     const evaluation = await this.evaluationModel.findOne({
       where: {
-        cpfPerson: cpf,
+        [Op.or]: [
+          { cpfHealthProfessional: cpf },
+          { cpfPatient: cpf },
+        ],
         id: id,
       },
     });
@@ -53,7 +62,7 @@ export class EvaluationService {
     }
     return evaluation;
   }
-  
+
   async findOne(id: number): Promise<Evaluation> {
     const evaluation = await this.evaluationModel.findByPk(id);
     if (!evaluation) {
@@ -66,26 +75,26 @@ export class EvaluationService {
     const evaluation = await this.evaluationModel.findOne({
       where: { id },
       attributes: [
-        'id', 
-        'type', 
-        'cpfPatient', 
+        'id',
+        'type',
+        'cpfPatient',
         'cpfHealthProfessional',
         'date',
         'totalTime',
-        'id_healthUnit', 
+        'id_healthUnit',
         'createdAt'
       ],
       include: [
-        { 
-          model: Patient, 
+        {
+          model: Patient,
           as: 'patient',
           attributes: ["weight", "height", "dateOfBirth"],
           include: [{ model: Person, attributes: ['name', 'phone', 'gender'] }]
         },
-        { 
-          model: HealthProfessional, 
+        {
+          model: HealthProfessional,
           as: 'healthProfessional',
-          attributes:  ['email'] ,
+          attributes: ['email'],
           include: [{ model: Person, attributes: ['name', 'phone'] }],
         },
         { model: HealthUnit, as: 'healthUnit', attributes: ['name'] },
