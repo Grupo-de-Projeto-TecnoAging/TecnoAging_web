@@ -3,6 +3,9 @@ import { CreateResearcherDto } from './dto/create-researcher.dto';
 import { UpdateResearcherDto } from './dto/update-researcher.dto';
 import { Researcher } from './entities/researcher.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { ReturnResearcherDto } from './dto/return-researcher.dto';
+import { Transaction } from 'sequelize';
+import { Person } from 'src/person/entities/person.entity';
 
 @Injectable()
 export class ResearcherService {
@@ -11,7 +14,7 @@ export class ResearcherService {
     private readonly researcherModel: typeof Researcher
   ) { }
 
-  async create(createresearcherDto: UpdateResearcherDto, cpf: string): Promise<Researcher> {  
+  async create(createresearcherDto: CreateResearcherDto, cpf: string, transaction?: Transaction): Promise<Researcher> {  
     if (!createresearcherDto.email || 
       !createresearcherDto.institution || 
       !createresearcherDto.fieldOfStudy || 
@@ -21,25 +24,61 @@ export class ResearcherService {
     
     const researcher = await this.researcherModel.create({
       ...createresearcherDto,
-      cpf:cpf 
-    });
+      cpf:cpf,
+     }, {
+          transaction,
+        });
     
     return researcher;
   }
 
-  async findAll(): Promise<Researcher[]> {
-    return this.researcherModel.findAll();
+  async findAll(): Promise<ReturnResearcherDto[]> {
+    const researcher = await this.researcherModel.findAll({
+      include: [{ model: Person, attributes: ['name'] }],
+    });
+
+    return researcher.map(researcher => ({
+      name: researcher.person?.name,
+      cpf: researcher.cpf,
+      email: researcher.email,
+      institution: researcher.institution,
+      fieldOfStudy: researcher.fieldOfStudy,
+      expertise: researcher.expertise,
+    }));
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} researcher`;
+  async findOne(cpf: string): Promise<ReturnResearcherDto> {
+    const researcher = await this.researcherModel.findByPk(cpf, { include: [{ model: Person, attributes: ['name'] }] });
+    if (!researcher) {
+      throw new BadRequestException('researcher not found.');
+    }
+    return {
+      name: researcher.person?.name,
+      cpf: researcher.cpf,
+      email: researcher.email,
+      institution: researcher.institution,
+      fieldOfStudy: researcher.fieldOfStudy,
+      expertise: researcher.expertise
+    };
   }
 
-  update(id: number, updateresearcherDto: UpdateResearcherDto) {
-    return `This action updates a #${id} researcher`;
+  async updateByCpf(cpf: string, updateResearcherDto: UpdateResearcherDto) {
+    const researcher = await this.researcherModel.findOne({ where: { cpf } });
+    if (!researcher) {
+      throw new BadRequestException('researcher not found.');
+    }
+
+    await researcher.update(updateResearcherDto);
+    return researcher;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} researcher`;
+  async removeByCpf(cpf: string) {
+    const researcher = await this.researcherModel.findOne({ where: { cpf } });
+    if (!researcher) {
+      throw new BadRequestException('researcher not found.');
+    }
+
+    await researcher.destroy();
+    return researcher;
   }
 }

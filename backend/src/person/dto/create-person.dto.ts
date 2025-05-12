@@ -41,10 +41,10 @@ export class CreatePersonDto {
 
     @ApiProperty({
         description: 'Profile of the person',
-        example: 'Patient',
+        example: 'patient',
     })
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({ message: 'Profile is required' })
     @IsEnum(["patient", "researcher", "healthProfessional"])
     profile: string;
 

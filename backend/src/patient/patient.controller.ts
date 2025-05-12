@@ -22,13 +22,13 @@ export class PatientController {
     return this.patientService.findOne(cpf);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePatientDto: UpdatePatientDto) {
-    return this.patientService.updateById(id, updatePatientDto);
+  @Patch(':cpf')
+  update(@Param('cpf') cpf: string, @Body() updatePatientDto: UpdatePatientDto) {
+    return this.patientService.updateByCpf(cpf, updatePatientDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.patientService.removeById(id);
+  @Delete(':cpf')
+  remove(@Param('cpf') cpf: string) {
+    return this.patientService.removeByCpf(cpf);
   }
 }

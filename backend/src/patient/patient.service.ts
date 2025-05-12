@@ -3,6 +3,7 @@ import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { Patient } from './entities/patient.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { Transaction } from 'sequelize';
 import { Person } from 'src/person/entities/person.entity';
 import { ReturnPatientDto } from './dto/return-patient.dto';
 
@@ -14,7 +15,7 @@ export class PatientService {
     private readonly patientModel: typeof Patient,
   ) { }
 
-  async create(createPatientDto: CreatePatientDto, cpf: string): Promise<Patient> {
+  async create(createPatientDto: CreatePatientDto, cpf: string, transaction?: Transaction): Promise<Patient> {
     if (!createPatientDto.cpf ||
       !createPatientDto.cep ||
       !createPatientDto.street ||
@@ -32,6 +33,8 @@ export class PatientService {
     const patient = await this.patientModel.create({
       ...createPatientDto,
       cpf: cpf,
+    }, { 
+      transaction,
     });
 
     return patient;
@@ -89,20 +92,20 @@ export class PatientService {
     };
   }
 
-  async updateById(id: string, updatePatientDto: UpdatePatientDto): Promise<Patient> {
-    const patient = await this.patientModel.findOne({ where: { id } });
+  async updateByCpf(cpf: string, updatePatientDto: UpdatePatientDto): Promise<Patient> {
+    const patient = await this.patientModel.findOne({ where: { cpf } });
     if (!patient) {
-      throw new NotFoundException(`Patient with id ${id} not found`);
+      throw new NotFoundException(`Patient with id ${cpf} not found`);
     }
 
     await patient.update(updatePatientDto);
     return patient;
   }
 
-  async removeById(id: string): Promise<Patient> {
-    const patient = await this.patientModel.findOne({ where: { id } });
+  async removeByCpf(cpf: string): Promise<Patient> {
+    const patient = await this.patientModel.findOne({ where: { cpf } });
     if (!patient) {
-      throw new NotFoundException(`Patient with id ${id} not found`);
+      throw new NotFoundException(`Patient with id ${cpf} not found`);
     }
 
     await patient.destroy();
