@@ -10,12 +10,59 @@ import { Person } from 'src/person/entities/person.entity';
 import { SensorData } from 'src/sensorData/entities/sensorData.entity';
 import { Op } from 'sequelize';
 
+
+const evaluationDetailsInclude = [
+    {
+        model: Patient,
+        as: 'patient',
+        attributes: ['weight', 'height', 'dateOfBirth'],
+        include: [{ model: Person, as: 'person', attributes: ['name', 'phone', 'gender'] }],
+    },
+    {
+        model: HealthProfessional,
+        as: 'healthProfessional',
+        attributes: ['email'],
+        include: [{ model: Person, as: 'person', attributes: ['name', 'phone'] }],
+    },
+    { model: HealthUnit, as: 'healthUnit', attributes: ['name'] },
+    { model: SensorData, as: 'sensorData' },
+];
+
 @Injectable()
 export class EvaluationService {
   constructor(
     @InjectModel(Evaluation)
     private readonly evaluationModel: typeof Evaluation,
   ) { }
+
+  private formatEvaluationDetails(evaluation: Evaluation): any {
+        if (!evaluation) {
+            return null;
+        }
+
+        const evaluationJson = evaluation.toJSON();
+
+        const formattedResult = {
+            ...evaluationJson,
+
+            patient: evaluationJson.patient ? {
+                name: evaluationJson.patient.person?.name,
+                phone: evaluationJson.patient.person?.phone,
+                gender: evaluationJson.patient.person?.gender,
+                weight: evaluationJson.patient.weight,
+                height: evaluationJson.patient.height,
+                dateOfBirth: evaluationJson.patient.dateOfBirth,
+            } : null,
+
+            healthProfessional: evaluationJson.healthProfessional ? {
+                name: evaluationJson.healthProfessional.person?.name,
+                email: evaluationJson.healthProfessional.email,
+                phone: evaluationJson.healthProfessional.person?.phone,
+            } : null,
+        };
+
+        return formattedResult;
+    }
 
   async create(createEvaluationDto: Partial<CreateEvaluationDto>): Promise<Evaluation> {
     const { sensorData, ...evaluationData } = createEvaluationDto;
@@ -30,23 +77,31 @@ export class EvaluationService {
       }
     );
 
-    return createdEvaluation;
+    return this.findOne(createdEvaluation.id);
   }
 
   async findAll(): Promise<Evaluation[]> {
-    return await this.evaluationModel.findAll();
-  }
+    const evaluations = await this.evaluationModel.findAll({
+            include: evaluationDetailsInclude,
+            order: [['date', 'DESC']],
+        });
+        return evaluations.map(evaluation => this.formatEvaluationDetails(evaluation));
+    }
 
   async findAllByPerson(cpf: string): Promise<Evaluation[]> {
-    return await this.evaluationModel.findAll({
+    const evaluations = await this.evaluationModel.findAll({
       where: {
         [Op.or]: [
-          { cpfHealthProfessional: cpf },
-          { cpfPatient: cpf },
+            { cpfHealthProfessional: cpf },
+            { cpfPatient: cpf },
         ],
-      },
+    },
+    include: evaluationDetailsInclude,
+    order: [['date', 'DESC']],
     });
+    return evaluations.map(evaluation => this.formatEvaluationDetails(evaluation));
   }
+  
   async findOneByPerson(cpf: string, id: number): Promise<Evaluation> {
     const evaluation = await this.evaluationModel.findOne({
       where: {
