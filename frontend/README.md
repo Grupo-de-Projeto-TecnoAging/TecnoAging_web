@@ -189,8 +189,8 @@ Para rodar o projeto localmente, siga os passos abaixo:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <URL_DO_REPOSITORIO>
-    cd <NOME_DO_PROJETO>
+    git clone https://github.com/Grupo-de-Projeto-TecnoAging/TecnoAging_web.git
+    cd frontend
     ```
 
 2.  **Instale as dependências:**
