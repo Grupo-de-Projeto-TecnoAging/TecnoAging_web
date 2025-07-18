@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { TotalUserAndEvaluations } from "@/components/pages/home/TotalUserAndEvaluations";
-import MonthlyTarget from "@/components/pages/home/MontlyTarget";
-import MonthlyEvaluationsChart from "@/components/pages/home/MonthlyEvaluationsChart";
-import StatisticsChart from "@/components/pages/home/StatisticsChart";
-import RankingPage from "@/components/pages/home/RankingPage";
 import { api } from "@/services/apiPerson";
 import { api as evaluationApi } from "@/services/apiEvaluations";
+import { TotalUserAndEvaluations } from "./TotalUserAndEvaluations";
+import MonthlyTarget from "./MontlyTarget";
+import MonthlyEvaluationsChart from "./MonthlyEvaluationsChart";
+import StatisticsChart from "./StatisticsChart";
+import RankingPage from "./RankingPage";
 
-export default function HomeContent() {
+export default function HomeHealth() {
     const [loading, setLoading] = useState(true);
     const [totalUsers, setTotalUsers] = useState(0);
     const [totalEvaluations, setTotalEvaluations] = useState(0);

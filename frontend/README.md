@@ -217,3 +217,9 @@ Para rodar o projeto localmente, siga os passos abaixo:
     ```
 
 5.  Abra `http://localhost:3000` no seu navegador para ver a aplicação.
+
+## 11. Acesso ao sistema
+
+* Conta de Paciente: CPF: 00011122237 | Senha: 123456
+* Conta de Profissional: CPF: 12312312311 | Senha: 123456
+* Conta de Pesquisador: CPF 00011122233 | Senha: 1234

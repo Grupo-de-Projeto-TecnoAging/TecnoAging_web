@@ -1,8 +1,8 @@
 'use client'
 import {useSession} from "next-auth/react";
 import HomePacientContent from "@/components/pages/homePacient/HomePacientContent";
-import HomeContent from "@/components/pages/home/HomeContent";
 import HomeResearchContent from "@/components/pages/homeResearch/HomeResearchContent";
+import HomeHealth from "@/components/pages/homeHealth/HomeContent";
 
 export default function HomeDashboardPage() {
     
@@ -19,5 +19,5 @@ export default function HomeDashboardPage() {
 
     const tipo = session?.user?.profile || 'researcher';
 
-    return tipo === 'patient' ? <HomePacientContent /> : tipo === 'researcher' ? <HomeResearchContent /> : <HomeContent />;
+    return tipo === 'patient' ? <HomePacientContent /> : tipo === 'researcher' ? <HomeResearchContent /> : <HomeHealth />;
 }
